@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -6,8 +15,7 @@
         "heading": "The Art of Ageless Skin",
         "subheading": "Exosome-powered luxury skincare — crafted to renew, repair, and illuminate from within.",
         "button_text": "Discover the Collection",
-        "button_link": "/collections/all",
-        "overlay_opacity": 45
+        "button_link": "/collections/all"
       }
     },
     "featured": {
@@ -33,11 +41,36 @@
     "testimonials": {
       "type": "testimonials",
       "blocks": {
-        "t1": { "type": "testimonial", "settings": { "quote": "My skin felt completely different after just one week — smoother, brighter, and healthier-looking.", "author": "Olivia M.", "product": "Exosome Renewal Serum" }},
-        "t2": { "type": "testimonial", "settings": { "quote": "Finally found a product that actually delivers on its promises. My fine lines have visibly diminished.", "author": "Sarah K.", "product": "Exosome Eye Elixir" }},
-        "t3": { "type": "testimonial", "settings": { "quote": "The texture is divine and the results speak for themselves. I've recommended it to everyone.", "author": "Lily C.", "product": "Exosome Barrier Cream" }}
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My skin felt completely different after just one week — smoother, brighter, and healthier-looking.",
+            "author": "Olivia M.",
+            "product": "Exosome Renewal Serum"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally found a product that actually delivers on its promises. My fine lines have visibly diminished.",
+            "author": "Sarah K.",
+            "product": "Exosome Eye Elixir"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The texture is divine and the results speak for themselves. I've recommended it to everyone.",
+            "author": "Lily C.",
+            "product": "Exosome Barrier Cream"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "settings": {
         "label": "Real Results",
         "title": "What Our Clients Say"
@@ -52,5 +85,11 @@
       }
     }
   },
-  "order": ["hero", "featured", "brand-story", "testimonials", "rich-text"]
+  "order": [
+    "hero",
+    "featured",
+    "brand-story",
+    "testimonials",
+    "rich-text"
+  ]
 }
