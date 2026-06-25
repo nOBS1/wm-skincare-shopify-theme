@@ -1,77 +1,220 @@
-<div class="container">
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="container product-page">
+  {%- include 'breadcrumb' -%}
+
   <div class="product-single">
     <div class="product-gallery">
       {%- for image in product.images -%}
-        <img src="{{ image | image_url: width: 800 }}"
-             alt="{{ image.alt | escape | default: product.title }}"
-             width="800" height="800"
-             {% if forloop.first %}loading="eager"{% else %}loading="lazy"{% endif %}>
+        <div class="product-gallery-item">
+          <img src="{{ image | image_url: width: 1200 }}"
+               srcset="{{ image | image_url: width: 600 }} 600w,
+                       {{ image | image_url: width: 1000 }} 1000w,
+                       {{ image | image_url: width: 1500 }} 1500w"
+               sizes="(max-width: 768px) 100vw, 50vw"
+               alt="{{ image.alt | escape | default: product.title }}"
+               width="{{ image.width }}" height="{{ image.height }}"
+               {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+        </div>
       {%- endfor -%}
     </div>
+
     <div class="product-info">
-      <h1>{{ product.title }}</h1>
-      <div class="product-price">
+      {%- if product.vendor != blank -%}
+        <span class="product-vendor">{{ product.vendor }}</span>
+      {%- endif -%}
+
+      <h1 class="product-title">{{ product.title }}</h1>
+
+      <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         {%- if product.compare_at_price > product.price -%}
-          <s>{{ product.compare_at_price | money }}</s>
+          <s class="price-compare">{{ product.compare_at_price | money }}</s>
         {%- endif -%}
-        {{ product.price | money }}
+        <span class="price-current" itemprop="price">{{ current_variant.price | money }}</span>
+        <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
       </div>
-      <div class="product-description">{{ product.description }}</div>
-      {%- form 'product', product -%}
-        {%- if product.has_only_default_variant == false -%}
+
+      {%- if product.metafields.custom.short_pitch -%}
+        <p class="product-pitch">{{ product.metafields.custom.short_pitch }}</p>
+      {%- elsif product.description != blank -%}
+        <p class="product-pitch">{{ product.description | strip_html | truncate: 180 }}</p>
+      {%- endif -%}
+
+      {%- form 'product', product, class: 'product-form' -%}
+        {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
-            <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
-            <select name="id" id="Option-{{ forloop.index }}" class="variant-select">
-              {%- for variant in product.variants -%}
-                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
-                  {{ variant.title }} - {{ variant.price | money }}
-                </option>
-              {%- endfor -%}
-            </select>
+            <div class="product-option">
+              <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
+              <select name="options[{{ option.name | escape }}]" id="Option-{{ forloop.index }}" class="variant-select" form="product-form-{{ section.id }}">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
           {%- endfor -%}
-        {%- else -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        {%- endif -%}
-        <label for="Quantity">Quantity</label>
-        <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-input">
-        <button type="submit" class="btn-add" {% unless product.available %}disabled{% endunless %}>
-          {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+        {%- endunless -%}
+
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+        <div class="product-quantity">
+          <label for="Quantity">Quantity</label>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-input">
+        </div>
+
+        <button type="submit" class="btn-add" {% unless current_variant.available %}disabled{% endunless %}>
+          {%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
         </button>
+
+        {%- if settings.enable_payment_button -%}
+          {{ form | payment_button }}
+        {%- endif -%}
       {%- endform -%}
+
+      <ul class="product-trust">
+        <li>Free worldwide shipping over $50</li>
+        <li>30-day satisfaction guarantee</li>
+        <li>Cruelty-free & dermatologist-tested</li>
+      </ul>
     </div>
   </div>
+
+  {%- comment -%} ===== AI/GEO-friendly Q&A content ===== {%- endcomment -%}
+  <section class="product-qa">
+    <div class="qa-grid">
+      {%- if product.metafields.custom.who_is_it_for -%}
+        <article class="qa-item">
+          <h2>Who is it for?</h2>
+          <div>{{ product.metafields.custom.who_is_it_for }}</div>
+        </article>
+      {%- endif -%}
+
+      {%- if product.metafields.custom.how_to_use -%}
+        <article class="qa-item">
+          <h2>How to use</h2>
+          <div>{{ product.metafields.custom.how_to_use }}</div>
+        </article>
+      {%- endif -%}
+
+      {%- if product.metafields.custom.key_ingredients -%}
+        <article class="qa-item">
+          <h2>Key ingredients</h2>
+          <div>{{ product.metafields.custom.key_ingredients }}</div>
+        </article>
+      {%- endif -%}
+
+      {%- if product.metafields.custom.benefits -%}
+        <article class="qa-item">
+          <h2>Benefits</h2>
+          <div>{{ product.metafields.custom.benefits }}</div>
+        </article>
+      {%- endif -%}
+    </div>
+
+    {%- if product.description != blank -%}
+      <article class="product-full-description">
+        <h2>About this product</h2>
+        <div class="rte">{{ product.description }}</div>
+      </article>
+    {%- endif -%}
+  </section>
+
+  {%- comment -%} ===== FAQ Section ===== {%- endcomment -%}
+  {%- if product.metafields.custom.faqs -%}
+    <section class="product-faq">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-list">
+        {%- assign faqs = product.metafields.custom.faqs.value -%}
+        {%- for faq in faqs -%}
+          <details class="faq-item">
+            <summary>{{ faq.question }}</summary>
+            <div class="faq-answer">{{ faq.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
 </div>
 
+{%- comment -%} ===== Product JSON-LD Schema ===== {%- endcomment -%}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
+  "@context": "https://schema.org/",
   "@type": "Product",
   "name": {{ product.title | json }},
-  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  "description": {{ product.description | strip_html | truncate: 5000 | json }},
   "url": "{{ shop.url }}{{ product.url }}",
-  {% if product.featured_image %}"image": "{{ product.featured_image | image_url: width: 1200 }}",{% endif %}
+  "sku": {{ current_variant.sku | json }},
+  "mpn": {{ current_variant.sku | json }},
+  {%- if product.images.size > 0 -%}
+  "image": [
+    {%- for image in product.images -%}
+      "{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  {%- endif -%}
   "brand": {
     "@type": "Brand",
-    "name": {{ product.vendor | json }}
+    "name": {{ product.vendor | default: shop.name | json }}
   },
   "offers": {
     "@type": "Offer",
     "url": "{{ shop.url }}{{ product.url }}",
     "priceCurrency": {{ cart.currency.iso_code | json }},
-    "price": {{ product.price | money_without_currency | remove: ',' | json }},
-    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "price": {{ current_variant.price | money_without_currency | remove: ',' | json }},
+    "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition",
     "seller": {
       "@type": "Organization",
       "name": {{ shop.name | json }}
     }
   }
-  {% if product.metafields.reviews.rating %}
+  {%- if product.metafields.reviews.rating -%}
   ,"aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": {{ product.metafields.reviews.rating.value | json }},
     "reviewCount": {{ product.metafields.reviews.rating_count.value | json }}
   }
-  {% endif %}
+  {%- endif -%}
+}
+</script>
+
+{%- comment -%} ===== FAQ JSON-LD (GEO-critical) ===== {%- endcomment -%}
+{%- if product.metafields.custom.faqs -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- assign faqs = product.metafields.custom.faqs.value -%}
+    {%- for faq in faqs -%}
+      {
+        "@type": "Question",
+        "name": {{ faq.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ faq.answer | strip_html | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{%- comment -%} ===== Breadcrumb JSON-LD ===== {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" },
+    {%- if collection -%}
+    { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" },
+    { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+    {%- else -%}
+    { "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+    {%- endif -%}
+  ]
 }
 </script>
 
