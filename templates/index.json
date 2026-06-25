@@ -12,6 +12,8 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
+        "image": "shopify://shop_images/6.jpg",
+        "label": "Exosome Science × Luxury",
         "heading": "The Art of Ageless Skin",
         "subheading": "Exosome-powered luxury skincare — crafted to renew, repair, and illuminate from within.",
         "button_text": "Discover the Collection",
@@ -25,7 +27,9 @@
         "title": "Bestsellers",
         "description": "Our most-loved formulas — where advanced science meets pure indulgence.",
         "collection": "all",
-        "limit": 4
+        "limit": 4,
+        "button_text": "View All Products",
+        "button_link": ""
       }
     },
     "brand-story": {
@@ -81,7 +85,9 @@
       "settings": {
         "label": "Our Promise",
         "title": "Beauty, Refined",
-        "text": "<p>We believe in skincare that honors both science and soul. Every ingredient is chosen with intention, every formula backed by research, every ritual designed to restore your skin's natural luminosity.</p>"
+        "text": "<p>We believe in skincare that honors both science and soul. Every ingredient is chosen with intention, every formula backed by research, every ritual designed to restore your skin's natural luminosity.</p>",
+        "button_text": "Our Story",
+        "button_link": ""
       }
     }
   },
