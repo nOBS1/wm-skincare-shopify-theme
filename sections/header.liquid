@@ -5,7 +5,8 @@
     </button>
     <div class="header-logo">
       {%- if settings.logo != blank -%}
-        <a href="/"><img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="200" height="40"></a>
+        {%- assign logo_w = settings.logo_width | default: 160 -%}
+        <a href="/"><img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" width="{{ logo_w }}" style="width:{{ logo_w }}px;height:auto"></a>
       {%- else -%}
         <a href="/">{{ shop.name }}</a>
       {%- endif -%}

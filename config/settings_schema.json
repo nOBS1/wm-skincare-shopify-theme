@@ -33,8 +33,10 @@
     ]
   },
   {
-    "name": "Favicon",
+    "name": "Logo & Favicon",
     "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "range", "id": "logo_width", "label": "Logo width", "min": 80, "max": 280, "step": 10, "unit": "px", "default": 160 },
       { "type": "image_picker", "id": "favicon", "label": "Favicon" }
     ]
   }
