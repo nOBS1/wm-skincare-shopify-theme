@@ -1,6 +1,9 @@
-<section class="section">
+<section class="section featured-products">
   <div class="container">
     <div class="section-title">
+      {%- if section.settings.label != blank -%}
+        <span class="section-label">{{ section.settings.label }}</span>
+      {%- endif -%}
       {%- if section.settings.title != blank -%}
         <h2>{{ section.settings.title }}</h2>
       {%- endif -%}
@@ -16,19 +19,33 @@
             {%- if product.featured_image != blank -%}
               <img src="{{ product.featured_image | image_url: width: 600 }}"
                    alt="{{ product.featured_image.alt | escape }}"
-                   width="600" height="600" loading="lazy">
+                   loading="lazy"
+                   width="600"
+                   height="600">
+            {%- else -%}
+              <div class="product-card-placeholder"></div>
             {%- endif -%}
+            <div class="product-card-overlay">
+              <span class="btn btn-small">Quick View</span>
+            </div>
           </div>
-          <h3 class="product-card-title">{{ product.title }}</h3>
-          <div class="product-card-price">
-            {%- if product.compare_at_price > product.price -%}
-              <s>{{ product.compare_at_price | money }}</s>
-            {%- endif -%}
-            {{ product.price | money }}
+          <div class="product-card-info">
+            <h3 class="product-card-title">{{ product.title }}</h3>
+            <p class="product-card-price">
+              {%- if product.compare_at_price > product.price -%}
+                <s>{{ product.compare_at_price | money }}</s>
+              {%- endif -%}
+              {{ product.price | money }}
+            </p>
           </div>
         </a>
       {%- endfor -%}
     </div>
+    {%- if section.settings.button_text != blank -%}
+      <div class="section-cta">
+        <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -36,10 +53,13 @@
 {
   "name": "Featured products",
   "settings": [
+    { "type": "text", "id": "label", "label": "Top label", "default": "Curated for You" },
     { "type": "text", "id": "title", "label": "Title", "default": "Bestsellers" },
-    { "type": "text", "id": "description", "label": "Description" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Our most-loved formulas — where advanced exosome science meets pure indulgence." },
     { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 }
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "View All Products" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
   ],
   "presets": [{ "name": "Featured products" }]
 }

@@ -1,13 +1,14 @@
 <header class="site-header">
   <div class="container header-inner">
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="header-logo">
-      <a href="/" aria-label="{{ shop.name }} - Home">
-        {%- if section.settings.logo != blank -%}
-          <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="200" height="40" loading="eager">
-        {%- else -%}
-          {{ shop.name }}
-        {%- endif -%}
-      </a>
+      {%- if settings.logo != blank -%}
+        <a href="/"><img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="200" height="40"></a>
+      {%- else -%}
+        <a href="/">{{ shop.name }}</a>
+      {%- endif -%}
     </div>
     <nav class="header-nav" aria-label="Main navigation">
       {%- for link in section.settings.menu.links -%}
@@ -15,12 +16,17 @@
       {%- endfor -%}
     </nav>
     <div class="header-actions">
-      <a href="/search" aria-label="Search">Search</a>
-      <a href="/cart" aria-label="Cart ({{ cart.item_count }} items)">Cart ({{ cart.item_count }})</a>
+      <a href="/search" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      </a>
+      <a href="/account" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      </a>
+      <a href="/cart" aria-label="Cart" class="header-cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count">{{ cart.item_count }}</span>
+      </a>
     </div>
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" onclick="document.querySelector('.header-nav').classList.toggle('is-open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='false')">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
@@ -29,14 +35,9 @@
   "name": "Header",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    },
-    {
       "type": "link_list",
       "id": "menu",
-      "label": "Menu",
+      "label": "Navigation menu",
       "default": "main-menu"
     }
   ]

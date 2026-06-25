@@ -1,0 +1,48 @@
+<section class="section brand-story">
+  <div class="container">
+    <div class="brand-story-grid">
+      <div class="brand-story-image">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="800" height="1000">
+        {%- else -%}
+          <div class="brand-story-placeholder">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="0.5">
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+              <path d="M12 6v12M6 12h12"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="brand-story-content">
+        {%- if section.settings.label != blank -%}
+          <span class="section-label">{{ section.settings.label }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2>{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="brand-story-text">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "label", "label": "Top label", "default": "The Science of Beauty" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Exosome Technology" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Our proprietary exosome delivery system penetrates deeper than traditional serums, communicating directly with your skin cells to activate natural repair and renewal processes.</p><p>Each product is formulated in our Seoul laboratory, combining decades of Korean skincare innovation with breakthrough biotech research.</p>" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Learn More" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Brand story" }]
+}
+{% endschema %}

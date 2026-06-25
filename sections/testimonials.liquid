@@ -1,0 +1,55 @@
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-title">
+      {%- if section.settings.label != blank -%}
+        <span class="section-label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2>{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+    <div class="testimonials-grid">
+      {%- for block in section.blocks -%}
+        <blockquote class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"{{ block.settings.quote }}"</p>
+          <footer>
+            <cite class="testimonial-author">{{ block.settings.author }}</cite>
+            {%- if block.settings.product != blank -%}
+              <span class="testimonial-product">{{ block.settings.product }}</span>
+            {%- endif -%}
+          </footer>
+        </blockquote>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Top label", "default": "Real Results" },
+    { "type": "text", "id": "title", "label": "Title", "default": "What Our Clients Say" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "My skin felt completely different after just one week — smoother, brighter, and healthier-looking." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Olivia M." },
+        { "type": "text", "id": "product", "label": "Product used", "default": "Exosome Renewal Serum" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Testimonials",
+    "blocks": [
+      { "type": "testimonial", "settings": { "quote": "My skin felt completely different after just one week — smoother, brighter, and healthier-looking.", "author": "Olivia M.", "product": "Exosome Renewal Serum" }},
+      { "type": "testimonial", "settings": { "quote": "Finally found a product that actually delivers on its promises. My fine lines have visibly diminished.", "author": "Sarah K.", "product": "Exosome Eye Elixir" }},
+      { "type": "testimonial", "settings": { "quote": "The texture is divine and the results speak for themselves. I've recommended it to everyone.", "author": "Lily C.", "product": "Exosome Barrier Cream" }}
+    ]
+  }]
+}
+{% endschema %}

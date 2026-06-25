@@ -1,11 +1,19 @@
-<section class="section" style="background:var(--color-bg-alt)">
-  <div class="container page-content text-center">
-    {%- if section.settings.title != blank -%}
-      <h2>{{ section.settings.title }}</h2>
-    {%- endif -%}
-    {%- if section.settings.text != blank -%}
-      <div class="rte" style="margin-top:1.5rem;">{{ section.settings.text }}</div>
-    {%- endif -%}
+<section class="section rich-text">
+  <div class="container">
+    <div class="rich-text-inner">
+      {%- if section.settings.label != blank -%}
+        <span class="section-label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2>{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rich-text-body">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
@@ -13,8 +21,11 @@
 {
   "name": "Rich text",
   "settings": [
-    { "type": "text", "id": "title", "label": "Heading" },
-    { "type": "richtext", "id": "text", "label": "Text" }
+    { "type": "text", "id": "label", "label": "Top label", "default": "Our Philosophy" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Science Meets Serenity" },
+    { "type": "richtext", "id": "text", "label": "Content", "default": "<p>Born from the poetry of skin renewal, we unite cutting-edge exosome science with the ritual of luxury. Every formula is crafted to restore radiance, strengthen the skin barrier, and reveal a timeless, luminous complexion.</p>" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Our Story" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
   ],
   "presets": [{ "name": "Rich text" }]
 }
