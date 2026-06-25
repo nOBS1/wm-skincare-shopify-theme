@@ -8,6 +8,48 @@
     "font_heading": "Marcellus",
     "social_twitter": "",
     "social_instagram": "",
-    "social_facebook": ""
+    "social_facebook": "",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Complimentary worldwide shipping on all orders over $50"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "description": "Luxury exosome skincare — where cutting-edge science meets timeless beauty rituals."
+        },
+        "blocks": {
+          "menu_1": {
+            "type": "menu",
+            "settings": {
+              "title": "Shop",
+              "menu": "main-menu"
+            }
+          },
+          "menu_2": {
+            "type": "menu",
+            "settings": {
+              "title": "About",
+              "menu": "footer"
+            }
+          },
+          "menu_3": {
+            "type": "menu",
+            "settings": {
+              "title": "Help",
+              "menu": "footer"
+            }
+          }
+        },
+        "block_order": ["menu_1", "menu_2", "menu_3"]
+      }
+    }
   }
 }
