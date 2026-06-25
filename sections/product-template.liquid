@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="product-single">
+    <div class="product-gallery">
+      {%- for image in product.images -%}
+        <img src="{{ image | image_url: width: 800 }}"
+             alt="{{ image.alt | escape | default: product.title }}"
+             width="800" height="800"
+             {% if forloop.first %}loading="eager"{% else %}loading="lazy"{% endif %}>
+      {%- endfor -%}
+    </div>
+    <div class="product-info">
+      <h1>{{ product.title }}</h1>
+      <div class="product-price">
+        {%- if product.compare_at_price > product.price -%}
+          <s>{{ product.compare_at_price | money }}</s>
+        {%- endif -%}
+        {{ product.price | money }}
+      </div>
+      <div class="product-description">{{ product.description }}</div>
+      {%- form 'product', product -%}
+        {%- if product.has_only_default_variant == false -%}
+          {%- for option in product.options_with_values -%}
+            <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
+            <select name="id" id="Option-{{ forloop.index }}" class="variant-select">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {%- endfor -%}
+            </select>
+          {%- endfor -%}
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {%- endif -%}
+        <label for="Quantity">Quantity</label>
+        <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-input">
+        <button type="submit" class="btn-add" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  "url": "{{ shop.url }}{{ product.url }}",
+  {% if product.featured_image %}"image": "{{ product.featured_image | image_url: width: 1200 }}",{% endif %}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ product.price | money_without_currency | remove: ',' | json }},
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }}
+    }
+  }
+  {% if product.metafields.reviews.rating %}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ product.metafields.reviews.rating.value | json }},
+    "reviewCount": {{ product.metafields.reviews.rating_count.value | json }}
+  }
+  {% endif %}
+}
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": []
+}
+{% endschema %}

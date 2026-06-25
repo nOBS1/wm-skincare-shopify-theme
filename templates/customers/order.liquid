@@ -1,0 +1,30 @@
+<div class="container page-content">
+  <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p>{{ 'customer.order.date' | t }}: {{ order.created_at | date: "%B %d, %Y" }}</p>
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>{{ 'customer.order.product' | t }}</th>
+        <th>{{ 'customer.order.quantity' | t }}</th>
+        <th>{{ 'customer.order.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for line_item in order.line_items %}
+      <tr>
+        <td>{{ line_item.title }}</td>
+        <td>{{ line_item.quantity }}</td>
+        <td>{{ line_item.line_price | money }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="cart-totals">
+    <p>{{ 'customer.order.subtotal' | t }}: {{ order.subtotal_price | money }}</p>
+    {% for shipping_method in order.shipping_methods %}
+    <p>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}): {{ shipping_method.price | money }}</p>
+    {% endfor %}
+    <p><strong>{{ 'customer.order.total' | t }}: {{ order.total_price | money }}</strong></p>
+  </div>
+  <a href="{{ routes.account_url }}">&larr; {{ 'customer.account.return' | t }}</a>
+</div>

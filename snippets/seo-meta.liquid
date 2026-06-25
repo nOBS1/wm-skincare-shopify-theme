@@ -1,0 +1,18 @@
+{%- comment -%}Open Graph & Twitter Card meta tags for SEO/GEO{%- endcomment -%}
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ page_description | escape | default: shop.description | escape }}">
+{%- if template contains 'product' -%}
+  <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
+  <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+  <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+{%- elsif template contains 'article' and article.image -%}
+  <meta property="og:image" content="{{ article.image | image_url: width: 1200 }}">
+{%- elsif settings.share_image -%}
+  <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+{%- endif -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{{ page_description | escape | default: shop.description | escape }}">

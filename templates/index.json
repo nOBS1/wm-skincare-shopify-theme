@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "The Art of Ageless Skin",
+        "subheading": "Exosome-powered luxury skincare, crafted to renew, repair, and illuminate.",
+        "button_text": "Discover the Collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Bestsellers",
+        "description": "Our most-loved formulas — where advanced science meets pure indulgence.",
+        "limit": 8
+      }
+    },
+    "text": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Our Philosophy",
+        "text": "<p>Born from the poetry of skin renewal, we unite cutting-edge exosome science with the ritual of luxury. Every formula is crafted to restore radiance, strengthen the skin barrier, and reveal a timeless, luminous complexion.</p>"
+      }
+    }
+  },
+  "order": ["hero", "featured", "text"]
+}

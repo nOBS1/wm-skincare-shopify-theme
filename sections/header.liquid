@@ -1,0 +1,44 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="header-logo">
+      <a href="/" aria-label="{{ shop.name }} - Home">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="200" height="40" loading="eager">
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+    </div>
+    <nav class="header-nav" aria-label="Main navigation">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+    <div class="header-actions">
+      <a href="/search" aria-label="Search">Search</a>
+      <a href="/cart" aria-label="Cart ({{ cart.item_count }} items)">Cart ({{ cart.item_count }})</a>
+    </div>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" onclick="document.querySelector('.header-nav').classList.toggle('is-open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='false')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

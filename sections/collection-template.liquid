@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="collection-header">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p>{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+  <div class="product-grid">
+    {%- paginate collection.products by 12 -%}
+      {%- for product in collection.products -%}
+        <a href="{{ product.url }}" class="product-card">
+          <div class="product-card-img">
+            {%- if product.featured_image != blank -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}"
+                   alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                   width="600" height="600" loading="lazy">
+            {%- endif -%}
+          </div>
+          <h3 class="product-card-title">{{ product.title }}</h3>
+          <div class="product-card-price">
+            {%- if product.compare_at_price > product.price -%}
+              <s>{{ product.compare_at_price | money }}</s>
+            {%- endif -%}
+            {{ product.price | money }}
+          </div>
+        </a>
+      {%- endfor -%}
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination" style="grid-column:1/-1;text-align:center;padding:2rem 0;">
+          {{ paginate | default_pagination }}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ collection.title | json }},
+  "description": {{ collection.description | strip_html | truncate: 300 | json }},
+  "url": "{{ shop.url }}{{ collection.url }}"
+}
+</script>
+
+{% schema %}
+{
+  "name": "Collection page",
+  "settings": []
+}
+{% endschema %}

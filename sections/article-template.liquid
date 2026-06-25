@@ -1,0 +1,82 @@
+<article class="container page-content" itemscope itemtype="https://schema.org/Article">
+  <header>
+    <h1 itemprop="headline">{{ article.title }}</h1>
+    <p class="article-meta">
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" itemprop="datePublished">
+        {{ article.published_at | date: '%B %d, %Y' }}
+      </time>
+      {%- if article.author -%}
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+          by <span itemprop="name">{{ article.author }}</span>
+        </span>
+      {%- endif -%}
+    </p>
+  </header>
+
+  {%- if article.image -%}
+    <img src="{{ article.image | image_url: width: 1200 }}"
+         alt="{{ article.image.alt | escape | default: article.title }}"
+         width="1200" height="630" loading="eager"
+         itemprop="image">
+  {%- endif -%}
+
+  <div class="rte" itemprop="articleBody">
+    {{ article.content }}
+  </div>
+
+  {%- if article.tags.size > 0 -%}
+    <div class="article-tags">
+      {%- for tag in article.tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if blog.comments_enabled? -%}
+    <div class="article-comments" style="margin-top:3rem;">
+      <h3>Comments ({{ article.comments_count }})</h3>
+      {%- for comment in article.comments -%}
+        <div class="comment">
+          <strong>{{ comment.author }}</strong>
+          <time>{{ comment.created_at | date: '%B %d, %Y' }}</time>
+          <p>{{ comment.content }}</p>
+        </div>
+      {%- endfor -%}
+      {%- form 'new_comment', article -%}
+        <input type="text" name="comment[author]" placeholder="Name" required>
+        <input type="email" name="comment[email]" placeholder="Email" required>
+        <textarea name="comment[body]" placeholder="Your comment" required></textarea>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncate: 160 | json }},
+  "url": "{{ shop.url }}{{ article.url }}",
+  {% if article.image %}"image": "{{ article.image | image_url: width: 1200 }}",{% endif %}
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": "{{ shop.url }}"
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "Article page",
+  "settings": []
+}
+{% endschema %}

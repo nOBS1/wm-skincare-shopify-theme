@@ -1,0 +1,41 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Minimal SEO",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_primary", "label": "Primary color", "default": "#111111" },
+      { "type": "color", "id": "color_secondary", "label": "Accent color", "default": "#c6a15b" },
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#ffffff" },
+      { "type": "color", "id": "color_text", "label": "Text color", "default": "#2b2b2b" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "text", "id": "font_body", "label": "Body font family", "default": "Jost" },
+      { "type": "text", "id": "font_heading", "label": "Heading font family", "default": "Marcellus" }
+    ]
+  },
+  {
+    "name": "SEO & Social",
+    "settings": [
+      { "type": "image_picker", "id": "og_image", "label": "Default social sharing image" },
+      { "type": "text", "id": "social_twitter", "label": "Twitter handle" },
+      { "type": "text", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "text", "id": "social_facebook", "label": "Facebook URL" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  }
+]

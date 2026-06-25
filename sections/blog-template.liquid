@@ -1,0 +1,36 @@
+<div class="container" style="padding:3rem 0;">
+  <h1>{{ blog.title }}</h1>
+  <div class="product-grid" style="margin-top:2rem;">
+    {%- paginate blog.articles by 9 -%}
+      {%- for article in blog.articles -%}
+        <article class="product-card">
+          {%- if article.image -%}
+            <a href="{{ article.url }}">
+              <div class="product-card-img">
+                <img src="{{ article.image | image_url: width: 600 }}"
+                     alt="{{ article.image.alt | escape | default: article.title }}"
+                     width="600" height="400" loading="lazy">
+              </div>
+            </a>
+          {%- endif -%}
+          <h3 class="product-card-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+          <p style="font-size:0.85rem;color:var(--color-text-light);margin-top:0.5rem;">
+            {{ article.excerpt_or_content | strip_html | truncate: 120 }}
+          </p>
+        </article>
+      {%- endfor -%}
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination" style="grid-column:1/-1;text-align:center;padding:2rem 0;">
+          {{ paginate | default_pagination }}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog page",
+  "settings": []
+}
+{% endschema %}

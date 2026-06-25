@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {%- if settings.favicon != blank -%}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+  {%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  <title>
+    {{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}
+  </title>
+  {%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- comment -%} Open Graph / Facebook {%- endcomment -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
+  {%- if page_description -%}
+  <meta property="og:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  {%- if template contains 'product' -%}
+  <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
+  {%- elsif template contains 'article' -%}
+  <meta property="og:image" content="{{ article.image | image_url: width: 1200 }}">
+  {%- elsif settings.share_image -%}
+  <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+  {%- endif -%}
+
+  {%- comment -%} Twitter Card {%- endcomment -%}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title | escape }}">
+  {%- if page_description -%}
+  <meta name="twitter:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- comment -%} Organization Schema for GEO {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    {%- if settings.favicon != blank -%}
+    "logo": {{ settings.favicon | image_url: width: 512 | json }},
+    {%- endif -%}
+    "sameAs": [
+      {%- if settings.social_facebook != blank -%}{{ settings.social_facebook | json }},{%- endif -%}
+      {%- if settings.social_instagram != blank -%}{{ settings.social_instagram | json }},{%- endif -%}
+      {%- if settings.social_twitter != blank -%}{{ settings.social_twitter | json }}{%- endif -%}
+    ]
+  }
+  </script>
+
+  {%- comment -%} Website SearchAction for sitelinks search box {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+</head>
+<body class="template-{{ template | replace: '.', '-' }}">
+  <a class="skip-link visually-hidden" href="#MainContent">Skip to content</a>
+  {%- section 'announcement-bar' -%}
+  {%- section 'header' -%}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {%- section 'footer' -%}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

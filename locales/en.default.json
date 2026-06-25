@@ -1,0 +1,41 @@
+{
+  "general": {
+    "password_page": { "opening_soon": "Opening soon", "email": "Enter your email", "submit": "Notify me" },
+    "search": { "title": "Search", "placeholder": "Search our store...", "submit": "Search", "results_with_count": "{{ count }} results for \"{{ terms }}\"", "no_results": "No results found for \"{{ terms }}\"" },
+    "meta": { "tags": "Tagged \"{{ tags }}\"", "page": "Page {{ page }}" },
+    "breadcrumbs": { "home": "Home" }
+  },
+  "customer": {
+    "login": { "title": "Login", "email": "Email", "password": "Password", "sign_in": "Sign in", "forgot_password": "Forgot your password?", "create_account": "Create account" },
+    "register": { "title": "Create Account", "first_name": "First name", "last_name": "Last name", "email": "Email", "password": "Password", "submit": "Create" },
+    "account": { "title": "My Account", "return": "Back to account" },
+    "orders": { "title": "Order History", "order_number": "Order", "date": "Date", "total": "Total", "fulfillment_status": "Status", "none": "You haven't placed any orders yet." },
+    "order": { "title": "Order {{ name }}", "date": "Date", "product": "Product", "quantity": "Qty", "total": "Total", "subtotal": "Subtotal", "shipping": "Shipping" },
+    "log_out": "Log out"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue shopping"
+  },
+  "collections": {
+    "title": "Collections"
+  },
+  "blogs": {
+    "article": { "read_more": "Read more", "back_to_blog": "Back to blog", "by_author": "By {{ author }}" }
+  },
+  "gift_cards": {
+    "issued": { "title": "Your Gift Card", "subtext": "Here's your gift card!", "remaining_html": "Remaining balance: {{ balance }}", "add_to_apple_wallet": "Add to Apple Wallet" }
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "quantity": "Quantity"
+  }
+}

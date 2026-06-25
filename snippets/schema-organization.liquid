@@ -1,0 +1,14 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": "{{ shop.url }}",
+  {% if settings.logo %}"logo": "{{ settings.logo | image_url: width: 600 }}",{% endif %}
+  "sameAs": [
+    {{ settings.social_instagram | json }},
+    {{ settings.social_facebook | json }},
+    {{ settings.social_twitter | json }}
+  ]
+}
+</script>

@@ -1,0 +1,21 @@
+<section class="section" style="background:var(--color-bg-alt)">
+  <div class="container page-content text-center">
+    {%- if section.settings.title != blank -%}
+      <h2>{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="rte" style="margin-top:1.5rem;">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text" }
+  ],
+  "presets": [{ "name": "Rich text" }]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      {%- if section.settings.title != blank -%}
+        <h2>{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p>{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+    <div class="product-grid">
+      {%- assign collection = collections[section.settings.collection] | default: collections.all -%}
+      {%- for product in collection.products limit: section.settings.limit -%}
+        <a href="{{ product.url }}" class="product-card">
+          <div class="product-card-img">
+            {%- if product.featured_image != blank -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}"
+                   alt="{{ product.featured_image.alt | escape }}"
+                   width="600" height="600" loading="lazy">
+            {%- endif -%}
+          </div>
+          <h3 class="product-card-title">{{ product.title }}</h3>
+          <div class="product-card-price">
+            {%- if product.compare_at_price > product.price -%}
+              <s>{{ product.compare_at_price | money }}</s>
+            {%- endif -%}
+            {{ product.price | money }}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Bestsellers" },
+    { "type": "text", "id": "description", "label": "Description" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 }
+  ],
+  "presets": [{ "name": "Featured products" }]
+}
+{% endschema %}

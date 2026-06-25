@@ -1,0 +1,17 @@
+<div class="container page-content">
+  <h1>{{ 'customer.login.title' | t }}</h1>
+  {% form 'customer_login' %}
+    {{ form.errors | default_errors }}
+    <div class="form-group">
+      <label for="email">{{ 'customer.login.email' | t }}</label>
+      <input type="email" name="customer[email]" id="email" autocomplete="email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">{{ 'customer.login.password' | t }}</label>
+      <input type="password" name="customer[password]" id="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ 'customer.login.sign_in' | t }}</button>
+  {% endform %}
+  <p class="form-link"><a href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a></p>
+  <p class="form-link"><a href="#recover">{{ 'customer.login.forgot_password' | t }}</a></p>
+</div>

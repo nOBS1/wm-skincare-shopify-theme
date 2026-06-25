@@ -1,0 +1,48 @@
+<div class="container" style="padding:3rem 0;">
+  <h1>Your Cart</h1>
+  {%- if cart.item_count > 0 -%}
+    <form action="/cart" method="post">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr>
+              <td>
+                <a href="{{ item.url }}" style="display:flex;align-items:center;gap:1rem;">
+                  <img src="{{ item.image | image_url: width: 80 }}" alt="{{ item.title | escape }}" class="cart-item-img" width="80" height="80" loading="lazy">
+                  <span>{{ item.product.title }}<br><small>{{ item.variant.title }}</small></span>
+                </a>
+              </td>
+              <td>{{ item.price | money }}</td>
+              <td>
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:60px;padding:6px;border:1px solid var(--color-border);text-align:center;">
+              </td>
+              <td>{{ item.line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+      <div class="cart-totals">
+        <p><strong>Subtotal:</strong> {{ cart.total_price | money }}</p>
+        <button type="submit" name="update" class="btn btn-outline" style="margin-right:0.5rem;color:var(--color-text);">Update</button>
+        <button type="submit" name="checkout" class="btn btn-primary">Checkout</button>
+      </div>
+    </form>
+  {%- else -%}
+    <p style="padding:3rem 0;">Your cart is empty. <a href="/collections/all" style="text-decoration:underline;">Continue shopping</a></p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": []
+}
+{% endschema %}
