@@ -1,23 +1,8 @@
 {%- assign image = section.settings.image -%}
-<section class="hero" {% if image != blank %}style="background-image:url({{ image | image_url: width: 1920 }})"{% else %}style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2422 50%, #1a1a1a 100%)"{% endif %}>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    {%- if section.settings.label != blank -%}
-      <span class="hero-subtitle">{{ section.settings.label }}</span>
-    {%- endif -%}
-    {%- if section.settings.heading != blank -%}
-      <h1>{{ section.settings.heading }}</h1>
-    {%- endif -%}
-    {%- if section.settings.subheading != blank -%}
-      <p>{{ section.settings.subheading }}</p>
-    {%- endif -%}
-    {%- if section.settings.button_text != blank -%}
-      <a href="{{ section.settings.button_link }}" class="btn btn-outline">{{ section.settings.button_text }}</a>
-    {%- endif -%}
-  </div>
-  <div class="hero-scroll-indicator">
-    <span></span>
-  </div>
+<section class="hero hero-image-only" {% if image != blank %}style="background-image:url({{ image | image_url: width: 1920 }})"{% else %}style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2422 50%, #1a1a1a 100%)"{% endif %}>
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}" class="hero-link" aria-label="{{ shop.name }}"></a>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -25,11 +10,7 @@
   "name": "Hero banner",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "label", "label": "Top label", "default": "Exosome Science × Luxury" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The Art of Ageless Skin" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Where cutting-edge exosome technology meets the ritual of luxury skincare. Reveal your skin's timeless luminosity." },
-    { "type": "text", "id": "button_text", "label": "Button text", "default": "Discover the Collection" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    { "type": "url", "id": "link", "label": "Image link (optional)" }
   ],
   "presets": [{ "name": "Hero banner" }]
 }
