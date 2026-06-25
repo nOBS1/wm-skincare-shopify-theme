@@ -146,70 +146,26 @@ ul, ol { list-style: none; }
 /* ========== HERO BANNER ========== */
 .hero {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  text-align: center;
-  color: var(--color-white);
+  width: 100%;
+  display: block;
   overflow: hidden;
+  background: #f6f2ea;
+  line-height: 0;
+}
+.hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 26, 26, 0.1) 0%,
-    rgba(26, 26, 26, 0.3) 40%,
-    rgba(26, 26, 26, 0.6) 100%
-  );
+  pointer-events: none;
 }
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  max-width: 800px;
-  animation: fadeUp 1.2s var(--transition) 0.3s both;
-}
-.hero-content .hero-subtitle {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  margin-bottom: 1.5rem;
-  color: var(--color-gold-light);
-}
-.hero-content h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 300;
-  margin-bottom: 1rem;
-  letter-spacing: 0.03em;
-  line-height: 1.1;
-}
-.hero-content p {
-  font-size: 1.05rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.85;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.8;
-}
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  animation: fadeIn 1s ease 1.5s both;
-}
-.hero-scroll-indicator span {
-  display: block;
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, var(--color-gold-light), transparent);
-  margin: 0 auto;
+.hero--placeholder {
+  min-height: 60vh;
 }
 
 /* ========== BUTTONS ========== */

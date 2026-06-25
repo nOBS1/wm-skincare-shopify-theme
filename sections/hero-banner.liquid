@@ -1,7 +1,25 @@
 {%- assign image = section.settings.image -%}
-<section class="hero hero-image-only" {% if image != blank %}style="background-image:url({{ image | image_url: width: 1920 }})"{% else %}style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2422 50%, #1a1a1a 100%)"{% endif %}>
-  {%- if section.settings.link != blank -%}
-    <a href="{{ section.settings.link }}" class="hero-link" aria-label="{{ shop.name }}"></a>
+{%- assign opacity = section.settings.overlay_opacity | default: 0 -%}
+<section class="hero {% if image == blank %}hero--placeholder{% endif %}">
+  {%- if image != blank -%}
+    <img
+      class="hero-image"
+      src="{{ image | image_url: width: 2400 }}"
+      srcset="{{ image | image_url: width: 600 }} 600w,
+              {{ image | image_url: width: 1000 }} 1000w,
+              {{ image | image_url: width: 1500 }} 1500w,
+              {{ image | image_url: width: 2000 }} 2000w,
+              {{ image | image_url: width: 2400 }} 2400w,
+              {{ image | image_url: width: 3000 }} 3000w"
+      sizes="100vw"
+      alt="{{ image.alt | default: shop.name | escape }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+      loading="eager"
+      fetchpriority="high">
+    {%- if opacity > 0 -%}
+      <div class="hero-overlay" style="background: rgba(0,0,0,{{ opacity | divided_by: 100.0 }})"></div>
+    {%- endif -%}
   {%- endif -%}
 </section>
 
@@ -9,8 +27,8 @@
 {
   "name": "Hero banner",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "url", "id": "link", "label": "Image link (optional)" }
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 60, "step": 5, "unit": "%", "default": 0 }
   ],
   "presets": [{ "name": "Hero banner" }]
 }
