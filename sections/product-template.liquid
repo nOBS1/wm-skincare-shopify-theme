@@ -1,4 +1,25 @@
+{%- comment -%}
+  Product page — GEO/SEO optimized.
+
+  All rich content is metafield-driven (namespace: custom) and hidden gracefully
+  when empty, so the page never renders empty wrappers. JSON-LD below stays valid
+  JSON in every branch. See GEO-SETUP.md for the metafield definitions + ready-to-paste
+  sample values.
+{%- endcomment -%}
+
 {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{%- comment -%} Resolve consumer brand vs. manufacturer (legal entity / vendor).
+  vendor on this store = "Lanyuan Elimei Biotech" (the maker); the consumer brand
+  "Weiman Poetics" lives in the title ("Weiman Poetics : ..."). Override anytime
+  with the custom.brand_name metafield. {%- endcomment -%}
+{%- assign product_brand = product.metafields.custom.brand_name -%}
+{%- if product_brand == blank and product.title contains ':' -%}
+  {%- assign product_brand = product.title | split: ':' | first | strip -%}
+{%- endif -%}
+{%- if product_brand == blank -%}
+  {%- assign product_brand = product.vendor -%}
+{%- endif -%}
 
 <div class="container product-page">
   {%- include 'breadcrumb' -%}
@@ -20,21 +41,23 @@
     </div>
 
     <div class="product-info">
-      {%- if product.vendor != blank -%}
-        <span class="product-vendor">{{ product.vendor }}</span>
+      {%- if product_brand != blank -%}
+        <span class="product-brand">{{ product_brand }}</span>
       {%- endif -%}
 
       <h1 class="product-title">{{ product.title }}</h1>
 
-      <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <div class="product-price">
         {%- if product.compare_at_price > product.price -%}
           <s class="price-compare">{{ product.compare_at_price | money }}</s>
         {%- endif -%}
-        <span class="price-current" itemprop="price">{{ current_variant.price | money }}</span>
-        <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+        <span class="price-current">{{ current_variant.price | money }}</span>
+        {%- unless current_variant.available -%}
+          <span class="price-status">Sold out</span>
+        {%- endunless -%}
       </div>
 
-      {%- if product.metafields.custom.short_pitch -%}
+      {%- if product.metafields.custom.short_pitch != blank -%}
         <p class="product-pitch">{{ product.metafields.custom.short_pitch }}</p>
       {%- elsif product.description != blank -%}
         <p class="product-pitch">{{ product.description | strip_html | truncate: 180 }}</p>
@@ -68,107 +91,188 @@
         {%- if settings.enable_payment_button -%}
           {{ form | payment_button }}
         {%- endif -%}
+
+        {%- unless current_variant.available -%}
+          {%- if product.metafields.custom.restock_note != blank -%}
+            <p class="restock-note">{{ product.metafields.custom.restock_note }}</p>
+          {%- endif -%}
+        {%- endunless -%}
       {%- endform -%}
 
       <ul class="product-trust">
         <li>Free worldwide shipping over $50</li>
         <li>30-day satisfaction guarantee</li>
-        <li>Cruelty-free & dermatologist-tested</li>
+        <li>Cruelty-free &amp; dermatologist-tested</li>
       </ul>
     </div>
   </div>
 
-  {%- comment -%} ===== AI/GEO-friendly Q&A content ===== {%- endcomment -%}
-  <section class="product-qa">
-    <div class="qa-grid">
-      {%- if product.metafields.custom.who_is_it_for -%}
-        <article class="qa-item">
-          <h2>Who is it for?</h2>
-          <div>{{ product.metafields.custom.who_is_it_for }}</div>
-        </article>
+  {%- comment -%} ===== Key benefits ===== {%- endcomment -%}
+  {%- if product.metafields.custom.benefits != blank -%}
+    <section class="product-section" id="benefits">
+      <h2>Key benefits</h2>
+      <div class="rte">{{ product.metafields.custom.benefits }}</div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== AI/GEO-friendly Q&A ===== {%- endcomment -%}
+  {%- assign has_qa = false -%}
+  {%- if product.metafields.custom.who_is_it_for != blank
+      or product.metafields.custom.how_to_use != blank
+      or product.metafields.custom.key_ingredients != blank -%}
+    {%- assign has_qa = true -%}
+  {%- endif -%}
+  {%- if has_qa -%}
+    <section class="product-qa">
+      <div class="qa-grid">
+        {%- if product.metafields.custom.who_is_it_for != blank -%}
+          <article class="qa-item">
+            <h2>Who is it for?</h2>
+            <div class="rte">{{ product.metafields.custom.who_is_it_for }}</div>
+          </article>
+        {%- endif -%}
+        {%- if product.metafields.custom.how_to_use != blank -%}
+          <article class="qa-item">
+            <h2>How to use</h2>
+            <div class="rte">{{ product.metafields.custom.how_to_use }}</div>
+          </article>
+        {%- endif -%}
+        {%- if product.metafields.custom.key_ingredients != blank -%}
+          <article class="qa-item">
+            <h2>Key ingredients</h2>
+            <div class="rte">{{ product.metafields.custom.key_ingredients }}</div>
+          </article>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== Specifications (also feeds JSON-LD additionalProperty) ===== {%- endcomment -%}
+  {%- if product.metafields.custom.specs != blank -%}
+    <section class="product-section" id="specs">
+      <h2>Specifications</h2>
+      <table class="spec-table">
+        <tbody>
+          {%- for row in product.metafields.custom.specs.value -%}
+            {%- if row.value != blank -%}
+              <tr>
+                <th scope="row">{{ row.label }}</th>
+                <td>{{ row.value }}</td>
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== Full ingredients / INCI ===== {%- endcomment -%}
+  {%- if product.metafields.custom.inci != blank -%}
+    <section class="product-section" id="ingredients">
+      <h2>Full ingredients (INCI)</h2>
+      <div class="rte inci-list">{{ product.metafields.custom.inci }}</div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== Precautions / who should avoid ===== {%- endcomment -%}
+  {%- if product.metafields.custom.precautions != blank -%}
+    <section class="product-section" id="precautions">
+      <h2>Precautions &amp; who should avoid</h2>
+      <div class="rte">{{ product.metafields.custom.precautions }}</div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== Brand & maker (entity clarity for GEO) ===== {%- endcomment -%}
+  {%- assign show_brand_block = false -%}
+  {%- if product.metafields.custom.brand_story != blank -%}{%- assign show_brand_block = true -%}{%- endif -%}
+  {%- if product.vendor != blank and product.vendor != product_brand -%}{%- assign show_brand_block = true -%}{%- endif -%}
+  {%- if show_brand_block -%}
+    <section class="product-section" id="brand">
+      <h2>Brand &amp; maker</h2>
+      {%- if product.vendor != blank and product.vendor != product_brand -%}
+        <p class="brand-entity"><strong>{{ product_brand }}</strong> is a skincare brand manufactured by <strong>{{ product.vendor }}</strong>.</p>
       {%- endif -%}
-
-      {%- if product.metafields.custom.how_to_use -%}
-        <article class="qa-item">
-          <h2>How to use</h2>
-          <div>{{ product.metafields.custom.how_to_use }}</div>
-        </article>
+      {%- if product.metafields.custom.brand_story != blank -%}
+        <div class="rte">{{ product.metafields.custom.brand_story }}</div>
       {%- endif -%}
+    </section>
+  {%- endif -%}
 
-      {%- if product.metafields.custom.key_ingredients -%}
-        <article class="qa-item">
-          <h2>Key ingredients</h2>
-          <div>{{ product.metafields.custom.key_ingredients }}</div>
-        </article>
-      {%- endif -%}
-
-      {%- if product.metafields.custom.benefits -%}
-        <article class="qa-item">
-          <h2>Benefits</h2>
-          <div>{{ product.metafields.custom.benefits }}</div>
-        </article>
-      {%- endif -%}
-    </div>
-
-    {%- if product.description != blank -%}
-      <article class="product-full-description">
-        <h2>About this product</h2>
-        <div class="rte">{{ product.description }}</div>
-      </article>
-    {%- endif -%}
-  </section>
-
-  {%- comment -%} ===== FAQ Section ===== {%- endcomment -%}
-  {%- if product.metafields.custom.faqs -%}
-    <section class="product-faq">
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  {%- if product.metafields.custom.faqs != blank -%}
+    <section class="product-faq" id="faq">
       <h2>Frequently asked questions</h2>
       <div class="faq-list">
-        {%- assign faqs = product.metafields.custom.faqs.value -%}
-        {%- for faq in faqs -%}
-          <details class="faq-item">
-            <summary>{{ faq.question }}</summary>
-            <div class="faq-answer">{{ faq.answer }}</div>
-          </details>
+        {%- for faq in product.metafields.custom.faqs.value -%}
+          {%- if faq.question != blank -%}
+            <details class="faq-item">
+              <summary>{{ faq.question }}</summary>
+              <div class="faq-answer rte">{{ faq.answer }}</div>
+            </details>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </section>
   {%- endif -%}
+
+  {%- comment -%} ===== About (legacy description; h1 -> h2 to avoid a duplicate page H1) ===== {%- endcomment -%}
+  {%- if product.description != blank -%}
+    <section class="product-section product-full-description" id="about">
+      <h2>About this product</h2>
+      <div class="rte">{{ product.description | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' }}</div>
+    </section>
+  {%- endif -%}
 </div>
 
-{%- comment -%} ===== Product JSON-LD Schema ===== {%- endcomment -%}
+{%- comment -%} ============ JSON-LD: Product (entity graph) ============ {%- endcomment -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "Product",
+  "@id": "{{ shop.url }}{{ product.url }}#product",
   "name": {{ product.title | json }},
   "description": {{ product.description | strip_html | truncate: 5000 | json }},
-  "url": "{{ shop.url }}{{ product.url }}",
-  "sku": {{ current_variant.sku | json }},
-  "mpn": {{ current_variant.sku | json }},
-  {%- if product.images.size > 0 -%}
-  "image": [
-    {%- for image in product.images -%}
-      "{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
-    {%- endfor -%}
-  ],
+  "url": "{{ shop.url }}{{ product.url }}"
+  {%- if product.type != blank -%}
+  ,"category": {{ product.type | json }}
   {%- endif -%}
-  "brand": {
-    "@type": "Brand",
-    "name": {{ product.vendor | default: shop.name | json }}
-  },
-  "offers": {
+  {%- if current_variant.sku != blank -%}
+  ,"sku": {{ current_variant.sku | json }},"mpn": {{ current_variant.sku | json }}
+  {%- endif -%}
+  {%- if product.images.size > 0 -%}
+  ,"image": [
+    {%- for image in product.images limit: 5 -%}
+      {%- capture img_src -%}{{ image | image_url: width: 1200 }}{%- endcapture -%}
+      {%- if img_src contains 'http' -%}{{ img_src | json }}{%- else -%}{{ img_src | prepend: 'https:' | json }}{%- endif -%}
+      {%- unless forloop.last %},{% endunless -%}
+    {%- endfor -%}
+  ]
+  {%- endif -%}
+  ,"brand": { "@type": "Brand", "name": {{ product_brand | json }} }
+  {%- if product.vendor != blank and product.vendor != product_brand -%}
+  ,"manufacturer": { "@type": "Organization", "name": {{ product.vendor | json }} }
+  {%- endif -%}
+  {%- if product.metafields.custom.specs != blank -%}
+  ,"additionalProperty": [
+    {%- for row in product.metafields.custom.specs.value -%}
+      {%- if row.value != blank -%}
+      { "@type": "PropertyValue", "name": {{ row.label | json }}, "value": {{ row.value | json }} }
+      {%- unless forloop.last %},{% endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+  {%- endif -%}
+  ,"offers": {
     "@type": "Offer",
     "url": "{{ shop.url }}{{ product.url }}",
     "priceCurrency": {{ cart.currency.iso_code | json }},
     "price": {{ current_variant.price | money_without_currency | remove: ',' | json }},
+    "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
     "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
     "itemCondition": "https://schema.org/NewCondition",
-    "seller": {
-      "@type": "Organization",
-      "name": {{ shop.name | json }}
-    }
+    "seller": { "@type": "Organization", "name": {{ shop.name | json }} }
   }
-  {%- if product.metafields.reviews.rating -%}
+  {%- if product.metafields.reviews.rating_count and product.metafields.reviews.rating_count.value > 0 -%}
   ,"aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": {{ product.metafields.reviews.rating.value | json }},
@@ -178,8 +282,8 @@
 }
 </script>
 
-{%- comment -%} ===== FAQ JSON-LD (GEO-critical) ===== {%- endcomment -%}
-{%- if product.metafields.custom.faqs -%}
+{%- comment -%} ============ JSON-LD: FAQPage (GEO-critical) ============ {%- endcomment -%}
+{%- if product.metafields.custom.faqs != blank -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,6 +291,7 @@
   "mainEntity": [
     {%- assign faqs = product.metafields.custom.faqs.value -%}
     {%- for faq in faqs -%}
+      {%- if faq.question != blank -%}
       {
         "@type": "Question",
         "name": {{ faq.question | json }},
@@ -194,25 +299,27 @@
           "@type": "Answer",
           "text": {{ faq.answer | strip_html | json }}
         }
-      }{% unless forloop.last %},{% endunless %}
+      }
+      {%- unless forloop.last %},{% endunless -%}
+      {%- endif -%}
     {%- endfor -%}
   ]
 }
 </script>
 {%- endif -%}
 
-{%- comment -%} ===== Breadcrumb JSON-LD ===== {%- endcomment -%}
+{%- comment -%} ============ JSON-LD: Breadcrumb ============ {%- endcomment -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" },
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" }
     {%- if collection -%}
-    { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" },
-    { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+    ,{ "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" }
+    ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
     {%- else -%}
-    { "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+    ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
     {%- endif -%}
   ]
 }
