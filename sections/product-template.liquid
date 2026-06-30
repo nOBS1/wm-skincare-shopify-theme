@@ -1,24 +1,27 @@
 {%- comment -%}
-  Product page — GEO/SEO optimized.
+  Product page — GEO/SEO optimized + "Poetics of Precision" visual design.
 
-  All rich content is metafield-driven (namespace: custom) and hidden gracefully
-  when empty, so the page never renders empty wrappers. JSON-LD below stays valid
-  JSON in every branch. See GEO-SETUP.md for the metafield definitions + ready-to-paste
-  sample values.
+  Server-rendered: all core content (title, price, specs, FAQ, JSON-LD) ships in the
+  first HTML response — no client-side rendering, so Googlebot/AI crawlers read it directly.
+  Rich content is metafield-driven (namespace: custom) and hidden gracefully when empty.
+  JSON-LD below stays valid JSON in every branch. See GEO-SETUP.md for metafield setup.
 {%- endcomment -%}
 
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
-{%- comment -%} Resolve consumer brand vs. manufacturer (legal entity / vendor).
-  vendor on this store = "Lanyuan Elimei Biotech" (the maker); the consumer brand
-  "Weiman Poetics" lives in the title ("Weiman Poetics : ..."). Override anytime
-  with the custom.brand_name metafield. {%- endcomment -%}
+{%- comment -%} Brand (consumer brand) vs manufacturer (vendor / legal entity) {%- endcomment -%}
 {%- assign product_brand = product.metafields.custom.brand_name -%}
 {%- if product_brand == blank and product.title contains ':' -%}
   {%- assign product_brand = product.title | split: ':' | first | strip -%}
 {%- endif -%}
 {%- if product_brand == blank -%}
   {%- assign product_brand = product.vendor -%}
+{%- endif -%}
+
+{%- comment -%} Display title with the "Brand : " prefix removed (eyebrow already shows brand) {%- endcomment -%}
+{%- assign product_display_title = product.title -%}
+{%- if product.title contains ':' -%}
+  {%- assign product_display_title = product.title | split: ':' | last | strip -%}
 {%- endif -%}
 
 <div class="container product-page">
@@ -41,17 +44,21 @@
     </div>
 
     <div class="product-info">
-      {%- if product_brand != blank -%}
-        <span class="product-brand">{{ product_brand }}</span>
-      {%- endif -%}
+      <span class="product-brand">
+        {{- product_brand -}}
+        {%- if product.type != blank %}<span class="sep"> · </span>{{ product.type }}{% endif -%}
+      </span>
 
-      <h1 class="product-title">{{ product.title }}</h1>
+      <h1 class="product-title">{{ product_display_title }}</h1>
 
       <div class="product-price">
         {%- if product.compare_at_price > product.price -%}
           <s class="price-compare">{{ product.compare_at_price | money }}</s>
         {%- endif -%}
         <span class="price-current">{{ current_variant.price | money }}</span>
+        {%- if product.metafields.custom.net_volume != blank -%}
+          <span class="product-vol">{{ product.metafields.custom.net_volume }}</span>
+        {%- endif -%}
         {%- unless current_variant.available -%}
           <span class="price-status">Sold out</span>
         {%- endunless -%}
@@ -110,7 +117,7 @@
   {%- comment -%} ===== Key benefits ===== {%- endcomment -%}
   {%- if product.metafields.custom.benefits != blank -%}
     <section class="product-section" id="benefits">
-      <h2>Key benefits</h2>
+      <div class="section-head"><span class="section-eyebrow">What it does</span><span class="section-line"></span></div>
       <div class="rte">{{ product.metafields.custom.benefits }}</div>
     </section>
   {%- endif -%}
@@ -124,6 +131,7 @@
   {%- endif -%}
   {%- if has_qa -%}
     <section class="product-qa">
+      <div class="section-head"><span class="section-eyebrow">Good to know</span><span class="section-line"></span></div>
       <div class="qa-grid">
         {%- if product.metafields.custom.who_is_it_for != blank -%}
           <article class="qa-item">
@@ -147,29 +155,37 @@
     </section>
   {%- endif -%}
 
-  {%- comment -%} ===== Specifications (also feeds JSON-LD additionalProperty) ===== {%- endcomment -%}
+  {%- comment -%} ===== SIGNATURE: Technical Dossier (specs feed JSON-LD additionalProperty) ===== {%- endcomment -%}
   {%- if product.metafields.custom.specs != blank -%}
     <section class="product-section" id="specs">
-      <h2>Specifications</h2>
-      <table class="spec-table">
-        <tbody>
-          {%- for row in product.metafields.custom.specs.value -%}
-            {%- if row.value != blank -%}
-              <tr>
-                <th scope="row">{{ row.label }}</th>
-                <td>{{ row.value }}</td>
-              </tr>
-            {%- endif -%}
-          {%- endfor -%}
-        </tbody>
-      </table>
+      <div class="section-head"><span class="section-eyebrow">The formula</span><span class="section-line"></span></div>
+      <div class="dossier">
+        <div class="dossier-top">
+          <span class="section-eyebrow">Technical dossier</span>
+          {%- if product.type != blank -%}
+            <span class="dossier-ref">{{ product.type | upcase }}{% if product.metafields.custom.net_volume != blank %} · {{ product.metafields.custom.net_volume | upcase }}{% endif %}</span>
+          {%- endif -%}
+        </div>
+        <table class="spec-table">
+          <tbody>
+            {%- for row in product.metafields.custom.specs.value -%}
+              {%- if row.value != blank -%}
+                <tr>
+                  <th scope="row">{{ row.label }}</th>
+                  <td>{{ row.value }}</td>
+                </tr>
+              {%- endif -%}
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
     </section>
   {%- endif -%}
 
   {%- comment -%} ===== Full ingredients / INCI ===== {%- endcomment -%}
   {%- if product.metafields.custom.inci != blank -%}
     <section class="product-section" id="ingredients">
-      <h2>Full ingredients (INCI)</h2>
+      <div class="section-head"><span class="section-eyebrow">Full ingredients · INCI</span><span class="section-line"></span></div>
       <div class="rte inci-list">{{ product.metafields.custom.inci }}</div>
     </section>
   {%- endif -%}
@@ -177,31 +193,16 @@
   {%- comment -%} ===== Precautions / who should avoid ===== {%- endcomment -%}
   {%- if product.metafields.custom.precautions != blank -%}
     <section class="product-section" id="precautions">
-      <h2>Precautions &amp; who should avoid</h2>
+      <div class="section-head"><span class="section-eyebrow">Safety &amp; precautions</span><span class="section-line"></span></div>
       <div class="rte">{{ product.metafields.custom.precautions }}</div>
-    </section>
-  {%- endif -%}
-
-  {%- comment -%} ===== Brand & maker (entity clarity for GEO) ===== {%- endcomment -%}
-  {%- assign show_brand_block = false -%}
-  {%- if product.metafields.custom.brand_story != blank -%}{%- assign show_brand_block = true -%}{%- endif -%}
-  {%- if product.vendor != blank and product.vendor != product_brand -%}{%- assign show_brand_block = true -%}{%- endif -%}
-  {%- if show_brand_block -%}
-    <section class="product-section" id="brand">
-      <h2>Brand &amp; maker</h2>
-      {%- if product.vendor != blank and product.vendor != product_brand -%}
-        <p class="brand-entity"><strong>{{ product_brand }}</strong> is a skincare brand manufactured by <strong>{{ product.vendor }}</strong>.</p>
-      {%- endif -%}
-      {%- if product.metafields.custom.brand_story != blank -%}
-        <div class="rte">{{ product.metafields.custom.brand_story }}</div>
-      {%- endif -%}
     </section>
   {%- endif -%}
 
   {%- comment -%} ===== FAQ ===== {%- endcomment -%}
   {%- if product.metafields.custom.faqs != blank -%}
     <section class="product-faq" id="faq">
-      <h2>Frequently asked questions</h2>
+      <div class="section-head"><span class="section-eyebrow">Questions</span><span class="section-line"></span></div>
+      <h2>Frequently asked</h2>
       <div class="faq-list">
         {%- for faq in product.metafields.custom.faqs.value -%}
           {%- if faq.question != blank -%}
@@ -215,10 +216,26 @@
     </section>
   {%- endif -%}
 
+  {%- comment -%} ===== Brand & maker (entity clarity for GEO) ===== {%- endcomment -%}
+  {%- assign show_brand_block = false -%}
+  {%- if product.metafields.custom.brand_story != blank -%}{%- assign show_brand_block = true -%}{%- endif -%}
+  {%- if product.vendor != blank and product.vendor != product_brand -%}{%- assign show_brand_block = true -%}{%- endif -%}
+  {%- if show_brand_block -%}
+    <section class="product-section" id="brand">
+      <div class="section-head"><span class="section-eyebrow">Brand &amp; maker</span><span class="section-line"></span></div>
+      {%- if product.vendor != blank and product.vendor != product_brand -%}
+        <p class="brand-entity"><strong>{{ product_brand }}</strong> is a skincare brand manufactured by <strong>{{ product.vendor }}</strong>.</p>
+      {%- endif -%}
+      {%- if product.metafields.custom.brand_story != blank -%}
+        <div class="rte">{{ product.metafields.custom.brand_story }}</div>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
   {%- comment -%} ===== About (legacy description; h1 -> h2 to avoid a duplicate page H1) ===== {%- endcomment -%}
   {%- if product.description != blank -%}
     <section class="product-section product-full-description" id="about">
-      <h2>About this product</h2>
+      <div class="section-head"><span class="section-eyebrow">About this product</span><span class="section-line"></span></div>
       <div class="rte">{{ product.description | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' }}</div>
     </section>
   {%- endif -%}
