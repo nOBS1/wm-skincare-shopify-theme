@@ -63,6 +63,22 @@ ul, ol { list-style: none; }
 .fade-up { animation: fadeUp 0.8s var(--transition) both; }
 .fade-in { animation: fadeIn 1s ease both; }
 
+/* ========== SCROLL ANIMATION ========== */
+/* Hero is EXCLUDED from this class to prevent LCP delay */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+/* Hero always visible — never hidden by animation */
+.hero, .hero * { opacity: 1 !important; transform: none !important; }
+
 /* ========== ANNOUNCEMENT BAR ========== */
 .announcement-bar {
   background: var(--color-primary);
@@ -160,6 +176,8 @@ ul, ol { list-style: none; }
   height: auto;
   max-width: 100%;
   object-fit: contain;
+  /* LCP: hint browser to decode image ASAP */
+  content-visibility: auto;
 }
 .hero-overlay {
   position: absolute;

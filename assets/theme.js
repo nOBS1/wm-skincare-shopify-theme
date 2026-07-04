@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Scroll-triggered fade-in animations
-  const animateEls = document.querySelectorAll('.section, .hero-content, .brand-story-grid, .testimonial-card, .product-card');
+  // Scroll-triggered fade-in animations — exclude hero (LCP element) to avoid LCP delay
+  const animateEls = document.querySelectorAll('.section:not(.hero), .brand-story-grid, .testimonial-card, .product-card');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
     animateEls.forEach(el => {
       el.classList.add('animate-on-scroll');
       observer.observe(el);

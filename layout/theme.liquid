@@ -69,9 +69,29 @@
   }
   </script>
 
+  {%- comment -%} LCP Optimization: Preconnect to critical third-party origins {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="dns-prefetch" href="https://cdn.shopify.com">
+
+  {%- comment -%} LCP Optimization: Preload hero image ASAP before browser parses body {%- endcomment -%}
+  {%- assign hero_section = sections['hero'] -%}
+  {%- if hero_section.settings.image != blank and template == 'index' -%}
+    <link rel="preload" as="image"
+          href="{{ hero_section.settings.image | image_url: width: 1500 }}"
+          imagesrcset="{{ hero_section.settings.image | image_url: width: 600 }} 600w,
+                       {{ hero_section.settings.image | image_url: width: 1000 }} 1000w,
+                       {{ hero_section.settings.image | image_url: width: 1500 }} 1500w,
+                       {{ hero_section.settings.image | image_url: width: 2000 }} 2000w"
+          imagesizes="100vw"
+          fetchpriority="high">
+  {%- endif -%}
+
+  {%- comment -%} LCP Optimization: Preload critical font weights used above fold {%- endcomment -%}
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap"></noscript>
+
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
 </head>
