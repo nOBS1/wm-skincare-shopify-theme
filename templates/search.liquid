@@ -5,6 +5,7 @@
     <button type="submit" class="btn btn-primary">{{ 'general.search.submit' | t }}</button>
   </form>
   {% if search.performed %}
+    {% paginate search.results by 24 %}
     {% if search.results_count > 0 %}
       <p>{{ 'general.search.results_with_count' | t: count: search.results_count, terms: search.terms }}</p>
       <div class="product-grid">
@@ -25,10 +26,13 @@
         {% endfor %}
       </div>
       {% if paginate.pages > 1 %}
-        {% include 'pagination' %}
+        <nav class="pagination" aria-label="Pagination" style="text-align:center;padding:2rem 0;">
+          {{ paginate | default_pagination }}
+        </nav>
       {% endif %}
     {% else %}
       <p>{{ 'general.search.no_results' | t: terms: search.terms }}</p>
     {% endif %}
+    {% endpaginate %}
   {% endif %}
 </div>

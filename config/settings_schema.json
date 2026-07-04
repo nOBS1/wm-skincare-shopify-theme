@@ -33,6 +33,12 @@
     ]
   },
   {
+    "name": "Product page",
+    "settings": [
+      { "type": "checkbox", "id": "enable_payment_button", "label": "Show dynamic checkout button", "default": true }
+    ]
+  },
+  {
     "name": "Logo & Favicon",
     "settings": [
       { "type": "image_picker", "id": "logo", "label": "Logo" },

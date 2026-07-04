@@ -2,7 +2,7 @@
   <h1>{{ 'gift_cards.issued.title' | t }}</h1>
   <p>{{ 'gift_cards.issued.subtext' | t }}</p>
   <div style="margin:2rem 0">
-    <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card" style="max-width:400px;margin:0 auto">
+    <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card" width="400" height="250" style="max-width:400px;height:auto;margin:0 auto">
   </div>
   <p style="font-size:1.5rem;letter-spacing:0.1em;font-weight:600">{{ gift_card.code | format_code }}</p>
   <p>{{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}</p>

@@ -10,8 +10,8 @@
   <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
 {%- elsif template contains 'article' and article.image -%}
   <meta property="og:image" content="{{ article.image | image_url: width: 1200 }}">
-{%- elsif settings.share_image -%}
-  <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+{%- elsif settings.og_image -%}
+  <meta property="og:image" content="{{ settings.og_image | image_url: width: 1200 }}">
 {%- endif -%}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title | escape }}">

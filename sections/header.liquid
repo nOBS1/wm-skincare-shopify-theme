@@ -6,9 +6,10 @@
     <div class="header-logo">
       {%- if settings.logo != blank -%}
         {%- assign logo_w = settings.logo_width | default: 160 -%}
-        <a href="/"><img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" width="{{ logo_w }}" style="width:{{ logo_w }}px;height:auto"></a>
+        {%- assign logo_h = logo_w | times: settings.logo.height | divided_by: settings.logo.width -%}
+        <a href="{{ routes.root_url }}"><img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" width="{{ logo_w }}" height="{{ logo_h }}" style="width:{{ logo_w }}px;height:auto"></a>
       {%- else -%}
-        <a href="/">{{ shop.name }}</a>
+        <a href="{{ routes.root_url }}">{{ shop.name }}</a>
       {%- endif -%}
     </div>
     <nav class="header-nav" aria-label="Main navigation">
@@ -17,13 +18,13 @@
       {%- endfor -%}
     </nav>
     <div class="header-actions">
-      <a href="/search" aria-label="Search">
+      <a href="{{ routes.search_url }}" aria-label="Search">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
       </a>
-      <a href="/account" aria-label="Account">
+      <a href="{{ routes.account_url }}" aria-label="Account">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
       </a>
-      <a href="/cart" aria-label="Cart" class="header-cart">
+      <a href="{{ routes.cart_url }}" aria-label="Cart" class="header-cart">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="cart-count">{{ cart.item_count }}</span>
       </a>

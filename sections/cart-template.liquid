@@ -1,7 +1,7 @@
 <div class="container" style="padding:3rem 0;">
   <h1>Your Cart</h1>
   {%- if cart.item_count > 0 -%}
-    <form action="/cart" method="post">
+    <form action="{{ routes.cart_url }}" method="post">
       <table class="cart-table">
         <thead>
           <tr>
@@ -36,7 +36,7 @@
       </div>
     </form>
   {%- else -%}
-    <p style="padding:3rem 0;">Your cart is empty. <a href="/collections/all" style="text-decoration:underline;">Continue shopping</a></p>
+    <p style="padding:3rem 0;">Your cart is empty. <a href="{{ routes.all_products_collection_url }}" style="text-decoration:underline;">Continue shopping</a></p>
   {%- endif -%}
 </div>
 

@@ -172,44 +172,79 @@ ul, ol { list-style: none; }
 
 /* ========== BUTTONS ========== */
 .btn {
-  display: inline-block;
-  padding: 14px 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 45px;
   font-size: 0.75rem;
+  font-weight: 500;
   font-family: var(--font-body);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   border: 1px solid currentColor;
+  border-radius: 4px; /* Soft rounded corners for elegance */
   transition: all 0.4s var(--transition);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
 }
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--transition);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  transform: scaleX(1);
+}
+
 .btn-primary {
   background: var(--color-primary);
   color: var(--color-white);
   border-color: var(--color-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
+
 .btn-primary:hover {
   background: var(--color-gold);
   border-color: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(184, 149, 106, 0.25);
 }
+
 .btn-outline {
   background: transparent;
-  color: var(--color-white);
-  border-color: rgba(255,255,255,0.6);
+  color: var(--color-text);
+  border-color: var(--color-border);
 }
+
 .btn-outline:hover {
-  background: var(--color-white);
-  color: var(--color-primary);
-  border-color: var(--color-white);
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
+
 .btn-gold {
   background: var(--color-gold);
   color: var(--color-white);
   border-color: var(--color-gold);
+  box-shadow: 0 4px 15px rgba(184, 149, 106, 0.15);
 }
+
 .btn-gold:hover {
   background: transparent;
   color: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(184, 149, 106, 0.15);
 }
 
 /* ========== SECTION SPACING ========== */
@@ -421,11 +456,16 @@ ul, ol { list-style: none; }
   text-transform: uppercase;
   letter-spacing: 0.2em;
   border: 1px solid var(--color-primary);
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   transition: all 0.4s var(--transition);
+  cursor: pointer;
 }
 .product-form .btn-add:hover {
   background: var(--color-gold);
   border-color: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(184, 149, 106, 0.25);
 }
 
 /* ========== COLLECTION PAGE ========== */
@@ -695,10 +735,11 @@ ul, ol { list-style: none; }
 .product-form .btn-add {
   width: 100%; background: var(--color-primary); color: var(--color-white); border: 1px solid var(--color-primary);
   font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
-  padding: 19px; cursor: pointer; transition: background .45s var(--transition), color .45s var(--transition);
+  padding: 19px; cursor: pointer; transition: all .45s var(--transition);
+  border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
-.product-form .btn-add:hover { background: var(--color-gold); border-color: var(--color-gold); color: #fff; }
-.product-form .btn-add[disabled] { background: transparent; color: var(--color-text-light); border-color: var(--color-border); cursor: default; }
+.product-form .btn-add:hover { background: var(--color-gold); border-color: var(--color-gold); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184, 149, 106, 0.25); }
+.product-form .btn-add[disabled] { background: transparent; color: var(--color-text-light); border-color: var(--color-border); cursor: default; box-shadow: none; transform: none; }
 .restock-note { margin-top: 1rem; font-size: 0.8rem; color: var(--color-text-light); line-height: 1.6; padding: 0.9rem 1rem; background: var(--color-cream); border-left: 2px solid var(--color-gold); }
 .product-trust { list-style: none; margin-top: 1.8rem; padding: 1.5rem 0 0; border-top: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 0.6rem; }
 .product-trust li { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-light); padding-left: 1.4rem; position: relative; }

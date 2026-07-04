@@ -1,14 +1,5 @@
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": {{ shop.name | json }},
-  "url": "{{ shop.url }}",
-  {% if settings.logo %}"logo": "{{ settings.logo | image_url: width: 600 }}",{% endif %}
-  "sameAs": [
-    {{ settings.social_instagram | json }},
-    {{ settings.social_facebook | json }},
-    {{ settings.social_twitter | json }}
-  ]
-}
-</script>
+{%- comment -%}
+  DEPRECATED — delete this file.
+  Organization JSON-LD now lives inline in layout/theme.liquid (with valid
+  sameAs array handling). This snippet was never referenced by any template.
+{%- endcomment -%}

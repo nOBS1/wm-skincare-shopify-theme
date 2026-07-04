@@ -1,6 +1,6 @@
 {%- if template != 'index' and template != '404' -%}
 <nav class="breadcrumb" aria-label="Breadcrumb">
-  <a href="/">Home</a>
+  <a href="{{ routes.root_url }}">Home</a>
   {%- if template contains 'product' -%}
     {%- if collection -%}
       <span>/</span>

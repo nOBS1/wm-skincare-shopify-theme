@@ -25,7 +25,7 @@
 {%- endif -%}
 
 <div class="container product-page">
-  {%- include 'breadcrumb' -%}
+  {%- render 'breadcrumb' -%}
 
   <div class="product-single">
     <div class="product-gallery">
@@ -52,16 +52,12 @@
       <h1 class="product-title">{{ product_display_title }}</h1>
 
       <div class="product-price">
-        {%- if product.compare_at_price > product.price -%}
-          <s class="price-compare">{{ product.compare_at_price | money }}</s>
-        {%- endif -%}
+        <s class="price-compare" {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</s>
         <span class="price-current">{{ current_variant.price | money }}</span>
         {%- if product.metafields.custom.net_volume != blank -%}
           <span class="product-vol">{{ product.metafields.custom.net_volume }}</span>
         {%- endif -%}
-        {%- unless current_variant.available -%}
-          <span class="price-status">Sold out</span>
-        {%- endunless -%}
+        <span class="price-status" {% if current_variant.available %}hidden{% endif %}>Sold out</span>
       </div>
 
       {%- if product.metafields.custom.short_pitch != blank -%}
@@ -75,7 +71,7 @@
           {%- for option in product.options_with_values -%}
             <div class="product-option">
               <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
-              <select name="options[{{ option.name | escape }}]" id="Option-{{ forloop.index }}" class="variant-select" form="product-form-{{ section.id }}">
+              <select name="options[{{ option.name | escape }}]" id="Option-{{ forloop.index }}" class="variant-select">
                 {%- for value in option.values -%}
                   <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
                 {%- endfor -%}
@@ -105,6 +101,23 @@
           {%- endif -%}
         {%- endunless -%}
       {%- endform -%}
+
+      {%- unless product.has_only_default_variant -%}
+        {%- comment -%} Variant data for JS: pre-formatted prices so JS never touches money formatting {%- endcomment -%}
+        <script type="application/json" data-variant-json>
+          [
+            {%- for variant in product.variants -%}
+            {
+              "id": {{ variant.id }},
+              "available": {{ variant.available }},
+              "options": {{ variant.options | json }},
+              "price": {{ variant.price | money | strip_html | json }},
+              "compare_at_price": {% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | strip_html | json }}{% else %}null{% endif %}
+            }{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ]
+        </script>
+      {%- endunless -%}
 
       <ul class="product-trust">
         <li>Free worldwide shipping over $50</li>
@@ -283,16 +296,17 @@
     "@type": "Offer",
     "url": "{{ shop.url }}{{ product.url }}",
     "priceCurrency": {{ cart.currency.iso_code | json }},
-    "price": {{ current_variant.price | money_without_currency | remove: ',' | json }},
+    "price": {{ current_variant.price | divided_by: 100.0 | json }},
     "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
     "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
     "itemCondition": "https://schema.org/NewCondition",
     "seller": { "@type": "Organization", "name": {{ shop.name | json }} }
   }
   {%- if product.metafields.reviews.rating_count and product.metafields.reviews.rating_count.value > 0 -%}
+  {%- assign rating_value = product.metafields.reviews.rating.value -%}
   ,"aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": {{ product.metafields.reviews.rating.value | json }},
+    "ratingValue": {% if rating_value.rating %}{{ rating_value.rating | json }}{% else %}{{ rating_value | json }}{% endif %},
     "reviewCount": {{ product.metafields.reviews.rating_count.value | json }}
   }
   {%- endif -%}

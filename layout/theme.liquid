@@ -15,28 +15,8 @@
   <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
 
-  {%- comment -%} Open Graph / Facebook {%- endcomment -%}
-  <meta property="og:site_name" content="{{ shop.name }}">
-  <meta property="og:url" content="{{ canonical_url }}">
-  <meta property="og:title" content="{{ page_title | escape }}">
-  <meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
-  {%- if page_description -%}
-  <meta property="og:description" content="{{ page_description | escape }}">
-  {%- endif -%}
-  {%- if template contains 'product' -%}
-  <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
-  {%- elsif template contains 'article' -%}
-  <meta property="og:image" content="{{ article.image | image_url: width: 1200 }}">
-  {%- elsif settings.share_image -%}
-  <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
-  {%- endif -%}
-
-  {%- comment -%} Twitter Card {%- endcomment -%}
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ page_title | escape }}">
-  {%- if page_description -%}
-  <meta name="twitter:description" content="{{ page_description | escape }}">
-  {%- endif -%}
+  {%- comment -%} Open Graph / Twitter Card (snippet also emits product price meta) {%- endcomment -%}
+  {%- render 'seo-meta' -%}
 
   {%- comment -%} Organization Schema for GEO {%- endcomment -%}
   <script type="application/ld+json">
@@ -45,16 +25,34 @@
     "@type": "Organization",
     "name": {{ shop.name | json }},
     "url": {{ shop.url | json }},
-    {%- if settings.favicon != blank -%}
+    {%- if settings.logo != blank -%}
+    "logo": {{ settings.logo | image_url: width: 512 | json }},
+    {%- elsif settings.favicon != blank -%}
     "logo": {{ settings.favicon | image_url: width: 512 | json }},
     {%- endif -%}
-    "sameAs": [
-      {%- if settings.social_facebook != blank -%}{{ settings.social_facebook | json }},{%- endif -%}
-      {%- if settings.social_instagram != blank -%}{{ settings.social_instagram | json }},{%- endif -%}
-      {%- if settings.social_twitter != blank -%}{{ settings.social_twitter | json }}{%- endif -%}
-    ]
+    {%- assign social_urls = '' -%}
+    {%- if settings.social_facebook != blank -%}
+      {%- assign social_urls = social_urls | append: settings.social_facebook | append: '|' -%}
+    {%- endif -%}
+    {%- if settings.social_instagram != blank -%}
+      {%- assign social_urls = social_urls | append: settings.social_instagram | append: '|' -%}
+    {%- endif -%}
+    {%- if settings.social_twitter != blank -%}
+      {%- assign social_twitter_url = settings.social_twitter -%}
+      {%- unless social_twitter_url contains 'http' -%}
+        {%- assign social_twitter_url = social_twitter_url | remove: '@' | prepend: 'https://x.com/' -%}
+      {%- endunless -%}
+      {%- assign social_urls = social_urls | append: social_twitter_url | append: '|' -%}
+    {%- endif -%}
+    {%- assign social_list = social_urls | split: '|' -%}
+    "sameAs": [{% for social_url in social_list %}{{ social_url | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]
   }
   </script>
+
+  {%- comment -%} Breadcrumb schema (product template renders its own richer version inline) {%- endcomment -%}
+  {%- unless template contains 'product' -%}
+    {%- render 'schema-breadcrumb' -%}
+  {%- endunless -%}
 
   {%- comment -%} Website SearchAction for sitelinks search box {%- endcomment -%}
   <script type="application/ld+json">
