@@ -25,10 +25,19 @@
     "@type": "Organization",
     "name": {{ shop.name | json }},
     "url": {{ shop.url | json }},
-    {%- if settings.logo != blank -%}
-    "logo": {{ settings.logo | image_url: width: 512 | json }},
-    {%- elsif settings.favicon != blank -%}
-    "logo": {{ settings.favicon | image_url: width: 512 | json }},
+    {%- liquid
+      assign org_logo = ''
+      if settings.logo != blank
+        assign org_logo = settings.logo | image_url: width: 512
+      elsif settings.favicon != blank
+        assign org_logo = settings.favicon | image_url: width: 512
+      endif
+      unless org_logo == '' or org_logo contains 'https:'
+        assign org_logo = org_logo | prepend: 'https:'
+      endunless
+    -%}
+    {%- if org_logo != '' -%}
+    "logo": {{ org_logo | json }},
     {%- endif -%}
     {%- assign social_urls = '' -%}
     {%- if settings.social_facebook != blank -%}
@@ -72,7 +81,7 @@
   {%- comment -%} LCP Optimization: Preconnect to critical third-party origins {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.shopify.com">
+  <link rel="preconnect" href="https://cdn.shopify.com">
 
   {%- comment -%} LCP Optimization: Preload hero image ASAP before browser parses body {%- endcomment -%}
   {%- assign hero_section = sections['hero'] -%}
@@ -87,12 +96,29 @@
           fetchpriority="high">
   {%- endif -%}
 
+  {%- comment -%} LCP Optimization: Preload article hero image (srcset/sizes must match article-template img) {%- endcomment -%}
+  {%- if template contains 'article' and article.image -%}
+    <link rel="preload" as="image"
+          href="{{ article.image | image_url: width: 1080 }}"
+          imagesrcset="{{ article.image | image_url: width: 720 }} 720w,
+                       {{ article.image | image_url: width: 1080 }} 1080w,
+                       {{ article.image | image_url: width: 1440 }} 1440w,
+                       {{ article.image | image_url: width: 2160 }} 2160w"
+          imagesizes="(min-width: 800px) 720px, calc(100vw - 40px)"
+          fetchpriority="high">
+  {%- endif -%}
+
+  {%- comment -%} GEO: expose the blog's Atom feed to crawlers {%- endcomment -%}
+  {%- if template contains 'blog' or template contains 'article' -%}
+    <link rel="alternate" type="application/atom+xml" title="{{ blog.title | escape }}" href="{{ shop.url }}{{ blog.url }}.atom">
+  {%- endif -%}
+
   {%- comment -%} LCP Optimization: Preload critical font weights used above fold {%- endcomment -%}
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap"></noscript>
 
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
   {{ content_for_header }}
 </head>
 <body class="template-{{ template | replace: '.', '-' }}">

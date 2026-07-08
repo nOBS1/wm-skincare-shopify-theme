@@ -1,36 +1,94 @@
-<div class="container" style="padding:3rem 0;">
-  <h1>{{ blog.title }}</h1>
-  <div class="product-grid" style="margin-top:2rem;">
-    {%- paginate blog.articles by 9 -%}
-      {%- for article in blog.articles -%}
-        <article class="product-card">
-          {%- if article.image -%}
-            <a href="{{ article.url }}">
-              <div class="product-card-img">
-                <img src="{{ article.image | image_url: width: 600 }}"
-                     alt="{{ article.image.alt | escape | default: article.title }}"
-                     width="600" height="400" loading="lazy">
-              </div>
-            </a>
-          {%- endif -%}
-          <h3 class="product-card-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
-          <p style="font-size:0.85rem;color:var(--color-text-light);margin-top:0.5rem;">
-            {{ article.excerpt_or_content | strip_html | truncate: 120 }}
-          </p>
-        </article>
-      {%- endfor -%}
-      {%- if paginate.pages > 1 -%}
-        <nav class="pagination" aria-label="Pagination" style="grid-column:1/-1;text-align:center;padding:2rem 0;">
-          {{ paginate | default_pagination }}
-        </nav>
+{%- paginate blog.articles by section.settings.posts_per_page -%}
+<div class="container blog-page">
+  {%- render 'breadcrumb' -%}
+
+  <header class="blog-header">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1>
+      {%- if current_tags -%}
+        {{ blog.title }} · {{ current_tags.first }}
+      {%- else -%}
+        {{ blog.title }}
       {%- endif -%}
-    {%- endpaginate -%}
+    </h1>
+    {%- if section.settings.description != blank and current_tags == blank -%}
+      <p class="blog-header-desc">{{ section.settings.description }}</p>
+    {%- endif -%}
+  </header>
+
+  {%- if section.settings.show_tag_filter and blog.all_tags.size > 0 -%}
+    <nav class="blog-tags" aria-label="Filter articles by topic">
+      <a href="{{ blog.url }}" class="blog-tag{% unless current_tags %} is-active{% endunless %}">All</a>
+      {%- for tag in blog.all_tags -%}
+        {%- if current_tags contains tag -%}
+          <a href="{{ blog.url }}" class="blog-tag is-active" aria-current="true">{{ tag }}</a>
+        {%- else -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="blog-tag">{{ tag }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  <div class="blog-grid">
+    {%- for article in blog.articles -%}
+      {%- if forloop.first and paginate.current_page == 1 -%}
+        {%- comment -%} First card is the likely LCP element — load eagerly {%- endcomment -%}
+        {%- render 'article-card', card_article: article, img_loading: 'eager', img_priority: true -%}
+      {%- else -%}
+        {%- render 'article-card', card_article: article -%}
+      {%- endif -%}
+    {%- else -%}
+      <p class="blog-empty">No articles yet — check back soon.</p>
+    {%- endfor -%}
   </div>
+
+  {%- if paginate.pages > 1 -%}
+    <nav class="pagination" aria-label="Pagination">
+      {{ paginate | default_pagination }}
+    </nav>
+  {%- endif -%}
 </div>
+
+{%- comment -%} GEO: Blog entity + the posts on this page, absolute URLs only {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "{{ shop.url }}{{ blog.url }}#blog",
+  "url": "{{ shop.url }}{{ blog.url }}",
+  "name": {{ blog.title | json }},
+  "publisher": { "@type": "Organization", "name": {{ shop.name | json }}, "url": {{ shop.url | json }} },
+  "inLanguage": {{ request.locale.iso_code | json }},
+  "blogPost": [
+    {%- for article in blog.articles -%}
+    {
+      "@type": "BlogPosting",
+      "headline": {{ article.title | json }},
+      "url": "{{ shop.url }}{{ article.url }}",
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      {%- if article.image -%}
+        {%- assign card_img_abs = article.image | image_url: width: 1200 -%}
+        {%- unless card_img_abs contains 'https:' -%}{%- assign card_img_abs = card_img_abs | prepend: 'https:' -%}{%- endunless -%}
+      "image": {{ card_img_abs | json }},
+      {%- endif -%}
+      "author": { "@type": "Person", "name": {{ article.author | json }} }
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endpaginate -%}
 
 {% schema %}
 {
   "name": "Blog page",
-  "settings": []
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "The Journal" },
+    { "type": "textarea", "id": "description", "label": "Blog description", "info": "Shown under the title on the unfiltered first page" },
+    { "type": "range", "id": "posts_per_page", "label": "Articles per page", "min": 6, "max": 24, "step": 3, "default": 9 },
+    { "type": "checkbox", "id": "show_tag_filter", "label": "Show tag filter", "default": true }
+  ]
 }
 {% endschema %}

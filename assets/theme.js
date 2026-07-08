@@ -78,4 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
       syncVariant(false); // sync state on load without touching the URL
     }
   }
+
+  // Article TOC: build from h2/h3 in the body, assign stable anchor ids (GEO: deep-linkable sections)
+  const tocBox = document.querySelector('[data-article-toc]');
+  const articleBody = document.querySelector('.article-body');
+  if (tocBox && articleBody) {
+    const tocList = tocBox.querySelector('[data-toc-list]');
+    const headings = articleBody.querySelectorAll('h2, h3');
+    if (tocList && headings.length >= 2) {
+      const used = new Set();
+      headings.forEach(h => {
+        if (!h.id) {
+          const base = h.textContent.trim().toLowerCase()
+            .replace(/[^\w一-鿿]+/g, '-')
+            .replace(/^-+|-+$/g, '') || 'section';
+          let id = base, n = 2;
+          while (used.has(id) || document.getElementById(id)) id = base + '-' + n++;
+          h.id = id;
+        }
+        used.add(h.id);
+        const li = document.createElement('li');
+        if (h.tagName === 'H3') li.classList.add('toc-h3');
+        const a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+      tocBox.hidden = false;
+    }
+  }
 });

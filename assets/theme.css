@@ -827,3 +827,98 @@ ul, ol { list-style: none; }
   .spec-table td { padding: 0 1.3rem 1rem; border-bottom: 1px solid var(--color-border); }
   .spec-table tr:last-child td { border-bottom: 0; }
 }
+
+/* ========== JOURNAL (GEO BLOG) ========== */
+.blog-page { padding-bottom: 3rem; }
+.blog-header { text-align: center; padding: 2.5rem 0 2rem; }
+.blog-header .section-eyebrow { display: block; margin-bottom: 1rem; }
+.blog-header h1 { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 300; }
+.blog-header-desc { color: var(--color-text-light); max-width: 560px; margin: 1rem auto 0; font-size: 0.95rem; }
+
+.blog-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin: 0 0 3rem; }
+.blog-tag {
+  font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.14em;
+  padding: 8px 16px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text-light);
+}
+.blog-tag:hover { border-color: var(--color-gold); color: var(--color-gold); }
+.blog-tag.is-active { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); }
+
+.blog-card-img { display: block; background: var(--color-cream); }
+.blog-card-meta { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-light); }
+.blog-card-title { font-size: 1.25rem; font-weight: 400; line-height: 1.35; margin-top: 0.5rem; }
+.blog-card-title a:hover { color: var(--color-gold); }
+.blog-card-excerpt { font-size: 0.9rem; color: var(--color-text-light); margin-top: 0.6rem; }
+.blog-card-more {
+  display: inline-block; margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-dew);
+}
+.blog-card-more::after { content: ' \2192'; }
+.blog-card-more:hover { color: var(--color-gold); }
+.blog-empty { grid-column: 1 / -1; text-align: center; color: var(--color-text-light); padding: 4rem 0; }
+
+/* ========== ARTICLE (GEO) ========== */
+.article-header .section-eyebrow { display: block; margin-bottom: 0.8rem; }
+.article-header .article-meta {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin-bottom: 2.5rem;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.article-hero { margin: 0 0 2.5rem; }
+.article-hero img { width: 100%; height: auto; }
+
+.article-takeaways { background: var(--color-cream); border-left: 2px solid var(--color-gold); padding: 1.6rem 1.8rem; margin: 0 0 2.5rem; }
+.article-takeaways h2 {
+  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--color-dew); margin-bottom: 0.9rem;
+}
+.article-takeaways li { position: relative; padding: 0.35rem 0 0.35rem 1.4rem; font-size: 0.95rem; line-height: 1.7; }
+.article-takeaways li::before { content: '\2014'; position: absolute; left: 0; color: var(--color-gold); }
+
+.article-toc { border: 1px solid var(--color-border); padding: 1.4rem 1.8rem; margin: 0 0 2.5rem; }
+.article-toc-title {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--color-dew); margin-bottom: 0.8rem;
+}
+.article-toc li { padding: 0.3rem 0; font-size: 0.9rem; }
+.article-toc li.toc-h3 { padding-left: 1.2rem; font-size: 0.85rem; }
+.article-toc a:hover { color: var(--color-gold); }
+.article-body h2[id], .article-body h3[id] { scroll-margin-top: calc(var(--header-height) + 24px); }
+
+.article-faq, .article-sources, .article-author, .article-nav-block, .article-comments { margin-top: 3.5rem; }
+.article-faq h2 { font-size: 1.7rem; font-weight: 400; margin-bottom: 1rem; }
+.article-faq .faq-item summary { font-size: 1.15rem; }
+
+.article-sources ol { counter-reset: refs; }
+.article-sources li { counter-increment: refs; position: relative; padding: 0.4rem 0 0.4rem 2rem; font-size: 0.9rem; }
+.article-sources li::before {
+  content: counter(refs, decimal-leading-zero); position: absolute; left: 0;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-dew);
+}
+.article-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.article-sources a:hover { color: var(--color-gold); }
+
+.article-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
+
+.article-author { background: var(--color-cream); padding: 1.6rem 1.8rem; }
+.article-author .section-eyebrow { display: block; margin-bottom: 0.6rem; }
+.article-author-name { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.3rem; }
+.article-author-bio { color: var(--color-text-light); font-size: 0.92rem; line-height: 1.8; }
+
+.article-nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.article-nav-link { display: block; border: 1px solid var(--color-border); padding: 1.2rem 1.4rem; font-family: var(--font-heading); font-size: 1.05rem; line-height: 1.4; }
+.article-nav-link:hover { border-color: var(--color-gold); color: var(--color-gold); }
+.article-nav-link .dir {
+  display: block; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--color-dew); margin-bottom: 0.4rem;
+}
+.article-nav-link.next { text-align: right; }
+@media (max-width: 640px) { .article-nav-grid { grid-template-columns: 1fr; } }
+
+.article-comments .comment { border-top: 1px solid var(--color-border); padding: 1.4rem 0; }
+.article-comments .comment-meta { display: flex; gap: 1rem; align-items: baseline; margin-bottom: 0.5rem; font-size: 0.85rem; }
+.article-comments .comment-meta time { font-size: 0.72rem; color: var(--color-text-light); }
+.article-comments form { margin-top: 2rem; }
+.form-status { padding: 1rem 1.2rem; background: var(--color-cream); border-left: 2px solid var(--color-sage); margin-bottom: 1.5rem; font-size: 0.9rem; }
+.form-status--error { border-left-color: #b00020; }
+
+.article-related { max-width: none; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--color-border); }
+.article-related .blog-grid { margin-top: 1rem; }

@@ -3,7 +3,14 @@
     <div class="brand-story-grid">
       <div class="brand-story-image">
         {%- if section.settings.image != blank -%}
-          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="800" height="1000">
+          <img src="{{ section.settings.image | image_url: width: 800 }}"
+               srcset="{{ section.settings.image | image_url: width: 400 }} 400w,
+                       {{ section.settings.image | image_url: width: 600 }} 600w,
+                       {{ section.settings.image | image_url: width: 800 }} 800w,
+                       {{ section.settings.image | image_url: width: 1200 }} 1200w"
+               sizes="(min-width: 768px) 50vw, 100vw"
+               alt="{{ section.settings.title | escape }}"
+               loading="lazy" width="800" height="1000" decoding="async">
         {%- else -%}
           <div class="brand-story-placeholder">
             <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="0.5">
