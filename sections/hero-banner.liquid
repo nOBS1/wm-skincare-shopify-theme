@@ -1,34 +1,135 @@
 {%- assign image = section.settings.image -%}
 {%- assign opacity = section.settings.overlay_opacity | default: 0 -%}
-<section class="hero {% if image == blank %}hero--placeholder{% endif %}">
-  {%- if image != blank -%}
-    <img
-      class="hero-image"
-      src="{{ image | image_url: width: 2400 }}"
-      srcset="{{ image | image_url: width: 600 }} 600w,
-              {{ image | image_url: width: 1000 }} 1000w,
-              {{ image | image_url: width: 1500 }} 1500w,
-              {{ image | image_url: width: 2000 }} 2000w,
-              {{ image | image_url: width: 2400 }} 2400w,
-              {{ image | image_url: width: 3000 }} 3000w"
-      sizes="100vw"
-      alt="{{ image.alt | default: shop.name | escape }}"
-      width="{{ image.width }}"
-      height="{{ image.height }}"
-      loading="eager"
-      fetchpriority="high">
-    {%- if opacity > 0 -%}
-      <div class="hero-overlay" style="background: rgba(0,0,0,{{ opacity | divided_by: 100.0 }})"></div>
+
+{%- if section.settings.layout == 'split' -%}
+
+  {%- comment -%} ---------- SPLIT LUXE HERO (Verepoetry concept) ---------- {%- endcomment -%}
+  <section class="hero hero--split">
+    <div class="lx-hero-blob lx-blob-rose" data-lx-parallax="0.05" aria-hidden="true"></div>
+    <div class="lx-hero-blob lx-blob-sage" data-lx-parallax="0.08" aria-hidden="true"></div>
+    <div class="lx-hero-blob lx-blob-gold" data-lx-parallax="0.04" aria-hidden="true"></div>
+    {%- if section.settings.show_ghost -%}
+      <div class="lx-hero-ghost" aria-hidden="true">{{ section.settings.ghost_text | default: shop.name }} — {{ section.settings.ghost_text | default: shop.name }} — {{ section.settings.ghost_text | default: shop.name }} —&nbsp;</div>
     {%- endif -%}
-  {%- endif -%}
-</section>
+
+    <div class="container lx-hero-grid">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="lx-hero-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name }}</span></h1>
+        {%- if section.settings.heading_2 != blank -%}
+          <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_2 }}</span></h1>
+        {%- endif -%}
+        {%- if section.settings.sub != blank -%}
+          <p class="lx-hero-sub">{{ section.settings.sub }}</p>
+        {%- endif -%}
+        <div class="lx-hero-cta">
+          {%- if section.settings.cta_1_text != blank -%}
+            <a href="{{ section.settings.cta_1_link | default: routes.all_products_collection_url }}" class="btn btn-primary">{{ section.settings.cta_1_text }}</a>
+          {%- endif -%}
+          {%- if section.settings.cta_2_text != blank -%}
+            <a href="{{ section.settings.cta_2_link | default: '#' }}" class="btn btn-outline">{{ section.settings.cta_2_text }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if image != blank -%}
+        <div class="lx-hero-visual">
+          <div class="lx-hero-arch" data-lx-parallax="0.06">
+            <img
+              src="{{ image | image_url: width: 800 }}"
+              srcset="{{ image | image_url: width: 400 }} 400w,
+                      {{ image | image_url: width: 600 }} 600w,
+                      {{ image | image_url: width: 800 }} 800w,
+                      {{ image | image_url: width: 1000 }} 1000w"
+              sizes="(min-width: 900px) 380px, 70vw"
+              alt="{{ image.alt | default: shop.name | escape }}"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              loading="eager"
+              fetchpriority="high">
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_scroll_hint -%}
+      <div class="lx-hero-scroll"><span>SCROLL</span><i></i></div>
+    {%- endif -%}
+  </section>
+
+{%- else -%}
+
+  {%- comment -%} ---------- CLASSIC OVERLAY HERO ---------- {%- endcomment -%}
+  <section class="hero {% if image == blank %}hero--placeholder{% endif %}">
+    {%- if image != blank -%}
+      <img
+        class="hero-image"
+        src="{{ image | image_url: width: 2400 }}"
+        srcset="{{ image | image_url: width: 600 }} 600w,
+                {{ image | image_url: width: 1000 }} 1000w,
+                {{ image | image_url: width: 1500 }} 1500w,
+                {{ image | image_url: width: 2000 }} 2000w,
+                {{ image | image_url: width: 2400 }} 2400w,
+                {{ image | image_url: width: 3000 }} 3000w"
+        sizes="100vw"
+        alt="{{ image.alt | default: shop.name | escape }}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        loading="eager"
+        fetchpriority="high">
+      {%- if opacity > 0 -%}
+        <div class="hero-overlay" style="background: rgba(0,0,0,{{ opacity | divided_by: 100.0 }})"></div>
+      {%- endif -%}
+      <div class="hero--overlay-text">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="lx-hero-eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name }}</span></h1>
+          {%- if section.settings.heading_2 != blank -%}
+            <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_2 }}</span></h1>
+          {%- endif -%}
+          {%- if section.settings.sub != blank -%}
+            <p class="lx-hero-sub">{{ section.settings.sub }}</p>
+          {%- endif -%}
+          <div class="lx-hero-cta">
+            {%- if section.settings.cta_1_text != blank -%}
+              <a href="{{ section.settings.cta_1_link | default: routes.all_products_collection_url }}" class="btn btn-primary">{{ section.settings.cta_1_text }}</a>
+            {%- endif -%}
+            {%- if section.settings.cta_2_text != blank -%}
+              <a href="{{ section.settings.cta_2_link | default: '#' }}" class="btn btn-outline">{{ section.settings.cta_2_text }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Hero banner",
   "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "options": [
+      { "value": "split", "label": "Split (arched image + text)" },
+      { "value": "overlay", "label": "Overlay (full-bleed image)" }
+    ], "default": "split" },
     { "type": "image_picker", "id": "image", "label": "Hero image" },
-    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 60, "step": 5, "unit": "%", "default": 0 }
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity (overlay layout)", "min": 0, "max": 60, "step": 5, "unit": "%", "default": 0 },
+    { "type": "header", "content": "Text content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Exosome Science · Poetic Skincare" },
+    { "type": "text", "id": "heading_1", "label": "Heading line 1", "default": "Poetry" },
+    { "type": "text", "id": "heading_2", "label": "Heading line 2", "default": "for your skin" },
+    { "type": "text", "id": "sub", "label": "Subtitle", "default": "Weiman Poetics — hydration, distilled to its essential form" },
+    { "type": "text", "id": "cta_1_text", "label": "Primary button text", "default": "Shop the Collection" },
+    { "type": "url", "id": "cta_1_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta_2_text", "label": "Secondary button text", "default": "Explore the Science" },
+    { "type": "url", "id": "cta_2_link", "label": "Secondary button link" },
+    { "type": "header", "content": "Effects" },
+    { "type": "checkbox", "id": "show_ghost", "label": "Show scrolling ghost wordmark", "default": true },
+    { "type": "text", "id": "ghost_text", "label": "Ghost wordmark text", "default": "VEREPOETRY" },
+    { "type": "checkbox", "id": "show_scroll_hint", "label": "Show scroll hint", "default": true }
   ],
   "presets": [{ "name": "Hero banner" }]
 }

@@ -3,8 +3,67 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
+        "layout": "split",
         "image": "shopify://shop_images/6.jpg",
-        "overlay_opacity": 40
+        "overlay_opacity": 40,
+        "eyebrow": "Exosome Science · Poetic Skincare",
+        "heading_1": "Poetry",
+        "heading_2": "for your skin",
+        "sub": "Weiman Poetics — hydration, distilled to its essential form",
+        "cta_1_text": "Shop the Collection",
+        "cta_1_link": "",
+        "cta_2_text": "Explore the Science",
+        "cta_2_link": "",
+        "show_ghost": true,
+        "ghost_text": "VEREPOETRY",
+        "show_scroll_hint": true
+      }
+    },
+    "ritual": {
+      "type": "ritual-steps",
+      "blocks": {
+        "r1": {
+          "type": "step",
+          "settings": {
+            "step": "Step 01",
+            "title": "Mist",
+            "description": "Morning Dew awakens the skin in a veil of exosome hydration.",
+            "link_text": "Shop Step 01",
+            "link": "",
+            "palette": "rose"
+          }
+        },
+        "r2": {
+          "type": "step",
+          "settings": {
+            "step": "Step 02",
+            "title": "Essence",
+            "description": "Dawn Rejuvenation sinks deep — weightless, potent, precise.",
+            "link_text": "Shop Step 02",
+            "link": "",
+            "palette": "sage"
+          }
+        },
+        "r3": {
+          "type": "step",
+          "settings": {
+            "step": "Step 03",
+            "title": "Gel",
+            "description": "Radiance Gel seals the ritual with a soft, luminous finish.",
+            "link_text": "Shop Step 03",
+            "link": "",
+            "palette": "gold"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "label": "The Ritual",
+        "title": "Three steps · One poem"
       }
     },
     "featured": {
@@ -64,7 +123,8 @@
       ],
       "settings": {
         "label": "Real Results",
-        "title": "What Our Clients Say"
+        "title": "What Our Clients Say",
+        "autoplay": true
       }
     },
     "rich-text": {
@@ -80,6 +140,7 @@
   },
   "order": [
     "hero",
+    "ritual",
     "featured",
     "brand-story",
     "testimonials",

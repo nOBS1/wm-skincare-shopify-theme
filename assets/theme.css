@@ -76,8 +76,8 @@ ul, ol { list-style: none; }
   transform: translateY(0);
   will-change: auto;
 }
-/* Hero always visible — never hidden by animation */
-.hero, .hero * { opacity: 1 !important; transform: none !important; }
+/* Hero image and overlay always visible — never hidden by animation (text lines animate via luxe.css) */
+.hero .hero-image, .hero .hero-overlay { opacity: 1 !important; transform: none !important; }
 
 /* ========== ANNOUNCEMENT BAR ========== */
 .announcement-bar {

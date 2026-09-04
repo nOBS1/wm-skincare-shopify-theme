@@ -1,0 +1,133 @@
+{%- comment -%}
+  LUXE OVERLAYS — global UI layer rendered from layout/theme.liquid
+  Pairs with assets/luxe.css + assets/luxe.js
+{%- endcomment -%}
+
+{%- if settings.enable_preloader -%}
+<div id="lxPreloader" aria-hidden="true">
+  <div class="lx-pre-inner">
+    <div class="lx-pre-logo">{{ shop.name }}</div>
+    <div class="lx-pre-bar"><i></i></div>
+    <div class="lx-pre-count">0%</div>
+  </div>
+</div>
+{%- endif -%}
+
+{%- if settings.enable_grain -%}
+<div class="lx-grain" aria-hidden="true"></div>
+{%- endif -%}
+
+{%- if settings.enable_cursor -%}
+<div class="lx-cursor-dot" aria-hidden="true"></div>
+<div class="lx-cursor-ring" aria-hidden="true"></div>
+{%- endif -%}
+
+<div class="lx-toast" id="lxToast" role="status" aria-live="polite"></div>
+<div class="lx-dim" id="lxDim"></div>
+
+{%- comment -%} ---------- SEARCH OVERLAY (narrow column, upper-center) ---------- {%- endcomment -%}
+<div class="lx-search" id="lxSearch" aria-hidden="true">
+  <button class="lx-search-close" type="button" aria-label="Close search">✕</button>
+  <div class="lx-search-inner">
+    <p class="lx-search-eyebrow">Search</p>
+    <div class="lx-search-box">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input id="lxSearchInput" type="text" placeholder="Search the collection" autocomplete="off">
+    </div>
+    <div class="lx-search-results" id="lxSearchResults"></div>
+  </div>
+</div>
+
+{%- comment -%} ---------- CART DRAWER (initial state server-rendered) ---------- {%- endcomment -%}
+<aside class="lx-cart" id="lxCart" aria-label="{{ 'sections.cart.title' | default: 'Shopping bag' }}"
+       data-threshold="{{ settings.free_shipping_threshold | default: 150 }}">
+  <div class="lx-cart-head">
+    <h3>Your Bag (<span id="lxCartHeadCount">{{ cart.item_count }}</span>)</h3>
+    <button class="lx-cart-close" id="lxCartClose" type="button" aria-label="Close bag">✕</button>
+  </div>
+  <div class="lx-cart-ship">
+    <span id="lxShipMsg">
+      {%- assign threshold = settings.free_shipping_threshold | default: 150 -%}
+      {%- if cart.total_price >= threshold -%}
+        Free shipping unlocked — enjoy
+      {%- else -%}
+        {{ threshold | minus: cart.total_price | money }} away from free shipping
+      {%- endif -%}
+    </span>
+    <div class="lx-ship-bar"><i id="lxShipBar"></i></div>
+  </div>
+  <div class="lx-cart-items" id="lxCartItems">
+    {%- if cart.item_count > 0 -%}
+      {%- for item in cart.items -%}
+        <div class="lx-cart-item" data-key="{{ item.key }}">
+          <a class="lx-ci-media" href="{{ item.url }}">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 144 }}" alt="{{ item.title | escape }}" loading="lazy" width="72" height="94">
+            {%- endif -%}
+          </a>
+          <div class="lx-ci-info">
+            <h5>{{ item.product.title }}</h5>
+            <p class="lx-ci-meta">
+              {%- if item.variant.title and item.variant.title != 'Default Title' -%}
+                {{ item.variant.title }}
+              {%- else -%}
+                Full Size
+              {%- endif -%}
+            </p>
+            <button class="lx-ci-remove" data-remove type="button">Remove</button>
+            <div class="lx-ci-row">
+              <div class="lx-qty">
+                <button data-dec type="button" aria-label="Decrease">−</button>
+                <span>{{ item.quantity }}</span>
+                <button data-inc type="button" aria-label="Increase">+</button>
+              </div>
+              <span class="lx-ci-price">{{ item.final_line_price | money }}</span>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="lx-cart-empty">
+        <span>Your bag is empty</span>
+        <a class="btn btn-outline" href="{{ routes.all_products_collection_url }}">Start Shopping</a>
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="lx-cart-foot">
+    <div class="lx-cart-total">
+      <span>Subtotal</span>
+      <span id="lxCartTotal">{{ cart.total_price | money }}</span>
+    </div>
+    <form action="{{ routes.cart_url }}" method="post">
+      <button class="btn btn-primary" type="submit" name="checkout">Checkout</button>
+    </form>
+    <p class="lx-cart-note">Shipping &amp; taxes calculated at checkout</p>
+  </div>
+</aside>
+
+{%- comment -%} ---------- QUICK VIEW MODAL ---------- {%- endcomment -%}
+<div class="lx-qv-wrap" id="lxQv" aria-hidden="true">
+  <div class="lx-qv" role="dialog" aria-modal="true" aria-label="Quick view">
+    <button class="lx-qv-close" id="lxQvClose" type="button" aria-label="Close quick view">✕</button>
+    <div class="lx-qv-media">
+      <img id="lxQvImg" src="" alt="" style="display:none">
+      <div class="lx-qv-thumbs" id="lxQvThumbs"></div>
+    </div>
+    <div class="lx-qv-info">
+      <p class="lx-qv-cat" id="lxQvCat"></p>
+      <h3 id="lxQvName"></h3>
+      <p class="lx-qv-price" id="lxQvPrice"></p>
+      <div id="lxQvVariants"></div>
+      <div>
+        <p class="lx-qv-label">Quantity</p>
+        <div class="lx-qty">
+          <button id="lxQvMinus" type="button" aria-label="Decrease quantity">−</button>
+          <span id="lxQvQty">1</span>
+          <button id="lxQvPlus" type="button" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <button class="btn btn-primary lx-qv-add" id="lxQvAdd" type="button">Add to Bag</button>
+      <a class="lx-qv-link" id="lxQvLink" href="#">View full details →</a>
+    </div>
+  </div>
+</div>

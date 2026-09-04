@@ -1,6 +1,6 @@
 <section class="section featured-products">
   <div class="container">
-    <div class="section-title">
+    <div class="section-header lx-reveal">
       {%- if section.settings.label != blank -%}
         <span class="section-label">{{ section.settings.label }}</span>
       {%- endif -%}
@@ -14,29 +14,52 @@
     <div class="product-grid">
       {%- assign collection = collections[section.settings.collection] | default: collections.all -%}
       {%- for product in collection.products limit: section.settings.limit -%}
-        <a href="{{ product.url }}" class="product-card">
+        <div class="product-card lx-reveal" data-lx-hover>
           <div class="product-card-img">
-            {%- if product.featured_image != blank -%}
-              <img src="{{ product.featured_image | image_url: width: 600 }}"
-                   srcset="{{ product.featured_image | image_url: width: 300 }} 300w,
-                           {{ product.featured_image | image_url: width: 450 }} 450w,
-                           {{ product.featured_image | image_url: width: 600 }} 600w,
-                           {{ product.featured_image | image_url: width: 900 }} 900w"
-                   sizes="(min-width: 1100px) 300px, (min-width: 640px) 33vw, 50vw"
-                   alt="{{ product.featured_image.alt | escape }}"
-                   loading="lazy"
-                   width="600"
-                   height="600"
-                   decoding="async">
-            {%- else -%}
-              <div class="product-card-placeholder"></div>
+            <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+              {%- if product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 600 }}"
+                     srcset="{{ product.featured_image | image_url: width: 300 }} 300w,
+                             {{ product.featured_image | image_url: width: 450 }} 450w,
+                             {{ product.featured_image | image_url: width: 600 }} 600w,
+                             {{ product.featured_image | image_url: width: 900 }} 900w"
+                     sizes="(min-width: 1100px) 300px, (min-width: 640px) 33vw, 50vw"
+                     alt="{{ product.featured_image.alt | escape }}"
+                     loading="lazy"
+                     width="600"
+                     height="600"
+                     decoding="async">
+                {%- if product.images[1] != blank -%}
+                  <img class="lx-img-b"
+                       src="{{ product.images[1] | image_url: width: 600 }}"
+                       srcset="{{ product.images[1] | image_url: width: 300 }} 300w,
+                               {{ product.images[1] | image_url: width: 600 }} 600w"
+                       sizes="(min-width: 1100px) 300px, (min-width: 640px) 33vw, 50vw"
+                       alt=""
+                       loading="lazy"
+                       width="600"
+                       height="600"
+                       decoding="async">
+                {%- endif -%}
+              {%- else -%}
+                <div class="product-card-placeholder"></div>
+              {%- endif -%}
+            </a>
+
+            {%- if product.compare_at_price > product.price -%}
+              <span class="lx-card-tag lx-tag-sale">Sale</span>
+            {%- elsif section.settings.new_label and product.tags contains 'new' -%}
+              <span class="lx-card-tag">New</span>
             {%- endif -%}
-            <div class="product-card-overlay">
-              <span class="btn btn-small">Quick View</span>
-            </div>
+
+            <button class="lx-wish" type="button" data-wish="{{ product.id }}" data-title="{{ product.title | escape }}" aria-label="Add {{ product.title | escape }} to wishlist">♡</button>
+            <button class="lx-quick-view-btn" type="button" data-lx-qv="{{ product.id }}">Quick View</button>
+            <button class="lx-quick-add" type="button" data-lx-add="{{ product.selected_or_first_available_variant.id }}" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}+ Quick Add{%- else -%}Sold Out{%- endif -%}
+            </button>
           </div>
           <div class="product-card-info">
-            <h3 class="product-card-title">{{ product.title }}</h3>
+            <h3 class="product-card-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
             <p class="product-card-price">
               {%- if product.compare_at_price > product.price -%}
                 <s>{{ product.compare_at_price | money }}</s>
@@ -44,7 +67,25 @@
               {{ product.price | money }}
             </p>
           </div>
-        </a>
+
+          {%- comment -%} Quick view data source {%- endcomment -%}
+          <script type="application/json" data-lx-product="{{ product.id }}">
+          {
+            "id": {{ product.id }},
+            "title": {{ product.title | json }},
+            "url": {{ product.url | json }},
+            "available": {{ product.available }},
+            "price": {{ product.price | money | json }},
+            "compare": {%- if product.compare_at_price > product.price -%}{{ product.compare_at_price | money | json }}{%- else -%}null{%- endif -%},
+            "vendor": {{ product.vendor | json }},
+            "type": {{ product.type | json }},
+            "default_variant": {{ product.selected_or_first_available_variant.id | default: 0 }},
+            "only_default": {{ product.has_only_default_variant }},
+            "images": [{%- for image in product.images limit: 4 -%}{{ image | image_url: width: 800 | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}],
+            "variants": [{%- for v in product.variants -%}{"id":{{ v.id }},"title":{{ v.title | json }},"available":{{ v.available }},"price":{{ v.price | money | json }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+          }
+          </script>
+        </div>
       {%- endfor -%}
     </div>
     {%- if section.settings.button_text != blank -%}
@@ -64,6 +105,7 @@
     { "type": "textarea", "id": "description", "label": "Description", "default": "Our most-loved formulas — where advanced exosome science meets pure indulgence." },
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "new_label", "label": "Show 'New' badge for products tagged 'new'", "default": true },
     { "type": "text", "id": "button_text", "label": "Button text", "default": "View All Products" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],

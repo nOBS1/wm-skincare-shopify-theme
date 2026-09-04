@@ -1,8 +1,26 @@
 <header class="site-header">
   <div class="container header-inner">
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-left">
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="header-nav" aria-label="Main navigation">
+        {%- for link in section.settings.menu.links -%}
+          {%- if link.links.size > 0 -%}
+            <div class="nav-item">
+              <button class="nav-link" type="button" data-mega="{{ forloop.index }}">{{ link.title }}</button>
+              <ul class="nav-children">
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- else -%}
+            <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
     <div class="header-logo">
       {%- if settings.logo != blank -%}
         {%- assign logo_w = settings.logo_width | default: 160 -%}
@@ -12,23 +30,46 @@
         <a href="{{ routes.root_url }}">{{ shop.name }}</a>
       {%- endif -%}
     </div>
-    <nav class="header-nav" aria-label="Main navigation">
-      {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
-    </nav>
     <div class="header-actions">
-      <a href="{{ routes.search_url }}" aria-label="Search">
+      <a href="{{ routes.search_url }}" aria-label="Search" data-lx-search>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
       </a>
-      <a href="{{ routes.account_url }}" aria-label="Account">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      <a href="#" aria-label="Wishlist" data-lx-wish>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21C7 16.5 3 13 3 8.8 3 6 5.2 4 7.7 4c1.7 0 3.3.9 4.3 2.4C13 4.9 14.6 4 16.3 4 18.8 4 21 6 21 8.8c0 4.2-4 7.7-9 12.2z"/></svg>
       </a>
-      <a href="{{ routes.cart_url }}" aria-label="Cart" class="header-cart">
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" aria-label="Cart" class="header-cart" data-lx-cart>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="cart-count">{{ cart.item_count }}</span>
+        <span class="cart-count {% if cart.item_count == 0 %}{% else %}on{% endif %}">{{ cart.item_count }}</span>
       </a>
     </div>
+  </div>
+
+  {%- comment -%} Mega menu panels built from the navigation menu {%- endcomment -%}
+  <div class="lx-mega" id="lxMega">
+    {%- for link in section.settings.menu.links -%}
+      {%- if link.links.size > 0 -%}
+        <div class="lx-mega-panel" data-mega="{{ forloop.index }}">
+          <div class="lx-mega-col">
+            <h4>{{ link.title }}</h4>
+            {%- for child in link.links -%}
+              <a href="{{ child.url }}">{{ child.title }}</a>
+            {%- endfor -%}
+          </div>
+          <div class="lx-mega-col">
+            <h4>Discover</h4>
+            <a href="{{ routes.all_products_collection_url }}">All Products</a>
+            <a href="{{ routes.root_url }}#ritual">The Ritual</a>
+            <a href="{{ routes.root_url }}#science">The Science</a>
+          </div>
+          <div class="lx-mega-feature">{{ shop.name }}</div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
   </div>
 </header>
 

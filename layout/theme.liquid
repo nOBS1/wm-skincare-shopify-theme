@@ -119,9 +119,10 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap"></noscript>
 
   {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'luxe.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
 </head>
-<body class="template-{{ template | replace: '.', '-' }}">
+<body class="template-{{ template | replace: '.', '-' }}{% if settings.enable_cursor %} lx-cursor-enabled{% endif %}" data-currency="{{ shop.currency }}">
   <a class="skip-link visually-hidden" href="#MainContent">Skip to content</a>
   {%- section 'announcement-bar' -%}
   {%- section 'header' -%}
@@ -131,6 +132,8 @@
   </main>
 
   {%- section 'footer' -%}
+  {%- render 'luxe-overlays' -%}
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'luxe.js' | asset_url }}" defer></script>
 </body>
 </html>

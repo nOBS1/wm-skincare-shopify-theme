@@ -1,0 +1,63 @@
+<section class="section" id="ritual">
+  <div class="container">
+    <div class="section-header lx-reveal">
+      {%- if section.settings.label != blank -%}
+        <span class="section-label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2>{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+    <div class="lx-ritual">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: routes.all_products_collection_url }}"
+           class="lx-ritual-tile palette-{{ block.settings.palette }} lx-reveal"
+           {% if forloop.index == 2 %}data-delay="1"{% elsif forloop.index == 3 %}data-delay="2"{% endif %}
+           {{ block.shopify_attributes }}>
+          <span class="lx-ritual-step">{{ block.settings.step }}</span>
+          <span class="lx-ritual-name">{{ block.settings.title }}</span>
+          {%- if block.settings.description != blank -%}
+            <span class="lx-ritual-desc">{{ block.settings.description }}</span>
+          {%- endif -%}
+          <span class="lx-ritual-go">{{ block.settings.link_text | default: 'Shop' }} <span>→</span></span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ritual steps",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Top label", "default": "The Ritual" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Three steps · One poem" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Ritual step",
+      "settings": [
+        { "type": "text", "id": "step", "label": "Step label", "default": "Step 01" },
+        { "type": "text", "id": "title", "label": "Step name", "default": "Mist" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Morning Dew awakens the skin in a veil of exosome hydration." },
+        { "type": "text", "id": "link_text", "label": "Link text", "default": "Shop Step 01" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "select", "id": "palette", "label": "Color palette", "options": [
+          { "value": "rose", "label": "Rose" },
+          { "value": "sage", "label": "Sage" },
+          { "value": "gold", "label": "Gold" }
+        ], "default": "rose" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Ritual steps",
+    "blocks": [
+      { "type": "step", "settings": { "step": "Step 01", "title": "Mist", "description": "Morning Dew awakens the skin in a veil of exosome hydration.", "link_text": "Shop Step 01", "palette": "rose" }},
+      { "type": "step", "settings": { "step": "Step 02", "title": "Essence", "description": "Dawn Rejuvenation sinks deep — weightless, potent, precise.", "link_text": "Shop Step 02", "palette": "sage" }},
+      { "type": "step", "settings": { "step": "Step 03", "title": "Gel", "description": "Radiance Gel seals the ritual with a soft, luminous finish.", "link_text": "Shop Step 03", "palette": "gold" }}
+    ]
+  }]
+}
+{% endschema %}

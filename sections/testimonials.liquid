@@ -1,6 +1,6 @@
 <section class="section testimonials">
   <div class="container">
-    <div class="section-title">
+    <div class="section-header lx-reveal">
       {%- if section.settings.label != blank -%}
         <span class="section-label">{{ section.settings.label }}</span>
       {%- endif -%}
@@ -8,19 +8,28 @@
         <h2>{{ section.settings.title }}</h2>
       {%- endif -%}
     </div>
-    <div class="testimonials-grid">
-      {%- for block in section.blocks -%}
-        <blockquote class="testimonial-card" {{ block.shopify_attributes }}>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-quote">"{{ block.settings.quote }}"</p>
-          <footer>
-            <cite class="testimonial-author">{{ block.settings.author }}</cite>
-            {%- if block.settings.product != blank -%}
-              <span class="testimonial-product">{{ block.settings.product }}</span>
-            {%- endif -%}
-          </footer>
-        </blockquote>
-      {%- endfor -%}
+    <div class="lx-rv-carousel lx-reveal" {% unless section.settings.autoplay %}data-autoplay="off"{% endunless %}>
+      <div class="lx-rv-track">
+        {%- for block in section.blocks -%}
+          <div class="lx-rv-slide">
+            <blockquote class="testimonial-card" {{ block.shopify_attributes }}>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">“{{ block.settings.quote }}”</p>
+              <footer>
+                <cite class="testimonial-author">{{ block.settings.author }}</cite>
+                {%- if block.settings.product != blank -%}
+                  <span class="testimonial-product">{{ block.settings.product }}</span>
+                {%- endif -%}
+              </footer>
+            </blockquote>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="lx-rv-nav">
+        <button class="lx-rv-arrow lx-rv-prev" type="button" aria-label="Previous review">←</button>
+        <div class="lx-rv-dots"></div>
+        <button class="lx-rv-arrow lx-rv-next" type="button" aria-label="Next review">→</button>
+      </div>
     </div>
   </div>
 </section>
@@ -30,7 +39,8 @@
   "name": "Testimonials",
   "settings": [
     { "type": "text", "id": "label", "label": "Top label", "default": "Real Results" },
-    { "type": "text", "id": "title", "label": "Title", "default": "What Our Clients Say" }
+    { "type": "text", "id": "title", "label": "Title", "default": "What Our Clients Say" },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate reviews", "default": true }
   ],
   "blocks": [
     {

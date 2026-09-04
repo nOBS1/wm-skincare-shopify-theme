@@ -25,6 +25,32 @@
         {%- endfor -%}
       </div>
     </div>
+
+    {%- if section.settings.show_newsletter -%}
+      <div class="lx-newsletter">
+        <h3>{{ section.settings.newsletter_heading | default: 'Join the Poetry List' }}</h3>
+        <p>{{ section.settings.newsletter_sub | default: 'Early access · Private rituals · No noise' }}</p>
+        {%- form 'customer', class: 'lx-news-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="lx-form-success">Welcome — you are on the list.</p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="lx-form-success">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- endif -%}
+            <input type="email" name="contact[email]" placeholder="Email address"
+                   aria-label="Email address" autocomplete="email" required
+                   {% if customer %}value="{{ customer.email }}"{% endif %}>
+            <button type="submit">Subscribe</button>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_wordmark -%}
+      <div class="lx-foot-mark" aria-hidden="true">{{ shop.name }}</div>
+    {%- endif -%}
+
     <div class="footer-bottom">
       <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
       <div class="footer-social">
@@ -52,7 +78,13 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "textarea", "id": "description", "label": "Brand description", "default": "Luxury exosome skincare — where cutting-edge science meets timeless beauty rituals." }
+    { "type": "textarea", "id": "description", "label": "Brand description", "default": "Luxury exosome skincare — where cutting-edge science meets timeless beauty rituals." },
+    { "type": "header", "content": "Newsletter" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show newsletter signup", "default": true },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Join the Poetry List" },
+    { "type": "text", "id": "newsletter_sub", "label": "Newsletter subtitle", "default": "Early access · Private rituals · No noise" },
+    { "type": "header", "content": "Wordmark" },
+    { "type": "checkbox", "id": "show_wordmark", "label": "Show oversized wordmark", "default": true }
   ],
   "blocks": [
     {
