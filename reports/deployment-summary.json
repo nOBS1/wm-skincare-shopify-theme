@@ -1,0 +1,54 @@
+{
+  "store": "0wcfy0-iw.myshopify.com",
+  "storefront": "https://verepoetry.com",
+  "collection": "https://verepoetry.com/collections/veymenz",
+  "liveThemeId": "153010143406",
+  "matchingPreviewThemeId": "189166092462",
+  "backupDirectory": "H:/xz/wm-skincare-shopify-theme-backups/2026-11-01-before-product-upload",
+  "originalImagesUploaded": 23,
+  "sourceImagesHashVerified": 23,
+  "newProductsPublished": 7,
+  "imageOnlyDraft": "veymenz-age-defying-essence",
+  "pricesUsd": {
+    "hand-cream": "25.25",
+    "rejuvenating-toner": "72.15",
+    "moisturizing-lotion": "132.27",
+    "nourishing-essence": "132.27",
+    "mens-serum": "132.27",
+    "anti-aging-serum": "132.27",
+    "bacteriostatic-gel": "192.40"
+  },
+  "antiAgingSerumSaleUnit": "One box of 10 individually sealed applicators, 2.2 g each, confirmed by the user",
+  "exchangeReference": {
+    "date": "2026-10-30",
+    "source": "https://www.centralbankmalta.org/exchange-rates",
+    "cnyUsd": 0.1503107929930307,
+    "rounding": "Two decimal places, no markup"
+  },
+  "verification": {
+    "adminReadback": "reports/final-store-state.json",
+    "collectionBrowserReadback": "Seven published products with the expected USD prices; the image-only draft is excluded",
+    "originalThreeProductsPreserved": true,
+    "inventoryAndCompareAtPricesUnchanged": true,
+    "themeCheckErrors": 0,
+    "themeCheckWarnings": 8,
+    "javascriptSyntaxChecks": "Passed",
+    "mobileWidthChecked": 390,
+    "mobileHorizontalOverflow": false,
+    "mobileMenuCloseAndEscape": "Passed; full viewport menu and restored focus",
+    "photoGallery": "Two photos switch correctly; long detail sheet is below purchase controls and loads on scroll",
+    "jsonLd": "All rendered JSON-LD parsed on checked product pages",
+    "quickView": "Correct title, USD price and two product photos",
+    "cart": "Added one hand cream, confirmed one line at $25.25, removed it and verified the cart returned to empty",
+    "precautions": "Intimate-care precautions render before the product form",
+    "rawHttpCollectionCheck": "An additional direct HTTP request received a connection challenge; browser verification succeeded"
+  },
+  "themeChanges": [
+    "Homepage uses original product photography and a native responsive image picker",
+    "Featured collection and ritual links lead to the uploaded products",
+    "Sample testimonials and unsupported default fulfillment claims removed",
+    "Compact accessible photo gallery and separate full-width detail sheets",
+    "Mobile navigation, quick add, cart errors, localized routes, modal focus and stacking fixed",
+    "Footer uses actual store policies and working customer-care links"
+  ]
+}

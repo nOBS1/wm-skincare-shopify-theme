@@ -1,0 +1,50 @@
+[
+  {
+    "key": "rejuvenating-toner",
+    "priceCents": 7215,
+    "expectedCents": 7215,
+    "available": true,
+    "images": 3,
+    "verified": true
+  },
+  {
+    "key": "hand-cream",
+    "priceCents": 2525,
+    "expectedCents": 2525,
+    "available": true,
+    "images": 2,
+    "verified": true
+  },
+  {
+    "key": "nourishing-essence",
+    "priceCents": 13227,
+    "expectedCents": 13227,
+    "available": true,
+    "images": 3,
+    "verified": true
+  },
+  {
+    "key": "moisturizing-lotion",
+    "priceCents": 13227,
+    "expectedCents": 13227,
+    "available": true,
+    "images": 3,
+    "verified": true
+  },
+  {
+    "key": "bacteriostatic-gel",
+    "priceCents": 19240,
+    "expectedCents": 19240,
+    "available": true,
+    "images": 3,
+    "verified": true
+  },
+  {
+    "key": "mens-serum",
+    "priceCents": 13227,
+    "expectedCents": 13227,
+    "available": true,
+    "images": 3,
+    "verified": true
+  }
+]

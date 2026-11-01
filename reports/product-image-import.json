@@ -1,0 +1,1001 @@
+{
+  "store": "0wcfy0-iw.myshopify.com",
+  "apiVersion": "2026-10",
+  "createdAt": "2026-11-01T07:08:39.676Z",
+  "products": [
+    {
+      "key": "moisturizing-lotion",
+      "handle": "veymenz-moisturizing-lotion",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "保湿乳产品图.png",
+          "uploadName": "veymenz-moisturizing-lotion-hero-1.png",
+          "sha256": "4ab575e13abaa337483422112386338c84bbd13f1d4ab41f475827263037216a",
+          "bytes": 1257604,
+          "role": "hero-1",
+          "alt": "VEYMENZ Luxury Moisturizing Lotion — product presentation"
+        },
+        {
+          "sourceFile": "保湿乳产品图1.png",
+          "uploadName": "veymenz-moisturizing-lotion-hero-2.png",
+          "sha256": "5bcfd87e1ccd9a61b72d95cd0ee275ccea25899673a9de68c291fff03172127f",
+          "bytes": 3062780,
+          "role": "hero-2",
+          "alt": "VEYMENZ Luxury Moisturizing Lotion — texture and packaging"
+        },
+        {
+          "sourceFile": "保湿乳详情页(英文版).png",
+          "uploadName": "veymenz-moisturizing-lotion-details.png",
+          "sha256": "acd070fc9ca2299628e09b2ce1fc4141f2151eb3f9910d5a1f1e32ccfd7259c6",
+          "bytes": 5457065,
+          "role": "details",
+          "alt": "VEYMENZ Luxury Moisturizing Lotion — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446580691118",
+      "title": "Luxury Moisturizing Lotion",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446580691118",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620837249198",
+          "alt": "VEYMENZ Luxury Moisturizing Lotion — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-moisturizing-lotion-hero-1.png?v=1793516940",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620837281966",
+          "alt": "VEYMENZ Luxury Moisturizing Lotion — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-moisturizing-lotion-hero-2.png?v=1793516940",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620837314734",
+          "alt": "VEYMENZ Luxury Moisturizing Lotion — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-moisturizing-lotion-details.png?v=1793516942",
+            "width": 750,
+            "height": 9302
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918409957550",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "A lightweight, milky lotion for daily moisture care. The fast-absorbing texture helps leave skin feeling soft, supple and comfortable."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "50 mL"
+        },
+        {
+          "namespace": "custom",
+          "key": "how_to_use",
+          "type": "multi_line_text_field",
+          "value": "After cleansing in the morning and evening, apply an appropriate amount to the face and massage until absorbed."
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nHydrogenated Polyisobutene\nTocopheryl Acetate\nButylene Glycol\nGlycerin"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Luxury Moisturizing Lotion | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "A lightweight, milky lotion for daily moisture care. The fast-absorbing texture helps leave skin feeling soft, supple and comfortable."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:09:05.718Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=9feecd6d443eee2a751d86b960e3ff8c"
+    },
+    {
+      "key": "rejuvenating-toner",
+      "handle": "veymenz-rejuvenating-toner",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "定格液产品图.png",
+          "uploadName": "veymenz-rejuvenating-toner-hero-1.png",
+          "sha256": "fc9f41f3b40471d00b36a30ead1684499d64b9f15bf7f764d7912708c11eab5f",
+          "bytes": 2123053,
+          "role": "hero-1",
+          "alt": "VEYMENZ Luxurious Rejuvenating Toner — product presentation"
+        },
+        {
+          "sourceFile": "定格液产品图1.png",
+          "uploadName": "veymenz-rejuvenating-toner-hero-2.png",
+          "sha256": "e9d3e9a5f7a4595d3eddef97dfe14eefff16460100db22f69988ffe04944c699",
+          "bytes": 2034020,
+          "role": "hero-2",
+          "alt": "VEYMENZ Luxurious Rejuvenating Toner — texture and packaging"
+        },
+        {
+          "sourceFile": "定格液详情页(英文版).jpg",
+          "uploadName": "veymenz-rejuvenating-toner-details.jpg",
+          "sha256": "b6612a726e41bb626f4afb231fc4d8cda356813e461a222a8591bb1fdb611044",
+          "bytes": 1736128,
+          "role": "details",
+          "alt": "VEYMENZ Luxurious Rejuvenating Toner — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446580756654",
+      "title": "Luxurious Rejuvenating Toner",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446580756654",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620837347502",
+          "alt": "VEYMENZ Luxurious Rejuvenating Toner — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-rejuvenating-toner-hero-1.png?v=1793516966",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620837380270",
+          "alt": "VEYMENZ Luxurious Rejuvenating Toner — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-rejuvenating-toner-hero-2.png?v=1793516966",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620837413038",
+          "alt": "VEYMENZ Luxurious Rejuvenating Toner — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-rejuvenating-toner-details.jpg?v=1793516965",
+            "width": 1080,
+            "height": 10238
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918410023086",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "A facial toner created for a calm, refreshed feel and a comfortable skincare ritual. Use as the toning step in your routine."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "80 mL"
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nUmbilical Cord Extract (animal-derived)"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Luxurious Rejuvenating Toner | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "A facial toner created for a calm, refreshed feel and a comfortable skincare ritual. Use as the toning step in your routine."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:09:30.401Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=69ab5f65c8b6ac64258dfba4b77305e9"
+    },
+    {
+      "key": "nourishing-essence",
+      "handle": "veymenz-nourishing-essence",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "肌活精华液头图.png",
+          "uploadName": "veymenz-nourishing-essence-hero-1.png",
+          "sha256": "9e52dd5834ea4cfa559f87950225468056e85e2bb96db42c2b4e1822c47f7866",
+          "bytes": 3196911,
+          "role": "hero-1",
+          "alt": "VEYMENZ Luxury Nourishing Essence — product presentation"
+        },
+        {
+          "sourceFile": "肌活精华液头图1.png",
+          "uploadName": "veymenz-nourishing-essence-hero-2.png",
+          "sha256": "5ef64342d818af1b4272678a0848757f8d6923010e8ac9aa37523aa458ad4448",
+          "bytes": 2634135,
+          "role": "hero-2",
+          "alt": "VEYMENZ Luxury Nourishing Essence — texture and packaging"
+        },
+        {
+          "sourceFile": "精华液液详情页(英文版).jpg",
+          "uploadName": "veymenz-nourishing-essence-details.jpg",
+          "sha256": "d1e1b94bf36324e3c773872aaaecb3089bc1c962d66d5f4147f1e57d4adae14f",
+          "bytes": 1615242,
+          "role": "details",
+          "alt": "VEYMENZ Luxury Nourishing Essence — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446580822190",
+      "title": "Luxury Nourishing Essence",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446580822190",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620837576878",
+          "alt": "VEYMENZ Luxury Nourishing Essence — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-nourishing-essence-hero-1.png?v=1793516992",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620837609646",
+          "alt": "VEYMENZ Luxury Nourishing Essence — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-nourishing-essence-hero-2.png?v=1793516992",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620837642414",
+          "alt": "VEYMENZ Luxury Nourishing Essence — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-nourishing-essence-details.jpg?v=1793516991",
+            "width": 1080,
+            "height": 11295
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918410088622",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "A silky, lightweight essence with a fast-absorbing, non-sticky finish. Formulated for moisture care and a smoother, more supple skin feel."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "50 mL"
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nUmbilical Cord Extract (animal-derived)\nDiglycerin\nPolyglycerin-10\nJojoba Esters\nAloe Barbadensis Leaf Juice\nBifida Ferment Lysate\nLactobacillus"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Luxury Nourishing Essence | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "A silky, lightweight essence with a fast-absorbing, non-sticky finish. Formulated for moisture care and a smoother, more supple skin feel."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:09:56.201Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=a0b2a5a0b15d5453d823b0c20cb0f4bb"
+    },
+    {
+      "key": "age-defying-essence",
+      "handle": "veymenz-age-defying-essence",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "精粹露头图.png",
+          "uploadName": "veymenz-age-defying-essence-hero-1.png",
+          "sha256": "c34303c52712ccef23657cd8b2c7186070c2122604356b1774da19ee69ce6c3d",
+          "bytes": 1077294,
+          "role": "hero-1",
+          "alt": "VEYMENZ Luxury Age-Defying Essence Lotion — product presentation"
+        },
+        {
+          "sourceFile": "精粹露头图1.png",
+          "uploadName": "veymenz-age-defying-essence-hero-2.png",
+          "sha256": "e7221cc5399c6b161e551de3b3ee5145eb674517daedf5cfcdded3f5eadf5ea1",
+          "bytes": 825304,
+          "role": "hero-2",
+          "alt": "VEYMENZ Luxury Age-Defying Essence Lotion — texture and packaging"
+        },
+        {
+          "sourceFile": "精粹露详情页(英文版).jpg",
+          "uploadName": "veymenz-age-defying-essence-details.jpg",
+          "sha256": "420d85172102a18d8e93d674b3ddef01c4b26d55eedab601142073909133f5d9",
+          "bytes": 4334032,
+          "role": "details",
+          "alt": "VEYMENZ Luxury Age-Defying Essence Lotion — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446580854958",
+      "title": "Luxury Age-Defying Essence Lotion",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446580854958",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620838232238",
+          "alt": "VEYMENZ Luxury Age-Defying Essence Lotion — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-age-defying-essence-hero-1.png?v=1793517018",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620838265006",
+          "alt": "VEYMENZ Luxury Age-Defying Essence Lotion — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-age-defying-essence-hero-2.png?v=1793517017",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620838297774",
+          "alt": "VEYMENZ Luxury Age-Defying Essence Lotion — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-age-defying-essence-details.jpg?v=1793517018",
+            "width": 1196,
+            "height": 14999
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918410285230",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "An essence presented in individual 3.2 mL ampoules, designed for an intensive skincare ritual and a smooth, hydrated skin feel."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "3.2 mL × 12"
+        },
+        {
+          "namespace": "custom",
+          "key": "how_to_use",
+          "type": "multi_line_text_field",
+          "value": "The supplied detail sheet suggests intensive care two to three times weekly. Follow the product packaging for full directions."
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nUmbilical Cord Extract\nArginine\nSodium Hyaluronate\nAloe Barbadensis Leaf Extract\nPortulaca Oleracea Extract\nCactus Extract"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Luxury Age-Defying Essence Lotion | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "An essence presented in individual 3.2 mL ampoules, designed for an intensive skincare ritual and a smooth, hydrated skin feel."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:10:22.410Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=3f8fad9bb35de65a4e4cfea4196baadf"
+    },
+    {
+      "key": "anti-aging-serum",
+      "handle": "veymenz-anti-aging-serum",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "逆龄凝露产品图.png",
+          "uploadName": "veymenz-anti-aging-serum-hero-1.png",
+          "sha256": "8db99d719b6c7c6e823aa2ad1aeba735754ab6fc7efb2b51f5d5113a025b8ba6",
+          "bytes": 606549,
+          "role": "hero-1",
+          "alt": "VEYMENZ Luxury Anti-Aging Serum — product presentation"
+        },
+        {
+          "sourceFile": "逆龄凝露产品图1.png",
+          "uploadName": "veymenz-anti-aging-serum-hero-2.png",
+          "sha256": "a9d72e299e1142529c265e5137164af2d0f06d2b423e3c92f408d7474a693c56",
+          "bytes": 2171293,
+          "role": "hero-2",
+          "alt": "VEYMENZ Luxury Anti-Aging Serum — texture and packaging"
+        },
+        {
+          "sourceFile": "逆龄凝露详情页（英文版）.jpg",
+          "uploadName": "veymenz-anti-aging-serum-details.jpg",
+          "sha256": "9d3c7cdb70644945994e30b221130acea9a8a2fffd55541165ce6fa21dcb76f9",
+          "bytes": 1606723,
+          "role": "details",
+          "alt": "VEYMENZ Luxury Anti-Aging Serum — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446580920494",
+      "title": "Luxury Anti-Aging Serum",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446580920494",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620838461614",
+          "alt": "VEYMENZ Luxury Anti-Aging Serum — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-anti-aging-serum-hero-1.png?v=1793517042",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620838494382",
+          "alt": "VEYMENZ Luxury Anti-Aging Serum — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-anti-aging-serum-hero-2.png?v=1793517043",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620838527150",
+          "alt": "VEYMENZ Luxury Anti-Aging Serum — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-anti-aging-serum-details.jpg?v=1793517043",
+            "width": 1080,
+            "height": 10238
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918411169966",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "A lightweight facial serum in an individually sealed applicator. Designed for evening moisture care and a supple, smooth skin feel."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "2.2 g"
+        },
+        {
+          "namespace": "custom",
+          "key": "how_to_use",
+          "type": "multi_line_text_field",
+          "value": "Recommended for nighttime skincare. After cleansing and toning, apply an appropriate amount evenly to the face and gently pat until absorbed. Adjust the amount to your skin condition."
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nHyaluronic Acid\nAllantoin\nPalmitoyl Tetrapeptide-7\nPortulaca Oleracea Extract"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Luxury Anti-Aging Serum | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "A lightweight facial serum in an individually sealed applicator. Designed for evening moisture care and a supple, smooth skin feel."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:10:47.462Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=c074f2e77aab8f5479903326fc679ba0"
+    },
+    {
+      "key": "mens-serum",
+      "handle": "veymenz-mens-serum",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "男士劲爽精华头图.png",
+          "uploadName": "veymenz-mens-serum-hero-1.png",
+          "sha256": "b660e4850ef6d7d255a627447c94205f3c47109752c05d8d8d2f9501e679fd39",
+          "bytes": 1231046,
+          "role": "hero-1",
+          "alt": "VEYMENZ Invigorating Serum for Men — product presentation"
+        },
+        {
+          "sourceFile": "男士劲爽精华头图1.png",
+          "uploadName": "veymenz-mens-serum-hero-2.png",
+          "sha256": "8cf7d707916fc36f40cdb92732e501e4c176350f9742c0e1b5d9f352dbe26928",
+          "bytes": 1272817,
+          "role": "hero-2",
+          "alt": "VEYMENZ Invigorating Serum for Men — texture and packaging"
+        },
+        {
+          "sourceFile": "男士劲爽精华液详情页(英文版).jpg",
+          "uploadName": "veymenz-mens-serum-details.jpg",
+          "sha256": "1915128e58ed93f63960fb765e8bd6febe25664237af2ecfaf8bf79ccfaa9769",
+          "bytes": 896807,
+          "role": "details",
+          "alt": "VEYMENZ Invigorating Serum for Men — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446581182638",
+      "title": "Invigorating Serum for Men",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446581182638",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620838559918",
+          "alt": "VEYMENZ Invigorating Serum for Men — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-mens-serum-hero-1.png?v=1793517067",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620838592686",
+          "alt": "VEYMENZ Invigorating Serum for Men — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-mens-serum-hero-2.png?v=1793517067",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620838625454",
+          "alt": "VEYMENZ Invigorating Serum for Men — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-mens-serum-details.jpg?v=1793517067",
+            "width": 750,
+            "height": 8150
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918411497646",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "A lightweight, refreshing facial serum for men. Created for a simple daily routine, with a hydrating feel and non-greasy finish."
+        },
+        {
+          "namespace": "custom",
+          "key": "how_to_use",
+          "type": "multi_line_text_field",
+          "value": "After cleansing and toning, dispense an appropriate amount into the palm. Apply evenly across the face and neck and gently massage with fingertips until absorbed."
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nChamomilla Recutita Flower Extract\nTaraxacum Officinale Root Extract\nPaeonia Lactiflora Root Extract\nGlycerin"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Invigorating Serum for Men | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "A lightweight, refreshing facial serum for men. Created for a simple daily routine, with a hydrating feel and non-greasy finish."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:11:11.510Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=a8f415eaf6c39407b0ca2ae143327fae"
+    },
+    {
+      "key": "hand-cream",
+      "handle": "veymenz-hand-cream",
+      "expectedImages": 2,
+      "assets": [
+        {
+          "sourceFile": "手霜产品图.png",
+          "uploadName": "veymenz-hand-cream-hero-1.png",
+          "sha256": "44bd86898177fd4ef9a5b84f5f3262c71cf8f3310b0b6130aab9b46d0975e889",
+          "bytes": 1480563,
+          "role": "hero-1",
+          "alt": "VEYMENZ Luxury Hand Cream — product presentation"
+        },
+        {
+          "sourceFile": "手霜产品图1.png",
+          "uploadName": "veymenz-hand-cream-hero-2.png",
+          "sha256": "9c78f3ae2da4a81eb3e1574fa156c2fe15fb03ad9a3a6a643aa9711f454462ac",
+          "bytes": 1921224,
+          "role": "hero-2",
+          "alt": "VEYMENZ Luxury Hand Cream — texture and packaging"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446581379246",
+      "title": "Luxury Hand Cream",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446581379246",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620841148590",
+          "alt": "VEYMENZ Luxury Hand Cream — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-hand-cream-hero-1.png?v=1793517091",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620841181358",
+          "alt": "VEYMENZ Luxury Hand Cream — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-hand-cream-hero-2.png?v=1793517091",
+            "width": 1200,
+            "height": 1600
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918411694254",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "A rich yet non-greasy hand cream for dry, rough-feeling hands. Presented in a portable 30 g tube for everyday moisture care."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "30 g"
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "Luxury Hand Cream | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "A rich yet non-greasy hand cream for dry, rough-feeling hands. Presented in a portable 30 g tube for everyday moisture care."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:11:35.667Z",
+      "importedImageCount": 2,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=5f9cb8b707485e07b692ea284618e46c"
+    },
+    {
+      "key": "bacteriostatic-gel",
+      "handle": "veymenz-bacteriostatic-gel",
+      "expectedImages": 3,
+      "assets": [
+        {
+          "sourceFile": "抑菌凝胶头图.png",
+          "uploadName": "veymenz-bacteriostatic-gel-hero-1.png",
+          "sha256": "fa9005dc38a622ad7104b9547122c4d26651823bb997aa8c5bd3672bbd4473fe",
+          "bytes": 2116115,
+          "role": "hero-1",
+          "alt": "VEYMENZ VEYMENZ Bacteriostatic Gel — product presentation"
+        },
+        {
+          "sourceFile": "抑菌凝胶头图1.png",
+          "uploadName": "veymenz-bacteriostatic-gel-hero-2.png",
+          "sha256": "17eedb15a8cbf55bbaf04ab21133a53591a8fa813a05ab6dbbf378c8f15e6f59",
+          "bytes": 1486478,
+          "role": "hero-2",
+          "alt": "VEYMENZ VEYMENZ Bacteriostatic Gel — texture and packaging"
+        },
+        {
+          "sourceFile": "抑菌凝胶详情（英文版.jpg",
+          "uploadName": "veymenz-bacteriostatic-gel-details.jpg",
+          "sha256": "376c45b3b095ab342dece570e0659647a6119c70d8c5350cbc543a685ded49a1",
+          "bytes": 1990477,
+          "role": "details",
+          "alt": "VEYMENZ VEYMENZ Bacteriostatic Gel — English product information and care guide"
+        }
+      ],
+      "stage": "complete",
+      "id": "gid://shopify/Product/15446581412014",
+      "title": "VEYMENZ Bacteriostatic Gel",
+      "status": "DRAFT",
+      "adminUrl": "https://admin.shopify.com/store/0wcfy0-iw/products/15446581412014",
+      "storefrontUrl": null,
+      "media": [
+        {
+          "id": "gid://shopify/MediaImage/46620841574574",
+          "alt": "VEYMENZ VEYMENZ Bacteriostatic Gel — product presentation",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-bacteriostatic-gel-hero-1.png?v=1793517117",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620841607342",
+          "alt": "VEYMENZ VEYMENZ Bacteriostatic Gel — texture and packaging",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-bacteriostatic-gel-hero-2.png?v=1793517117",
+            "width": 1200,
+            "height": 1600
+          }
+        },
+        {
+          "id": "gid://shopify/MediaImage/46620841640110",
+          "alt": "VEYMENZ VEYMENZ Bacteriostatic Gel — English product information and care guide",
+          "status": "READY",
+          "mediaContentType": "IMAGE",
+          "image": {
+            "url": "https://cdn.shopify.com/s/files/1/0703/6757/6238/files/veymenz-bacteriostatic-gel-details.jpg?v=1793517117",
+            "width": 1080,
+            "height": 11750
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "gid://shopify/ProductVariant/67918411727022",
+          "title": "Default Title",
+          "price": "0.00",
+          "inventoryQuantity": 0
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "brand_name",
+          "type": "single_line_text_field",
+          "value": "VEYMENZ"
+        },
+        {
+          "namespace": "custom",
+          "key": "short_pitch",
+          "type": "single_line_text_field",
+          "value": "An intimate-care gel with a light, clear texture, presented in individually packaged, single-use applicators."
+        },
+        {
+          "namespace": "custom",
+          "key": "net_volume",
+          "type": "single_line_text_field",
+          "value": "3 g × 7"
+        },
+        {
+          "namespace": "custom",
+          "key": "key_ingredients",
+          "type": "multi_line_text_field",
+          "value": "Highlighted ingredients from the supplied product information (not the full INCI list):\nSilver Ions\nCentella Asiatica\nChamomilla Recutita\nPortulaca Oleracea\nHyaluronic Acid\nGlycerin"
+        },
+        {
+          "namespace": "custom",
+          "key": "precautions",
+          "type": "multi_line_text_field",
+          "value": "Do not use on broken mucosa, during menstruation or pregnancy. This is not medicine and cannot be used to treat medical conditions. Keep clean before and after use. Discontinue use and consult a specialist if discomfort occurs. Store in a cool, dry place, away from direct sunlight and high heat."
+        },
+        {
+          "namespace": "global",
+          "key": "title_tag",
+          "type": "string",
+          "value": "VEYMENZ Bacteriostatic Gel | VEYMENZ"
+        },
+        {
+          "namespace": "global",
+          "key": "description_tag",
+          "type": "string",
+          "value": "An intimate-care gel with a light, clear texture, presented in individually packaged, single-use applicators."
+        }
+      ],
+      "verifiedAt": "2026-11-01T07:12:01.446Z",
+      "importedImageCount": 3,
+      "previewUrl": "https://434fmiiibm33xiah-70367576238.shopifypreview.com/products_preview?preview_key=c03e18160778da367df54ae099c6f59e"
+    }
+  ],
+  "notes": [
+    "Created products remain draft and unpublished until pricing is provided. Existing prices, stock and publications are preserved."
+  ],
+  "updatedAt": "2026-11-01T07:12:01.448Z",
+  "completedAt": "2026-11-01T07:12:01.447Z",
+  "totalProducts": 8,
+  "totalImages": 23,
+  "verification": {
+    "checkedAt": "2026-11-01T07:12:15.211772+00:00",
+    "allMediaReady": true,
+    "sourceHashesUnchanged": 23,
+    "existingProductsPreserved": 3,
+    "existingProductFieldsCompared": [
+      "id",
+      "title",
+      "handle",
+      "status",
+      "descriptionHtml",
+      "productType",
+      "vendor",
+      "variants",
+      "media",
+      "metafields"
+    ],
+    "priceWritesPerformed": false,
+    "publicationWritesPerformed": false
+  }
+}

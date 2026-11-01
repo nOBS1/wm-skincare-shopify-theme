@@ -1,0 +1,300 @@
+{
+  "data": {
+    "shop": {
+      "name": "Verepoetry",
+      "currencyCode": "USD",
+      "primaryDomain": {
+        "url": "https://verepoetry.com"
+      }
+    },
+    "products": {
+      "nodes": [
+        {
+          "id": "gid://shopify/Product/15446580691118",
+          "title": "Luxury Moisturizing Lotion",
+          "handle": "veymenz-moisturizing-lotion",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-moisturizing-lotion",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918409957550",
+                "price": "132.27"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "50 mL"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620837249198",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620837281966",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620837314734",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446580756654",
+          "title": "Luxurious Rejuvenating Toner",
+          "handle": "veymenz-rejuvenating-toner",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-rejuvenating-toner",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918410023086",
+                "price": "72.15"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "80 mL"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620837347502",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620837380270",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620837413038",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446580822190",
+          "title": "Luxury Nourishing Essence",
+          "handle": "veymenz-nourishing-essence",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-nourishing-essence",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918410088622",
+                "price": "132.27"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "50 mL"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620837576878",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620837609646",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620837642414",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446580854958",
+          "title": "Luxury Age-Defying Essence Lotion",
+          "handle": "veymenz-age-defying-essence",
+          "status": "DRAFT",
+          "onlineStoreUrl": null,
+          "publishedOnPublication": false,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918410285230",
+                "price": "0.00"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "3.2 mL × 12"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620838232238",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620838265006",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620838297774",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446580920494",
+          "title": "Luxury Anti-Aging Serum — 10 × 2.2 g",
+          "handle": "veymenz-anti-aging-serum",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-anti-aging-serum",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918411169966",
+                "price": "132.27"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "10 × 2.2 g"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620838461614",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620838494382",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620838527150",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446581182638",
+          "title": "Invigorating Serum for Men",
+          "handle": "veymenz-mens-serum",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-mens-serum",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918411497646",
+                "price": "132.27"
+              }
+            ]
+          },
+          "metafield": null,
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620838559918",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620838592686",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620838625454",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446581379246",
+          "title": "Luxury Hand Cream",
+          "handle": "veymenz-hand-cream",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-hand-cream",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918411694254",
+                "price": "25.25"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "30 g"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620841148590",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620841181358",
+                "status": "READY"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/15446581412014",
+          "title": "VEYMENZ Bacteriostatic Gel",
+          "handle": "veymenz-bacteriostatic-gel",
+          "status": "ACTIVE",
+          "onlineStoreUrl": "https://verepoetry.com/products/veymenz-bacteriostatic-gel",
+          "publishedOnPublication": true,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/67918411727022",
+                "price": "192.40"
+              }
+            ]
+          },
+          "metafield": {
+            "value": "3 g × 7"
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/46620841574574",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620841607342",
+                "status": "READY"
+              },
+              {
+                "id": "gid://shopify/MediaImage/46620841640110",
+                "status": "READY"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 95,
+      "actualQueryCost": 12,
+      "throttleStatus": {
+        "maximumAvailable": 2000,
+        "currentlyAvailable": 1988,
+        "restoreRate": 100
+      }
+    }
+  }
+}

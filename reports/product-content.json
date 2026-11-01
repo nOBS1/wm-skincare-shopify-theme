@@ -1,0 +1,183 @@
+[
+  {
+    "key": "moisturizing-lotion",
+    "title": "Luxury Moisturizing Lotion",
+    "size": "50 mL",
+    "images": [
+      "保湿乳产品图.png",
+      "保湿乳产品图1.png"
+    ],
+    "detail": "保湿乳详情页(英文版).png",
+    "description": "A lightweight, milky lotion for daily moisture care. The fast-absorbing texture helps leave skin feeling soft, supple and comfortable.",
+    "directions": "After cleansing in the morning and evening, apply an appropriate amount to the face and massage until absorbed.",
+    "highlights": [
+      "Lightweight milky lotion",
+      "Daily hydration",
+      "Suitable for all skin types, as stated in the supplied detail sheet"
+    ],
+    "ingredients_highlighted": [
+      "Hydrogenated Polyisobutene",
+      "Tocopheryl Acetate",
+      "Butylene Glycol",
+      "Glycerin"
+    ]
+  },
+  {
+    "key": "rejuvenating-toner",
+    "title": "Luxurious Rejuvenating Toner",
+    "size": "80 mL",
+    "images": [
+      "定格液产品图.png",
+      "定格液产品图1.png"
+    ],
+    "detail": "定格液详情页(英文版).jpg",
+    "description": "A facial toner created for a calm, refreshed feel and a comfortable skincare ritual. Use as the toning step in your routine.",
+    "directions": null,
+    "highlights": [
+      "Facial toner",
+      "Comfort and hydration"
+    ],
+    "ingredients_highlighted": [
+      "Umbilical Cord Extract (animal-derived)"
+    ]
+  },
+  {
+    "key": "nourishing-essence",
+    "title": "Luxury Nourishing Essence",
+    "size": "50 mL",
+    "images": [
+      "肌活精华液头图.png",
+      "肌活精华液头图1.png"
+    ],
+    "detail": "精华液液详情页(英文版).jpg",
+    "description": "A silky, lightweight essence with a fast-absorbing, non-sticky finish. Formulated for moisture care and a smoother, more supple skin feel.",
+    "directions": null,
+    "highlights": [
+      "Silky lightweight texture",
+      "Fast-absorbing and non-sticky",
+      "Fragrance-free, as stated in the supplied detail sheet"
+    ],
+    "ingredients_highlighted": [
+      "Umbilical Cord Extract (animal-derived)",
+      "Diglycerin",
+      "Polyglycerin-10",
+      "Jojoba Esters",
+      "Aloe Barbadensis Leaf Juice",
+      "Bifida Ferment Lysate",
+      "Lactobacillus"
+    ]
+  },
+  {
+    "key": "age-defying-essence",
+    "title": "Luxury Age-Defying Essence Lotion",
+    "size": "3.2 mL × 12",
+    "images": [
+      "精粹露头图.png",
+      "精粹露头图1.png"
+    ],
+    "detail": "精粹露详情页(英文版).jpg",
+    "description": "An essence presented in individual 3.2 mL ampoules, designed for an intensive skincare ritual and a smooth, hydrated skin feel.",
+    "directions": "For intensive care, use two to three times weekly. Follow the product packaging for full directions.",
+    "highlights": [
+      "Individual ampoules",
+      "12 × 3.2 mL presentation"
+    ],
+    "ingredients_highlighted": [
+      "Umbilical Cord Extract",
+      "Arginine",
+      "Sodium Hyaluronate",
+      "Aloe Barbadensis Leaf Extract",
+      "Portulaca Oleracea Extract",
+      "Cactus Extract"
+    ]
+  },
+  {
+    "key": "anti-aging-serum",
+    "title": "Luxury Anti-Aging Serum — 10 × 2.2 g",
+    "size": "10 × 2.2 g",
+    "images": [
+      "逆龄凝露产品图.png",
+      "逆龄凝露产品图1.png"
+    ],
+    "detail": "逆龄凝露详情页（英文版）.jpg",
+    "description": "A lightweight facial serum in an individually sealed applicator. Designed for evening moisture care and a supple, smooth skin feel. Sold as one box of 10 individually sealed applicators, 2.2 g each.",
+    "directions": "Recommended for nighttime skincare. After cleansing and toning, apply an appropriate amount evenly to the face and gently pat until absorbed. Adjust the amount to your skin condition.",
+    "highlights": [
+      "Lightweight and fast-absorbing",
+      "Individually sealed applicator",
+      "Nighttime skincare"
+    ],
+    "ingredients_highlighted": [
+      "Hyaluronic Acid",
+      "Allantoin",
+      "Palmitoyl Tetrapeptide-7",
+      "Portulaca Oleracea Extract"
+    ]
+  },
+  {
+    "key": "mens-serum",
+    "title": "Invigorating Serum for Men",
+    "size": null,
+    "images": [
+      "男士劲爽精华头图.png",
+      "男士劲爽精华头图1.png"
+    ],
+    "detail": "男士劲爽精华液详情页(英文版).jpg",
+    "description": "A lightweight, refreshing facial serum for men. Created for a simple daily routine, with a hydrating feel and non-greasy finish.",
+    "directions": "After cleansing and toning, dispense an appropriate amount into the palm. Apply evenly across the face and neck and gently massage with fingertips until absorbed.",
+    "highlights": [
+      "Lightweight and refreshing",
+      "Hydrating, non-greasy feel"
+    ],
+    "ingredients_highlighted": [
+      "Chamomilla Recutita Flower Extract",
+      "Taraxacum Officinale Root Extract",
+      "Paeonia Lactiflora Root Extract",
+      "Glycerin"
+    ]
+  },
+  {
+    "key": "hand-cream",
+    "title": "Luxury Hand Cream",
+    "size": "30 g",
+    "images": [
+      "手霜产品图.png",
+      "手霜产品图1.png"
+    ],
+    "detail": null,
+    "description": "A rich yet non-greasy hand cream for dry, rough-feeling hands. Presented in a portable 30 g tube for everyday moisture care.",
+    "directions": null,
+    "highlights": [
+      "Rich yet non-greasy",
+      "30 g tube",
+      "For dry, rough-feeling hands"
+    ],
+    "ingredients_highlighted": []
+  },
+  {
+    "key": "bacteriostatic-gel",
+    "title": "VEYMENZ Bacteriostatic Gel",
+    "size": "3 g × 7",
+    "images": [
+      "抑菌凝胶头图.png",
+      "抑菌凝胶头图1.png"
+    ],
+    "detail": "抑菌凝胶详情（英文版.jpg",
+    "description": "An intimate-care gel with a light, clear texture, presented in individually packaged, single-use applicators.",
+    "directions": null,
+    "highlights": [
+      "Light, clear gel",
+      "Individually packaged single-use applicators",
+      "7 × 3 g presentation"
+    ],
+    "ingredients_highlighted": [
+      "Silver Ions",
+      "Centella Asiatica",
+      "Chamomilla Recutita",
+      "Portulaca Oleracea",
+      "Hyaluronic Acid",
+      "Glycerin"
+    ],
+    "source_precautions": "Do not use on broken mucosa, during menstruation or pregnancy. This is not medicine and cannot be used to treat medical conditions. Keep clean before and after use. Discontinue use and consult a specialist if discomfort occurs. Store in a cool, dry place, away from direct sunlight and high heat."
+  }
+]

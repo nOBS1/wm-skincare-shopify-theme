@@ -1,0 +1,1251 @@
+{
+  "store": "0wcfy0-iw.myshopify.com",
+  "apiVersion": "2026-10",
+  "runs": [
+    {
+      "startedAt": "2026-11-01T07:15:55.273Z",
+      "mode": "dry-run",
+      "stage": "ready-for-apply",
+      "plan": {
+        "allId": "gid://shopify/Collection/333901004974",
+        "desiredAllRules": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "VENDOR",
+              "relation": "EQUALS",
+              "condition": "Lanyuan Elimei Biotech"
+            },
+            {
+              "column": "VENDOR",
+              "relation": "EQUALS",
+              "condition": "VEYMENZ"
+            }
+          ]
+        },
+        "newCollection": {
+          "title": "VEYMENZ Collection",
+          "handle": "veymenz",
+          "descriptionHtml": "<p>Explore VEYMENZ facial care, hand care and everyday essentials. Find product details and directions on each page.</p>",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          }
+        },
+        "publicationId": "gid://shopify/Publication/155558969518"
+      },
+      "actions": [],
+      "before": {
+        "shop": {
+          "name": "Verepoetry",
+          "currencyCode": "USD",
+          "primaryDomain": {
+            "url": "https://verepoetry.com"
+          }
+        },
+        "publications": {
+          "nodes": [
+            {
+              "id": "gid://shopify/Publication/155558969518",
+              "name": "在线商店",
+              "app": {
+                "title": "在线商店"
+              }
+            }
+          ]
+        },
+        "all": {
+          "id": "gid://shopify/Collection/333901004974",
+          "title": "ALL",
+          "handle": "all",
+          "descriptionHtml": "",
+          "sortOrder": "BEST_SELLING",
+          "templateSuffix": "",
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "Lanyuan Elimei Biotech"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 3,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/8790574727342",
+                "title": "Weiman Poetics : Morning Dew Age-Defying Mist",
+                "handle": "weiman-poetics-morning-dew-age-defying-mist",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790424191150",
+                "title": "Weiman Poetics Dawn Rejuvenation Essence 50ml",
+                "handle": "weiman-poetics-dawn-rejuvenation-essence-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8789650702510",
+                "title": "Weiman Poetics: Radiance Gel 50ml",
+                "handle": "weiman-poetics-radiance-serum-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        },
+        "veymenz": null
+      },
+      "after": {
+        "shop": {
+          "name": "Verepoetry",
+          "currencyCode": "USD",
+          "primaryDomain": {
+            "url": "https://verepoetry.com"
+          }
+        },
+        "publications": {
+          "nodes": [
+            {
+              "id": "gid://shopify/Publication/155558969518",
+              "name": "在线商店",
+              "app": {
+                "title": "在线商店"
+              }
+            }
+          ]
+        },
+        "all": {
+          "id": "gid://shopify/Collection/333901004974",
+          "title": "ALL",
+          "handle": "all",
+          "descriptionHtml": "",
+          "sortOrder": "BEST_SELLING",
+          "templateSuffix": "",
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "Lanyuan Elimei Biotech"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 3,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/8790574727342",
+                "title": "Weiman Poetics : Morning Dew Age-Defying Mist",
+                "handle": "weiman-poetics-morning-dew-age-defying-mist",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790424191150",
+                "title": "Weiman Poetics Dawn Rejuvenation Essence 50ml",
+                "handle": "weiman-poetics-dawn-rejuvenation-essence-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8789650702510",
+                "title": "Weiman Poetics: Radiance Gel 50ml",
+                "handle": "weiman-poetics-radiance-serum-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        },
+        "veymenz": null
+      },
+      "summary": {
+        "veymenzExists": false
+      },
+      "completedAt": "2026-11-01T07:16:04.924Z"
+    },
+    {
+      "startedAt": "2026-11-01T07:16:09.018Z",
+      "mode": "apply",
+      "stage": "verified",
+      "plan": {
+        "allId": "gid://shopify/Collection/333901004974",
+        "desiredAllRules": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "VENDOR",
+              "relation": "EQUALS",
+              "condition": "Lanyuan Elimei Biotech"
+            },
+            {
+              "column": "VENDOR",
+              "relation": "EQUALS",
+              "condition": "VEYMENZ"
+            }
+          ]
+        },
+        "newCollection": {
+          "title": "VEYMENZ Collection",
+          "handle": "veymenz",
+          "descriptionHtml": "<p>Explore VEYMENZ facial care, hand care and everyday essentials. Find product details and directions on each page.</p>",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          }
+        },
+        "publicationId": "gid://shopify/Publication/155558969518"
+      },
+      "actions": [
+        {
+          "at": "2026-11-01T07:16:19.343Z",
+          "operation": "broaden-all-vendors",
+          "id": "gid://shopify/Collection/333901004974"
+        },
+        {
+          "at": "2026-11-01T07:16:19.345Z",
+          "operation": "membership-job",
+          "jobId": "gid://shopify/Job/e4ffc743-d5fd-4aa6-ab9c-4f0a5cad043b"
+        },
+        {
+          "at": "2026-11-01T07:16:32.559Z",
+          "operation": "create-veymenz",
+          "id": "gid://shopify/Collection/512668008622"
+        },
+        {
+          "at": "2026-11-01T07:16:41.689Z",
+          "operation": "publish-veymenz-online-store",
+          "id": "gid://shopify/Collection/512668008622",
+          "publicationId": "gid://shopify/Publication/155558969518"
+        }
+      ],
+      "before": {
+        "shop": {
+          "name": "Verepoetry",
+          "currencyCode": "USD",
+          "primaryDomain": {
+            "url": "https://verepoetry.com"
+          }
+        },
+        "publications": {
+          "nodes": [
+            {
+              "id": "gid://shopify/Publication/155558969518",
+              "name": "在线商店",
+              "app": {
+                "title": "在线商店"
+              }
+            }
+          ]
+        },
+        "all": {
+          "id": "gid://shopify/Collection/333901004974",
+          "title": "ALL",
+          "handle": "all",
+          "descriptionHtml": "",
+          "sortOrder": "BEST_SELLING",
+          "templateSuffix": "",
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "Lanyuan Elimei Biotech"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 3,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/8790574727342",
+                "title": "Weiman Poetics : Morning Dew Age-Defying Mist",
+                "handle": "weiman-poetics-morning-dew-age-defying-mist",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790424191150",
+                "title": "Weiman Poetics Dawn Rejuvenation Essence 50ml",
+                "handle": "weiman-poetics-dawn-rejuvenation-essence-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8789650702510",
+                "title": "Weiman Poetics: Radiance Gel 50ml",
+                "handle": "weiman-poetics-radiance-serum-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        },
+        "veymenz": null
+      },
+      "after": {
+        "shop": {
+          "name": "Verepoetry",
+          "currencyCode": "USD",
+          "primaryDomain": {
+            "url": "https://verepoetry.com"
+          }
+        },
+        "publications": {
+          "nodes": [
+            {
+              "id": "gid://shopify/Publication/155558969518",
+              "name": "在线商店",
+              "app": {
+                "title": "在线商店"
+              }
+            }
+          ]
+        },
+        "all": {
+          "id": "gid://shopify/Collection/333901004974",
+          "title": "ALL",
+          "handle": "all",
+          "descriptionHtml": "",
+          "sortOrder": "BEST_SELLING",
+          "templateSuffix": "",
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "Lanyuan Elimei Biotech"
+              },
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 11,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/15446581412014",
+                "title": "VEYMENZ Bacteriostatic Gel",
+                "handle": "veymenz-bacteriostatic-gel",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581379246",
+                "title": "Luxury Hand Cream",
+                "handle": "veymenz-hand-cream",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581182638",
+                "title": "Invigorating Serum for Men",
+                "handle": "veymenz-mens-serum",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580920494",
+                "title": "Luxury Anti-Aging Serum",
+                "handle": "veymenz-anti-aging-serum",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580854958",
+                "title": "Luxury Age-Defying Essence Lotion",
+                "handle": "veymenz-age-defying-essence",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580822190",
+                "title": "Luxury Nourishing Essence",
+                "handle": "veymenz-nourishing-essence",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580756654",
+                "title": "Luxurious Rejuvenating Toner",
+                "handle": "veymenz-rejuvenating-toner",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580691118",
+                "title": "Luxury Moisturizing Lotion",
+                "handle": "veymenz-moisturizing-lotion",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790574727342",
+                "title": "Weiman Poetics : Morning Dew Age-Defying Mist",
+                "handle": "weiman-poetics-morning-dew-age-defying-mist",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790424191150",
+                "title": "Weiman Poetics Dawn Rejuvenation Essence 50ml",
+                "handle": "weiman-poetics-dawn-rejuvenation-essence-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8789650702510",
+                "title": "Weiman Poetics: Radiance Gel 50ml",
+                "handle": "weiman-poetics-radiance-serum-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        },
+        "veymenz": {
+          "id": "gid://shopify/Collection/512668008622",
+          "title": "VEYMENZ Collection",
+          "handle": "veymenz",
+          "descriptionHtml": "<p>Explore VEYMENZ facial care, hand care and everyday essentials. Find product details and directions on each page.</p>",
+          "sortOrder": "MOST_RELEVANT",
+          "templateSuffix": null,
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 8,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/15446581412014",
+                "title": "VEYMENZ Bacteriostatic Gel",
+                "handle": "veymenz-bacteriostatic-gel",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581379246",
+                "title": "Luxury Hand Cream",
+                "handle": "veymenz-hand-cream",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581182638",
+                "title": "Invigorating Serum for Men",
+                "handle": "veymenz-mens-serum",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580920494",
+                "title": "Luxury Anti-Aging Serum",
+                "handle": "veymenz-anti-aging-serum",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580854958",
+                "title": "Luxury Age-Defying Essence Lotion",
+                "handle": "veymenz-age-defying-essence",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580822190",
+                "title": "Luxury Nourishing Essence",
+                "handle": "veymenz-nourishing-essence",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580756654",
+                "title": "Luxurious Rejuvenating Toner",
+                "handle": "veymenz-rejuvenating-toner",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580691118",
+                "title": "Luxury Moisturizing Lotion",
+                "handle": "veymenz-moisturizing-lotion",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "summary": {
+        "id": "gid://shopify/Collection/512668008622",
+        "url": "https://verepoetry.com/collections/veymenz",
+        "adminProductCount": {
+          "count": 8,
+          "precision": "EXACT"
+        },
+        "returnedProducts": 8,
+        "activeOnlineStoreProducts": 6,
+        "draftProducts": 2,
+        "publishedOnOnlineStore": true,
+        "allCollectionProductCount": {
+          "count": 11,
+          "precision": "EXACT"
+        }
+      },
+      "completedAt": "2026-11-01T07:16:46.001Z"
+    },
+    {
+      "startedAt": "2026-11-01T07:16:54.116Z",
+      "mode": "apply",
+      "stage": "verified",
+      "plan": {
+        "allId": "gid://shopify/Collection/333901004974",
+        "desiredAllRules": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "VENDOR",
+              "relation": "EQUALS",
+              "condition": "Lanyuan Elimei Biotech"
+            },
+            {
+              "column": "VENDOR",
+              "relation": "EQUALS",
+              "condition": "VEYMENZ"
+            }
+          ]
+        },
+        "newCollection": {
+          "title": "VEYMENZ Collection",
+          "handle": "veymenz",
+          "descriptionHtml": "<p>Explore VEYMENZ facial care, hand care and everyday essentials. Find product details and directions on each page.</p>",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          }
+        },
+        "publicationId": "gid://shopify/Publication/155558969518"
+      },
+      "actions": [
+        {
+          "at": "2026-11-01T07:16:58.498Z",
+          "operation": "skip-all-already-synced",
+          "id": "gid://shopify/Collection/333901004974"
+        },
+        {
+          "at": "2026-11-01T07:17:02.894Z",
+          "operation": "skip-existing-veymenz",
+          "id": "gid://shopify/Collection/512668008622"
+        }
+      ],
+      "before": {
+        "shop": {
+          "name": "Verepoetry",
+          "currencyCode": "USD",
+          "primaryDomain": {
+            "url": "https://verepoetry.com"
+          }
+        },
+        "publications": {
+          "nodes": [
+            {
+              "id": "gid://shopify/Publication/155558969518",
+              "name": "在线商店",
+              "app": {
+                "title": "在线商店"
+              }
+            }
+          ]
+        },
+        "all": {
+          "id": "gid://shopify/Collection/333901004974",
+          "title": "ALL",
+          "handle": "all",
+          "descriptionHtml": "",
+          "sortOrder": "BEST_SELLING",
+          "templateSuffix": "",
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "Lanyuan Elimei Biotech"
+              },
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 11,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/15446581412014",
+                "title": "VEYMENZ Bacteriostatic Gel",
+                "handle": "veymenz-bacteriostatic-gel",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581379246",
+                "title": "Luxury Hand Cream",
+                "handle": "veymenz-hand-cream",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581182638",
+                "title": "Invigorating Serum for Men",
+                "handle": "veymenz-mens-serum",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580920494",
+                "title": "Luxury Anti-Aging Serum",
+                "handle": "veymenz-anti-aging-serum",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580854958",
+                "title": "Luxury Age-Defying Essence Lotion",
+                "handle": "veymenz-age-defying-essence",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580822190",
+                "title": "Luxury Nourishing Essence",
+                "handle": "veymenz-nourishing-essence",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580756654",
+                "title": "Luxurious Rejuvenating Toner",
+                "handle": "veymenz-rejuvenating-toner",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580691118",
+                "title": "Luxury Moisturizing Lotion",
+                "handle": "veymenz-moisturizing-lotion",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790574727342",
+                "title": "Weiman Poetics : Morning Dew Age-Defying Mist",
+                "handle": "weiman-poetics-morning-dew-age-defying-mist",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790424191150",
+                "title": "Weiman Poetics Dawn Rejuvenation Essence 50ml",
+                "handle": "weiman-poetics-dawn-rejuvenation-essence-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8789650702510",
+                "title": "Weiman Poetics: Radiance Gel 50ml",
+                "handle": "weiman-poetics-radiance-serum-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        },
+        "veymenz": {
+          "id": "gid://shopify/Collection/512668008622",
+          "title": "VEYMENZ Collection",
+          "handle": "veymenz",
+          "descriptionHtml": "<p>Explore VEYMENZ facial care, hand care and everyday essentials. Find product details and directions on each page.</p>",
+          "sortOrder": "MOST_RELEVANT",
+          "templateSuffix": null,
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 8,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/15446581412014",
+                "title": "VEYMENZ Bacteriostatic Gel",
+                "handle": "veymenz-bacteriostatic-gel",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581379246",
+                "title": "Luxury Hand Cream",
+                "handle": "veymenz-hand-cream",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581182638",
+                "title": "Invigorating Serum for Men",
+                "handle": "veymenz-mens-serum",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580920494",
+                "title": "Luxury Anti-Aging Serum",
+                "handle": "veymenz-anti-aging-serum",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580854958",
+                "title": "Luxury Age-Defying Essence Lotion",
+                "handle": "veymenz-age-defying-essence",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580822190",
+                "title": "Luxury Nourishing Essence",
+                "handle": "veymenz-nourishing-essence",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580756654",
+                "title": "Luxurious Rejuvenating Toner",
+                "handle": "veymenz-rejuvenating-toner",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580691118",
+                "title": "Luxury Moisturizing Lotion",
+                "handle": "veymenz-moisturizing-lotion",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "after": {
+        "shop": {
+          "name": "Verepoetry",
+          "currencyCode": "USD",
+          "primaryDomain": {
+            "url": "https://verepoetry.com"
+          }
+        },
+        "publications": {
+          "nodes": [
+            {
+              "id": "gid://shopify/Publication/155558969518",
+              "name": "在线商店",
+              "app": {
+                "title": "在线商店"
+              }
+            }
+          ]
+        },
+        "all": {
+          "id": "gid://shopify/Collection/333901004974",
+          "title": "ALL",
+          "handle": "all",
+          "descriptionHtml": "",
+          "sortOrder": "BEST_SELLING",
+          "templateSuffix": "",
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "Lanyuan Elimei Biotech"
+              },
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 11,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/15446581412014",
+                "title": "VEYMENZ Bacteriostatic Gel",
+                "handle": "veymenz-bacteriostatic-gel",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581379246",
+                "title": "Luxury Hand Cream",
+                "handle": "veymenz-hand-cream",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581182638",
+                "title": "Invigorating Serum for Men",
+                "handle": "veymenz-mens-serum",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580920494",
+                "title": "Luxury Anti-Aging Serum",
+                "handle": "veymenz-anti-aging-serum",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580854958",
+                "title": "Luxury Age-Defying Essence Lotion",
+                "handle": "veymenz-age-defying-essence",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580822190",
+                "title": "Luxury Nourishing Essence",
+                "handle": "veymenz-nourishing-essence",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580756654",
+                "title": "Luxurious Rejuvenating Toner",
+                "handle": "veymenz-rejuvenating-toner",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580691118",
+                "title": "Luxury Moisturizing Lotion",
+                "handle": "veymenz-moisturizing-lotion",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790574727342",
+                "title": "Weiman Poetics : Morning Dew Age-Defying Mist",
+                "handle": "weiman-poetics-morning-dew-age-defying-mist",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8790424191150",
+                "title": "Weiman Poetics Dawn Rejuvenation Essence 50ml",
+                "handle": "weiman-poetics-dawn-rejuvenation-essence-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/8789650702510",
+                "title": "Weiman Poetics: Radiance Gel 50ml",
+                "handle": "weiman-poetics-radiance-serum-50ml",
+                "vendor": "Lanyuan Elimei Biotech",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        },
+        "veymenz": {
+          "id": "gid://shopify/Collection/512668008622",
+          "title": "VEYMENZ Collection",
+          "handle": "veymenz",
+          "descriptionHtml": "<p>Explore VEYMENZ facial care, hand care and everyday essentials. Find product details and directions on each page.</p>",
+          "sortOrder": "MOST_RELEVANT",
+          "templateSuffix": null,
+          "seo": {
+            "title": null,
+            "description": null
+          },
+          "image": null,
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "VENDOR",
+                "relation": "EQUALS",
+                "condition": "VEYMENZ"
+              }
+            ]
+          },
+          "productsCount": {
+            "count": 8,
+            "precision": "EXACT"
+          },
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/15446581412014",
+                "title": "VEYMENZ Bacteriostatic Gel",
+                "handle": "veymenz-bacteriostatic-gel",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581379246",
+                "title": "Luxury Hand Cream",
+                "handle": "veymenz-hand-cream",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446581182638",
+                "title": "Invigorating Serum for Men",
+                "handle": "veymenz-mens-serum",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580920494",
+                "title": "Luxury Anti-Aging Serum",
+                "handle": "veymenz-anti-aging-serum",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580854958",
+                "title": "Luxury Age-Defying Essence Lotion",
+                "handle": "veymenz-age-defying-essence",
+                "vendor": "VEYMENZ",
+                "status": "DRAFT",
+                "publishedOnPublication": false
+              },
+              {
+                "id": "gid://shopify/Product/15446580822190",
+                "title": "Luxury Nourishing Essence",
+                "handle": "veymenz-nourishing-essence",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580756654",
+                "title": "Luxurious Rejuvenating Toner",
+                "handle": "veymenz-rejuvenating-toner",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              },
+              {
+                "id": "gid://shopify/Product/15446580691118",
+                "title": "Luxury Moisturizing Lotion",
+                "handle": "veymenz-moisturizing-lotion",
+                "vendor": "VEYMENZ",
+                "status": "ACTIVE",
+                "publishedOnPublication": true
+              }
+            ]
+          },
+          "publishedOnPublication": true,
+          "resourcePublicationsV2": {
+            "nodes": [
+              {
+                "isPublished": true,
+                "publication": {
+                  "id": "gid://shopify/Publication/155558969518",
+                  "name": "在线商店"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "summary": {
+        "id": "gid://shopify/Collection/512668008622",
+        "url": "https://verepoetry.com/collections/veymenz",
+        "adminProductCount": {
+          "count": 8,
+          "precision": "EXACT"
+        },
+        "returnedProducts": 8,
+        "activeOnlineStoreProducts": 6,
+        "draftProducts": 2,
+        "publishedOnOnlineStore": true,
+        "allCollectionProductCount": {
+          "count": 11,
+          "precision": "EXACT"
+        }
+      },
+      "completedAt": "2026-11-01T07:17:07.074Z"
+    }
+  ],
+  "updatedAt": "2026-11-01T07:17:07.074Z"
+}
