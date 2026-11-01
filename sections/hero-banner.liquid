@@ -18,7 +18,7 @@
           <p class="lx-hero-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name | escape }}</span>
-        {%- if section.settings.heading_2 != blank -%}
+        {% if section.settings.heading_2 != blank %}
           <span class="lx-line-inner">{{ section.settings.heading_2 | escape }}</span>
         {%- endif -%}
         </h1>
@@ -91,7 +91,7 @@
             <p class="lx-hero-eyebrow">{{ section.settings.eyebrow }}</p>
           {%- endif -%}
           <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name | escape }}</span>
-          {%- if section.settings.heading_2 != blank -%}
+          {% if section.settings.heading_2 != blank %}
             <span class="lx-line-inner">{{ section.settings.heading_2 | escape }}</span>
           {%- endif -%}
           </h1>
