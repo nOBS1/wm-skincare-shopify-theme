@@ -13,7 +13,7 @@
       "type": "hero-banner",
       "settings": {
         "layout": "split",
-        "image": "",
+        "image": "shopify://shop_images/veymenz-rejuvenating-toner-hero-1.png",
         "overlay_opacity": 40,
         "eyebrow": "VEYMENZ · Everyday care",
         "heading_1": "Your daily",
@@ -97,7 +97,7 @@
         "text": "<p>From lightweight toners and silky essences to everyday moisture care, discover a routine that feels right for you.</p><p>Take a closer look at each product for its size, texture, highlighted ingredients and directions.</p>",
         "button_text": "Discover all products",
         "button_link": "/collections/all",
-        "image": "",
+        "image": "shopify://shop_images/veymenz-nourishing-essence-hero-1.png",
         "image_asset": "veymenz-nourishing-essence-story.png",
         "image_alt": "VEYMENZ Luxury Nourishing Essence 50 mL"
       }

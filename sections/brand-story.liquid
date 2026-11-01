@@ -9,7 +9,7 @@
                        {{ section.settings.image | image_url: width: 800 }} 800w,
                        {{ section.settings.image | image_url: width: 1200 }} 1200w"
                sizes="(min-width: 768px) 50vw, 100vw"
-               alt="{{ section.settings.title | escape }}"
+               alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
                loading="lazy" width="800" height="1000" decoding="async">
         {%- elsif section.settings.image_asset != blank -%}
           <img src="{{ section.settings.image_asset | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1200" height="1600" loading="lazy" decoding="async">
