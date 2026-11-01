@@ -495,6 +495,7 @@ body.lx-loaded .lx-hero-cta { opacity: 1; transform: none; }
   line-height: .95; letter-spacing: .06em; text-align: center; white-space: nowrap;
   color: var(--color-text); opacity: .9; margin-bottom: 20px; overflow: hidden;
 }
+.lx-foot-mark img { display: block; width: min(100%, 900px); height: auto; margin: 0 auto; }
 
 /* ---------- luxe reveal ---------- */
 .lx-reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s var(--transition), transform .9s var(--transition); }

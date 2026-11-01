@@ -3,7 +3,9 @@
     <div class="footer-top">
       <div class="footer-brand">
         {%- if settings.logo != blank -%}
-          <img src="{{ settings.logo | image_url: width: 160 }}" alt="{{ shop.name }}" width="160" height="32">
+          {%- assign logo_w = settings.logo_width | default: 160 -%}
+          {%- assign logo_h = logo_w | times: settings.logo.height | divided_by: settings.logo.width -%}
+          <a href="{{ routes.root_url }}"><img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" width="{{ logo_w }}" height="{{ logo_h }}" loading="lazy" style="width:{{ logo_w }}px;height:auto"></a>
         {%- else -%}
           <span class="footer-logo-text">{{ shop.name }}</span>
         {%- endif -%}
@@ -66,7 +68,13 @@
     {%- endif -%}
 
     {%- if section.settings.show_wordmark -%}
-      <div class="lx-foot-mark" aria-hidden="true">{{ shop.name }}</div>
+      <div class="lx-foot-mark" aria-hidden="true">
+        {%- if settings.logo != blank -%}
+          <img src="{{ settings.logo | image_url: width: 1600 }}" alt="" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" loading="lazy">
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
     <div class="footer-bottom">
