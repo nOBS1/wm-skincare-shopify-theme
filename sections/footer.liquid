@@ -70,7 +70,7 @@
     {%- if section.settings.show_wordmark -%}
       <div class="lx-foot-mark" aria-hidden="true">
         {%- if settings.logo != blank -%}
-          <img src="{{ settings.logo | image_url: width: 1600 }}" alt="" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" loading="lazy">
+          <img src="{{ settings.logo | image_url: width: 800 }}" alt="" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}" loading="lazy">
         {%- else -%}
           {{ shop.name }}
         {%- endif -%}
