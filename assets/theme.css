@@ -535,11 +535,17 @@ ul, ol { list-style: none; }
   margin-bottom: 4rem;
 }
 @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-brand {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.footer-brand img { display: block; margin: 0 auto 1rem; }
 .footer-brand p {
   font-size: 0.9rem;
   color: var(--color-text-light);
   line-height: 1.8;
   max-width: 280px;
+  margin: 0 auto;
 }
 .footer-col h4 {
   font-family: var(--font-body);
