@@ -20,7 +20,7 @@
         "heading_2": "ritual.",
         "sub": "Discover textures, formulas and thoughtful care for your everyday routine.",
         "cta_1_text": "Explore the collection",
-        "cta_1_link": "/collections/all",
+        "cta_1_link": "/collections/veymenz",
         "cta_2_text": "Find your ritual",
         "cta_2_link": "#ritual",
         "show_ghost": false,
@@ -40,7 +40,7 @@
             "title": "Tone",
             "description": "Begin with a refreshing toner as part of your daily skincare routine.",
             "link_text": "Explore toners",
-            "link": "/collections/all",
+            "link": "/products/veymenz-rejuvenating-toner",
             "palette": "rose"
           }
         },
@@ -51,7 +51,7 @@
             "title": "Nourish",
             "description": "Choose an essence with a texture that suits your routine.",
             "link_text": "Explore essences",
-            "link": "/collections/all",
+            "link": "/products/veymenz-nourishing-essence",
             "palette": "sage"
           }
         },
@@ -62,7 +62,7 @@
             "title": "Moisturize",
             "description": "Complete your daily care with a comfortable moisturizing lotion.",
             "link_text": "Explore moisturizers",
-            "link": "/collections/all",
+            "link": "/products/veymenz-moisturizing-lotion",
             "palette": "gold"
           }
         }
@@ -81,12 +81,12 @@
       "type": "featured-products",
       "settings": {
         "label": "Discover the collection",
-        "title": "Care for your every day",
+        "title": "The VEYMENZ collection",
         "description": "Explore facial care, hand care and more. Find product details and directions on each page.",
-        "collection": "all",
+        "collection": "veymenz",
         "limit": 8,
         "button_text": "View All Products",
-        "button_link": "/collections/all"
+        "button_link": "/collections/veymenz"
       }
     },
     "brand-story": {
@@ -96,7 +96,7 @@
         "title": "Care, at your own pace",
         "text": "<p>From lightweight toners and silky essences to everyday moisture care, discover a routine that feels right for you.</p><p>Take a closer look at each product for its size, texture, highlighted ingredients and directions.</p>",
         "button_text": "Discover all products",
-        "button_link": "/collections/all",
+        "button_link": "/collections/veymenz",
         "image": "shopify://shop_images/veymenz-nourishing-essence-hero-1.png",
         "image_asset": "veymenz-nourishing-essence-story.png",
         "image_alt": "VEYMENZ Luxury Nourishing Essence 50 mL"
@@ -109,7 +109,7 @@
         "title": "A little time for yourself",
         "text": "<p>Make room for a simple, considered skincare ritual. Explore the collection and choose the care that fits your day.</p>",
         "button_text": "Explore the collection",
-        "button_link": "/collections/all"
+        "button_link": "/collections/veymenz"
       }
     }
   },

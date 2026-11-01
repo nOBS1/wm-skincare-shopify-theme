@@ -85,6 +85,9 @@
 .product-detail-sheet figcaption a,
 .product-trust a { text-decoration: underline; text-underline-offset: .2em; }
 .product-detail-sheets .section-head h2 { margin: 0; font-weight: 400; }
+.product-use-note { padding: 1rem; margin: 1.5rem 0; border: 1px solid var(--color-border); background: var(--color-cream); font-size: .85rem; }
+.product-use-note h2 { font-family: var(--font-body); font-size: .85rem; margin: 0 0 .5rem; }
+.product-use-note p { margin: 0; }
 @media (min-width: 881px) {
   .product-gallery-track .product-gallery-item,
   .product-gallery-empty { max-height: 72vh; }

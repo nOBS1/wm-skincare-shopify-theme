@@ -107,6 +107,19 @@
         <p class="product-pitch">{{ product.description | strip_html | truncate: 180 | escape }}</p>
       {%- endif -%}
 
+      {%- if product.metafields.custom.precautions != blank -%}
+        <div class="product-use-note" id="precautions">
+          <h2>Before use</h2>
+          <div class="rte">
+            {%- if product.metafields.custom.precautions.type == 'rich_text_field' or product.metafields.custom.precautions.type == 'multi_line_text_field' or product.metafields.custom.precautions.type == 'single_line_text_field' -%}
+              {{ product.metafields.custom.precautions | metafield_tag }}
+            {%- else -%}
+              {{ product.metafields.custom.precautions }}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
       {%- form 'product', product, class: 'product-form' -%}
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
@@ -293,20 +306,6 @@
           {{ product.metafields.custom.inci | metafield_tag }}
         {%- else -%}
           {{ product.metafields.custom.inci }}
-        {%- endif -%}
-      </div>
-    </section>
-  {%- endif -%}
-
-  {%- comment -%} ===== Precautions / who should avoid ===== {%- endcomment -%}
-  {%- if product.metafields.custom.precautions != blank -%}
-    <section class="product-section" id="precautions">
-      <div class="section-head"><span class="section-eyebrow">Safety &amp; precautions</span><span class="section-line"></span></div>
-      <div class="rte">
-        {%- if product.metafields.custom.precautions.type == 'rich_text_field' or product.metafields.custom.precautions.type == 'multi_line_text_field' or product.metafields.custom.precautions.type == 'single_line_text_field' -%}
-          {{ product.metafields.custom.precautions | metafield_tag }}
-        {%- else -%}
-          {{ product.metafields.custom.precautions }}
         {%- endif -%}
       </div>
     </section>
