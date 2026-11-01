@@ -43,32 +43,19 @@
               "title": "Shop",
               "menu": "main-menu"
             }
-          },
-          "menu_2": {
-            "type": "menu",
-            "settings": {
-              "title": "About",
-              "menu": "footer"
-            }
-          },
-          "menu_3": {
-            "type": "menu",
-            "settings": {
-              "title": "Help",
-              "menu": "footer"
-            }
           }
         },
         "block_order": [
-          "menu_1",
-          "menu_2",
-          "menu_3"
+          "menu_1"
         ],
         "settings": {
-          "description": "Luxury exosome skincare — where cutting-edge science meets timeless beauty rituals."
+          "description": "Discover skincare, hand care and everyday rituals. Explore product details and find the care that fits your routine."
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "enable_preloader": false,
+    "enable_cursor": false,
+    "enable_free_shipping_message": false
   }
 }

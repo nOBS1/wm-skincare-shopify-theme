@@ -83,19 +83,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.shopify.com">
 
-  {%- comment -%} LCP Optimization: Preload hero image ASAP before browser parses body {%- endcomment -%}
-  {%- assign hero_section = sections['hero'] -%}
-  {%- if hero_section.settings.image != blank and template == 'index' -%}
-    <link rel="preload" as="image"
-          href="{{ hero_section.settings.image | image_url: width: 1500 }}"
-          imagesrcset="{{ hero_section.settings.image | image_url: width: 600 }} 600w,
-                       {{ hero_section.settings.image | image_url: width: 1000 }} 1000w,
-                       {{ hero_section.settings.image | image_url: width: 1500 }} 1500w,
-                       {{ hero_section.settings.image | image_url: width: 2000 }} 2000w"
-          imagesizes="100vw"
-          fetchpriority="high">
-  {%- endif -%}
-
   {%- comment -%} LCP Optimization: Preload article hero image (srcset/sizes must match article-template img) {%- endcomment -%}
   {%- if template contains 'article' and article.image -%}
     <link rel="preload" as="image"
@@ -120,6 +107,7 @@
 
   {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
   {{ 'luxe.css' | asset_url | stylesheet_tag }}
+  <noscript><style>.lx-reveal{opacity:1;transform:none}.lx-preloader{display:none}</style></noscript>
   {{ content_for_header }}
 </head>
 <body class="template-{{ template | replace: '.', '-' }}{% if settings.enable_cursor %} lx-cursor-enabled{% endif %}" data-currency="{{ shop.currency }}">

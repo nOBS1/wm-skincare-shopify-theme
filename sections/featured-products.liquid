@@ -24,12 +24,12 @@
                              {{ product.featured_image | image_url: width: 600 }} 600w,
                              {{ product.featured_image | image_url: width: 900 }} 900w"
                      sizes="(min-width: 1100px) 300px, (min-width: 640px) 33vw, 50vw"
-                     alt="{{ product.featured_image.alt | escape }}"
+                     alt="{{ product.featured_image.alt | default: product.title | escape }}"
                      loading="lazy"
                      width="600"
                      height="600"
                      decoding="async">
-                {%- if product.images[1] != blank -%}
+                {%- if product.images[1] != blank and product.images[1].aspect_ratio >= 0.4 -%}
                   <img class="lx-img-b"
                        src="{{ product.images[1] | image_url: width: 600 }}"
                        srcset="{{ product.images[1] | image_url: width: 300 }} 300w,
@@ -81,7 +81,7 @@
             "type": {{ product.type | json }},
             "default_variant": {{ product.selected_or_first_available_variant.id | default: 0 }},
             "only_default": {{ product.has_only_default_variant }},
-            "images": [{%- for image in product.images limit: 4 -%}{{ image | image_url: width: 800 | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}],
+            "images": [{%- assign photo_emitted = false -%}{%- for image in product.images -%}{%- if image.aspect_ratio >= 0.4 -%}{% if photo_emitted %},{% endif %}{{ image | image_url: width: 800 | json }}{%- assign photo_emitted = true -%}{%- endif -%}{%- endfor -%}],
             "variants": [{%- for v in product.variants -%}{"id":{{ v.id }},"title":{{ v.title | json }},"available":{{ v.available }},"price":{{ v.price | money | json }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
           }
           </script>

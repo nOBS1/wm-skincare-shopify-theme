@@ -3,9 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.header-nav');
   if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', nav.classList.contains('is-open'));
+    const setMenu = (open, restoreFocus = false) => {
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('menu-open', open);
+      if (open) nav.querySelector('.mobile-menu-close').focus();
+      else if (restoreFocus) toggle.focus();
+    };
+    toggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+    nav.querySelector('.mobile-menu-close').addEventListener('click', () => setMenu(false, true));
+    nav.addEventListener('click', (event) => {
+      if (event.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (!nav.classList.contains('is-open')) return;
+      if (event.key === 'Escape') setMenu(false, true);
+      if (event.key === 'Tab') {
+        const focusable = Array.from(nav.querySelectorAll('a, button')).filter(el => el.getClientRects().length);
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+    window.matchMedia('(min-width: 769px)').addEventListener('change', event => {
+      if (event.matches) setMenu(false);
     });
   }
 

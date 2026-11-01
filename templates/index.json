@@ -1,22 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-banner",
       "settings": {
         "layout": "split",
-        "image": "shopify://shop_images/6.jpg",
+        "image": "",
         "overlay_opacity": 40,
-        "eyebrow": "Exosome Science · Poetic Skincare",
-        "heading_1": "Poetry",
-        "heading_2": "for your skin",
-        "sub": "Weiman Poetics — hydration, distilled to its essential form",
-        "cta_1_text": "Shop the Collection",
-        "cta_1_link": "",
-        "cta_2_text": "Explore the Science",
-        "cta_2_link": "",
-        "show_ghost": true,
+        "eyebrow": "VEYMENZ · Everyday care",
+        "heading_1": "Your daily",
+        "heading_2": "ritual.",
+        "sub": "Discover textures, formulas and thoughtful care for your everyday routine.",
+        "cta_1_text": "Explore the collection",
+        "cta_1_link": "/collections/all",
+        "cta_2_text": "Find your ritual",
+        "cta_2_link": "#ritual",
+        "show_ghost": false,
         "ghost_text": "VEREPOETRY",
-        "show_scroll_hint": true
+        "show_scroll_hint": false,
+        "image_asset": "veymenz-rejuvenating-toner-hero.png",
+        "image_alt": "VEYMENZ Luxurious Rejuvenating Toner with its black and gold packaging"
       }
     },
     "ritual": {
@@ -26,10 +37,10 @@
           "type": "step",
           "settings": {
             "step": "Step 01",
-            "title": "Mist",
-            "description": "Morning Dew awakens the skin in a veil of exosome hydration.",
-            "link_text": "Shop Step 01",
-            "link": "",
+            "title": "Tone",
+            "description": "Begin with a refreshing toner as part of your daily skincare routine.",
+            "link_text": "Explore toners",
+            "link": "/collections/all",
             "palette": "rose"
           }
         },
@@ -37,10 +48,10 @@
           "type": "step",
           "settings": {
             "step": "Step 02",
-            "title": "Essence",
-            "description": "Dawn Rejuvenation sinks deep — weightless, potent, precise.",
-            "link_text": "Shop Step 02",
-            "link": "",
+            "title": "Nourish",
+            "description": "Choose an essence with a texture that suits your routine.",
+            "link_text": "Explore essences",
+            "link": "/collections/all",
             "palette": "sage"
           }
         },
@@ -48,10 +59,10 @@
           "type": "step",
           "settings": {
             "step": "Step 03",
-            "title": "Gel",
-            "description": "Radiance Gel seals the ritual with a soft, luminous finish.",
-            "link_text": "Shop Step 03",
-            "link": "",
+            "title": "Moisturize",
+            "description": "Complete your daily care with a comfortable moisturizing lotion.",
+            "link_text": "Explore moisturizers",
+            "link": "/collections/all",
             "palette": "gold"
           }
         }
@@ -62,79 +73,43 @@
         "r3"
       ],
       "settings": {
-        "label": "The Ritual",
-        "title": "Three steps · One poem"
+        "label": "Make it your own",
+        "title": "Care, step by step"
       }
     },
     "featured": {
       "type": "featured-products",
       "settings": {
-        "label": "Curated for You",
-        "title": "Bestsellers",
-        "description": "Our most-loved formulas — where advanced science meets pure indulgence.",
+        "label": "Discover the collection",
+        "title": "Care for your every day",
+        "description": "Explore facial care, hand care and more. Find product details and directions on each page.",
         "collection": "all",
-        "limit": 4,
+        "limit": 8,
         "button_text": "View All Products",
-        "button_link": ""
+        "button_link": "/collections/all"
       }
     },
     "brand-story": {
       "type": "brand-story",
       "settings": {
-        "label": "The Science of Beauty",
-        "title": "Exosome Technology",
-        "text": "<p>Our proprietary exosome delivery system penetrates deeper than traditional serums, communicating directly with your skin cells to activate natural repair and renewal processes.</p><p>Each product is formulated in our Seoul laboratory, combining decades of Korean skincare innovation with breakthrough biotech research.</p>",
-        "button_text": "Learn More",
-        "button_link": "/pages/about"
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "blocks": {
-        "t1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "My skin felt completely different after just one week — smoother, brighter, and healthier-looking.",
-            "author": "Olivia M.",
-            "product": "Exosome Renewal Serum"
-          }
-        },
-        "t2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Finally found a product that actually delivers on its promises. My fine lines have visibly diminished.",
-            "author": "Sarah K.",
-            "product": "Exosome Eye Elixir"
-          }
-        },
-        "t3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The texture is divine and the results speak for themselves. I've recommended it to everyone.",
-            "author": "Lily C.",
-            "product": "Exosome Barrier Cream"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "settings": {
-        "label": "Real Results",
-        "title": "What Our Clients Say",
-        "autoplay": true
+        "label": "The details matter",
+        "title": "Care, at your own pace",
+        "text": "<p>From lightweight toners and silky essences to everyday moisture care, discover a routine that feels right for you.</p><p>Take a closer look at each product for its size, texture, highlighted ingredients and directions.</p>",
+        "button_text": "Discover all products",
+        "button_link": "/collections/all",
+        "image": "",
+        "image_asset": "veymenz-nourishing-essence-story.png",
+        "image_alt": "VEYMENZ Luxury Nourishing Essence 50 mL"
       }
     },
     "rich-text": {
       "type": "rich-text",
       "settings": {
-        "label": "Our Promise",
-        "title": "Beauty, Refined",
-        "text": "<p>We believe in skincare that honors both science and soul. Every ingredient is chosen with intention, every formula backed by research, every ritual designed to restore your skin's natural luminosity.</p>",
-        "button_text": "Our Story",
-        "button_link": ""
+        "label": "Everyday moments",
+        "title": "A little time for yourself",
+        "text": "<p>Make room for a simple, considered skincare ritual. Explore the collection and choose the care that fits your day.</p>",
+        "button_text": "Explore the collection",
+        "button_link": "/collections/all"
       }
     }
   },
@@ -143,7 +118,6 @@
     "ritual",
     "featured",
     "brand-story",
-    "testimonials",
     "rich-text"
   ]
 }

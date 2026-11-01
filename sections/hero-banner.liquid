@@ -17,10 +17,11 @@
         {%- if section.settings.eyebrow != blank -%}
           <p class="lx-hero-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name }}</span></h1>
+        <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name | escape }}</span>
         {%- if section.settings.heading_2 != blank -%}
-          <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_2 }}</span></h1>
+          <span class="lx-line-inner">{{ section.settings.heading_2 | escape }}</span>
         {%- endif -%}
+        </h1>
         {%- if section.settings.sub != blank -%}
           <p class="lx-hero-sub">{{ section.settings.sub }}</p>
         {%- endif -%}
@@ -33,9 +34,10 @@
           {%- endif -%}
         </div>
       </div>
-      {%- if image != blank -%}
+      {%- if image != blank or section.settings.image_asset != blank -%}
         <div class="lx-hero-visual">
           <div class="lx-hero-arch" data-lx-parallax="0.06">
+            {%- if image != blank -%}
             <img
               src="{{ image | image_url: width: 800 }}"
               srcset="{{ image | image_url: width: 400 }} 400w,
@@ -48,6 +50,9 @@
               height="{{ image.height }}"
               loading="eager"
               fetchpriority="high">
+            {%- else -%}
+              <img src="{{ section.settings.image_asset | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1200" height="1600" loading="eager" fetchpriority="high">
+            {%- endif -%}
           </div>
         </div>
       {%- endif -%}
@@ -85,10 +90,11 @@
           {%- if section.settings.eyebrow != blank -%}
             <p class="lx-hero-eyebrow">{{ section.settings.eyebrow }}</p>
           {%- endif -%}
-          <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name }}</span></h1>
+          <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_1 | default: shop.name | escape }}</span>
           {%- if section.settings.heading_2 != blank -%}
-            <h1 class="lx-hero-line"><span class="lx-line-inner">{{ section.settings.heading_2 }}</span></h1>
+            <span class="lx-line-inner">{{ section.settings.heading_2 | escape }}</span>
           {%- endif -%}
+          </h1>
           {%- if section.settings.sub != blank -%}
             <p class="lx-hero-sub">{{ section.settings.sub }}</p>
           {%- endif -%}
@@ -116,6 +122,8 @@
       { "value": "overlay", "label": "Overlay (full-bleed image)" }
     ], "default": "split" },
     { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "image_asset", "label": "Theme image filename (split layout fallback)" },
+    { "type": "text", "id": "image_alt", "label": "Fallback image description", "default": "VEYMENZ skincare" },
     { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity (overlay layout)", "min": 0, "max": 60, "step": 5, "unit": "%", "default": 0 },
     { "type": "header", "content": "Text content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Exosome Science · Poetic Skincare" },

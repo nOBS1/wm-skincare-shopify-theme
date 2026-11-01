@@ -8,9 +8,14 @@
 {%- endcomment -%}
 
 {%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_absolute_url = shop.url | append: product.url -%}
+{%- assign product_schema_id = product_absolute_url | append: '#product' -%}
 
 {%- comment -%} Brand (consumer brand) vs manufacturer (vendor / legal entity) {%- endcomment -%}
-{%- assign product_brand = product.metafields.custom.brand_name -%}
+{{ 'product-gallery.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-gallery.js' | asset_url }}" defer></script>
+
+{%- assign product_brand = product.metafields.custom.brand_name.value | default: product.metafields.custom.brand_name -%}
 {%- if product_brand == blank and product.title contains ':' -%}
   {%- assign product_brand = product.title | split: ':' | first | strip -%}
 {%- endif -%}
@@ -28,52 +33,88 @@
   {%- render 'breadcrumb' -%}
 
   <div class="product-single">
-    <div class="product-gallery">
+    {%- assign photo_count = 0 -%}
+    {%- assign detail_count = 0 -%}
+    {%- for image in product.images -%}
+      {%- if image.aspect_ratio >= 0.4 -%}
+        {%- assign photo_count = photo_count | plus: 1 -%}
+      {%- else -%}
+        {%- assign detail_count = detail_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    <div class="product-gallery product-gallery--photos" data-product-gallery>
+      <div class="product-gallery-track" data-gallery-track tabindex="0" role="region" aria-label="{{ product_display_title | escape }} product photos">
+      {%- assign photo_index = 0 -%}
       {%- for image in product.images -%}
-        <div class="product-gallery-item">
+        {%- if image.aspect_ratio >= 0.4 -%}
+        {%- assign photo_index = photo_index | plus: 1 -%}
+        <div class="product-gallery-item" id="ProductPhoto-{{ section.id }}-{{ image.id }}" data-gallery-slide>
           <img src="{{ image | image_url: width: 1200 }}"
                srcset="{{ image | image_url: width: 600 }} 600w,
                        {{ image | image_url: width: 1000 }} 1000w,
                        {{ image | image_url: width: 1500 }} 1500w"
-               sizes="(max-width: 768px) 100vw, 50vw"
-               alt="{{ image.alt | escape | default: product.title }}"
+               sizes="(max-width: 880px) calc(100vw - 40px), 50vw"
+               alt="{{ image.alt | default: product_display_title | escape }}"
                width="{{ image.width }}" height="{{ image.height }}"
-               {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+               {% if photo_index == 1 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
         </div>
+        {%- endif -%}
       {%- endfor -%}
+      {%- if photo_count == 0 -%}
+        <div class="product-gallery-empty">{{ product_display_title | escape }}</div>
+      {%- endif -%}
+      </div>
+      {%- if photo_count > 1 -%}
+        <div class="product-gallery-controls" data-gallery-controls hidden>
+          <button type="button" data-gallery-prev aria-label="Previous product photo">←</button>
+          <span data-gallery-status aria-live="polite" aria-atomic="true">1 / {{ photo_count }}</span>
+          <button type="button" data-gallery-next aria-label="Next product photo">→</button>
+        </div>
+        <nav class="product-gallery-thumbs" aria-label="Choose a product photo">
+          {%- assign photo_index = 0 -%}
+          {%- for image in product.images -%}
+            {%- if image.aspect_ratio >= 0.4 -%}
+              {%- assign photo_index = photo_index | plus: 1 -%}
+              <a href="#ProductPhoto-{{ section.id }}-{{ image.id }}" data-gallery-thumb="{{ photo_index | minus: 1 }}" aria-label="View product photo {{ photo_index }} of {{ photo_count }}" {% if photo_index == 1 %}aria-current="true"{% endif %}>
+                <img src="{{ image | image_url: width: 160 }}" alt="" width="80" height="100" loading="lazy">
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
     </div>
 
     <div class="product-info">
       <span class="product-brand">
-        {{- product_brand -}}
-        {%- if product.type != blank %}<span class="sep"> · </span>{{ product.type }}{% endif -%}
+        {{- product_brand | escape -}}
+        {%- if product.type != blank %}<span class="sep"> · </span>{{ product.type | escape }}{% endif -%}
       </span>
 
-      <h1 class="product-title">{{ product_display_title }}</h1>
+      <h1 class="product-title">{{ product_display_title | escape }}</h1>
 
       <div class="product-price">
         <s class="price-compare" {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</s>
         <span class="price-current">{{ current_variant.price | money }}</span>
         {%- if product.metafields.custom.net_volume != blank -%}
-          <span class="product-vol">{{ product.metafields.custom.net_volume }}</span>
+          <span class="product-vol">{{ product.metafields.custom.net_volume.value | default: product.metafields.custom.net_volume | escape }}</span>
         {%- endif -%}
         <span class="price-status" {% if current_variant.available %}hidden{% endif %}>Sold out</span>
       </div>
 
       {%- if product.metafields.custom.short_pitch != blank -%}
-        <p class="product-pitch">{{ product.metafields.custom.short_pitch }}</p>
+        <p class="product-pitch">{{ product.metafields.custom.short_pitch.value | default: product.metafields.custom.short_pitch | escape }}</p>
       {%- elsif product.description != blank -%}
-        <p class="product-pitch">{{ product.description | strip_html | truncate: 180 }}</p>
+        <p class="product-pitch">{{ product.description | strip_html | truncate: 180 | escape }}</p>
       {%- endif -%}
 
       {%- form 'product', product, class: 'product-form' -%}
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
             <div class="product-option">
-              <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
+              <label for="Option-{{ forloop.index }}">{{ option.name | escape }}</label>
               <select name="options[{{ option.name | escape }}]" id="Option-{{ forloop.index }}" class="variant-select">
                 {%- for value in option.values -%}
-                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value | escape }}</option>
                 {%- endfor -%}
               </select>
             </div>
@@ -97,7 +138,7 @@
 
         {%- unless current_variant.available -%}
           {%- if product.metafields.custom.restock_note != blank -%}
-            <p class="restock-note">{{ product.metafields.custom.restock_note }}</p>
+            <p class="restock-note">{{ product.metafields.custom.restock_note.value | default: product.metafields.custom.restock_note | escape }}</p>
           {%- endif -%}
         {%- endunless -%}
       {%- endform -%}
@@ -120,18 +161,48 @@
       {%- endunless -%}
 
       <ul class="product-trust">
-        <li>Free worldwide shipping over $50</li>
-        <li>30-day satisfaction guarantee</li>
-        <li>Cruelty-free &amp; dermatologist-tested</li>
+        <li>Shipping and applicable taxes calculated at checkout</li>
+        {%- if shop.shipping_policy.body != blank -%}
+          <li><a href="{{ shop.shipping_policy.url }}">Shipping policy</a></li>
+        {%- endif -%}
+        {%- if shop.refund_policy.body != blank -%}
+          <li><a href="{{ shop.refund_policy.url }}">Returns and refunds</a></li>
+        {%- endif -%}
       </ul>
     </div>
   </div>
+
+  {%- if detail_count > 0 -%}
+    <section class="product-section product-detail-sheets" aria-labelledby="ProductDetails-{{ section.id }}">
+      <div class="section-head"><h2 class="section-eyebrow" id="ProductDetails-{{ section.id }}">Product details</h2><span class="section-line"></span></div>
+      {%- for image in product.images -%}
+        {%- if image.aspect_ratio < 0.4 -%}
+          <figure class="product-detail-sheet">
+            <a href="{{ image | image_url: width: image.width }}" target="_blank" rel="noopener" aria-label="Open {{ product_display_title | escape }} detail image at full size in a new tab">
+              <img src="{{ image | image_url: width: 1200 }}"
+                   srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1200 }} 1200w, {{ image | image_url: width: 1600 }} 1600w"
+                   sizes="(min-width: 1000px) 920px, calc(100vw - 40px)"
+                   alt="{{ image.alt | default: product_display_title | escape }}"
+                   width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async">
+            </a>
+            <figcaption><a href="{{ image | image_url: width: image.width }}" target="_blank" rel="noopener">Open full-size details ↗</a></figcaption>
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
 
   {%- comment -%} ===== Key benefits ===== {%- endcomment -%}
   {%- if product.metafields.custom.benefits != blank -%}
     <section class="product-section" id="benefits">
       <div class="section-head"><span class="section-eyebrow">What it does</span><span class="section-line"></span></div>
-      <div class="rte">{{ product.metafields.custom.benefits }}</div>
+      <div class="rte">
+        {%- if product.metafields.custom.benefits.type == 'rich_text_field' or product.metafields.custom.benefits.type == 'multi_line_text_field' or product.metafields.custom.benefits.type == 'single_line_text_field' -%}
+          {{ product.metafields.custom.benefits | metafield_tag }}
+        {%- else -%}
+          {{ product.metafields.custom.benefits }}
+        {%- endif -%}
+      </div>
     </section>
   {%- endif -%}
 
@@ -149,19 +220,37 @@
         {%- if product.metafields.custom.who_is_it_for != blank -%}
           <article class="qa-item">
             <h2>Who is it for?</h2>
-            <div class="rte">{{ product.metafields.custom.who_is_it_for }}</div>
+            <div class="rte">
+              {%- if product.metafields.custom.who_is_it_for.type == 'rich_text_field' or product.metafields.custom.who_is_it_for.type == 'multi_line_text_field' or product.metafields.custom.who_is_it_for.type == 'single_line_text_field' -%}
+                {{ product.metafields.custom.who_is_it_for | metafield_tag }}
+              {%- else -%}
+                {{ product.metafields.custom.who_is_it_for }}
+              {%- endif -%}
+            </div>
           </article>
         {%- endif -%}
         {%- if product.metafields.custom.how_to_use != blank -%}
           <article class="qa-item">
             <h2>How to use</h2>
-            <div class="rte">{{ product.metafields.custom.how_to_use }}</div>
+            <div class="rte">
+              {%- if product.metafields.custom.how_to_use.type == 'rich_text_field' or product.metafields.custom.how_to_use.type == 'multi_line_text_field' or product.metafields.custom.how_to_use.type == 'single_line_text_field' -%}
+                {{ product.metafields.custom.how_to_use | metafield_tag }}
+              {%- else -%}
+                {{ product.metafields.custom.how_to_use }}
+              {%- endif -%}
+            </div>
           </article>
         {%- endif -%}
         {%- if product.metafields.custom.key_ingredients != blank -%}
           <article class="qa-item">
             <h2>Key ingredients</h2>
-            <div class="rte">{{ product.metafields.custom.key_ingredients }}</div>
+            <div class="rte">
+              {%- if product.metafields.custom.key_ingredients.type == 'rich_text_field' or product.metafields.custom.key_ingredients.type == 'multi_line_text_field' or product.metafields.custom.key_ingredients.type == 'single_line_text_field' -%}
+                {{ product.metafields.custom.key_ingredients | metafield_tag }}
+              {%- else -%}
+                {{ product.metafields.custom.key_ingredients }}
+              {%- endif -%}
+            </div>
           </article>
         {%- endif -%}
       </div>
@@ -176,7 +265,7 @@
         <div class="dossier-top">
           <span class="section-eyebrow">Technical dossier</span>
           {%- if product.type != blank -%}
-            <span class="dossier-ref">{{ product.type | upcase }}{% if product.metafields.custom.net_volume != blank %} · {{ product.metafields.custom.net_volume | upcase }}{% endif %}</span>
+            <span class="dossier-ref">{{ product.type | upcase | escape }}{% if product.metafields.custom.net_volume != blank %} · {{ product.metafields.custom.net_volume.value | default: product.metafields.custom.net_volume | upcase | escape }}{% endif %}</span>
           {%- endif -%}
         </div>
         <table class="spec-table">
@@ -184,8 +273,8 @@
             {%- for row in product.metafields.custom.specs.value -%}
               {%- if row.value != blank -%}
                 <tr>
-                  <th scope="row">{{ row.label }}</th>
-                  <td>{{ row.value }}</td>
+                  <th scope="row">{{ row.label | escape }}</th>
+                  <td>{{ row.value | escape }}</td>
                 </tr>
               {%- endif -%}
             {%- endfor -%}
@@ -199,7 +288,13 @@
   {%- if product.metafields.custom.inci != blank -%}
     <section class="product-section" id="ingredients">
       <div class="section-head"><span class="section-eyebrow">Full ingredients · INCI</span><span class="section-line"></span></div>
-      <div class="rte inci-list">{{ product.metafields.custom.inci }}</div>
+      <div class="rte inci-list">
+        {%- if product.metafields.custom.inci.type == 'rich_text_field' or product.metafields.custom.inci.type == 'multi_line_text_field' or product.metafields.custom.inci.type == 'single_line_text_field' -%}
+          {{ product.metafields.custom.inci | metafield_tag }}
+        {%- else -%}
+          {{ product.metafields.custom.inci }}
+        {%- endif -%}
+      </div>
     </section>
   {%- endif -%}
 
@@ -207,7 +302,13 @@
   {%- if product.metafields.custom.precautions != blank -%}
     <section class="product-section" id="precautions">
       <div class="section-head"><span class="section-eyebrow">Safety &amp; precautions</span><span class="section-line"></span></div>
-      <div class="rte">{{ product.metafields.custom.precautions }}</div>
+      <div class="rte">
+        {%- if product.metafields.custom.precautions.type == 'rich_text_field' or product.metafields.custom.precautions.type == 'multi_line_text_field' or product.metafields.custom.precautions.type == 'single_line_text_field' -%}
+          {{ product.metafields.custom.precautions | metafield_tag }}
+        {%- else -%}
+          {{ product.metafields.custom.precautions }}
+        {%- endif -%}
+      </div>
     </section>
   {%- endif -%}
 
@@ -218,10 +319,10 @@
       <h2>Frequently asked</h2>
       <div class="faq-list">
         {%- for faq in product.metafields.custom.faqs.value -%}
-          {%- if faq.question != blank -%}
+          {%- if faq.question != blank and faq.answer != blank -%}
             <details class="faq-item">
-              <summary>{{ faq.question }}</summary>
-              <div class="faq-answer rte">{{ faq.answer }}</div>
+              <summary>{{ faq.question | escape }}</summary>
+              <div class="faq-answer rte">{{ faq.answer | escape | newline_to_br }}</div>
             </details>
           {%- endif -%}
         {%- endfor -%}
@@ -237,10 +338,16 @@
     <section class="product-section" id="brand">
       <div class="section-head"><span class="section-eyebrow">Brand &amp; maker</span><span class="section-line"></span></div>
       {%- if product.vendor != blank and product.vendor != product_brand -%}
-        <p class="brand-entity"><strong>{{ product_brand }}</strong> is a skincare brand manufactured by <strong>{{ product.vendor }}</strong>.</p>
+        <p class="brand-entity"><strong>{{ product_brand | escape }}</strong> is a skincare brand manufactured by <strong>{{ product.vendor | escape }}</strong>.</p>
       {%- endif -%}
       {%- if product.metafields.custom.brand_story != blank -%}
-        <div class="rte">{{ product.metafields.custom.brand_story }}</div>
+        <div class="rte">
+          {%- if product.metafields.custom.brand_story.type == 'rich_text_field' or product.metafields.custom.brand_story.type == 'multi_line_text_field' or product.metafields.custom.brand_story.type == 'single_line_text_field' -%}
+            {{ product.metafields.custom.brand_story | metafield_tag }}
+          {%- else -%}
+            {{ product.metafields.custom.brand_story }}
+          {%- endif -%}
+        </div>
       {%- endif -%}
     </section>
   {%- endif -%}
@@ -259,10 +366,10 @@
 {
   "@context": "https://schema.org/",
   "@type": "Product",
-  "@id": "{{ shop.url }}{{ product.url }}#product",
+  "@id": {{ product_schema_id | json }},
   "name": {{ product.title | json }},
   "description": {{ product.description | strip_html | truncate: 5000 | json }},
-  "url": "{{ shop.url }}{{ product.url }}"
+  "url": {{ product_absolute_url | json }}
   {%- if product.type != blank -%}
   ,"category": {{ product.type | json }}
   {%- endif -%}
@@ -284,17 +391,18 @@
   {%- endif -%}
   {%- if product.metafields.custom.specs != blank -%}
   ,"additionalProperty": [
+    {%- assign property_separator = '' -%}
     {%- for row in product.metafields.custom.specs.value -%}
       {%- if row.value != blank -%}
-      { "@type": "PropertyValue", "name": {{ row.label | json }}, "value": {{ row.value | json }} }
-      {%- unless forloop.last %},{% endunless -%}
+      {{ property_separator }}{ "@type": "PropertyValue", "name": {{ row.label | json }}, "value": {{ row.value | json }} }
+      {%- assign property_separator = ',' -%}
       {%- endif -%}
     {%- endfor -%}
   ]
   {%- endif -%}
   ,"offers": {
     "@type": "Offer",
-    "url": "{{ shop.url }}{{ product.url }}",
+    "url": {{ product_absolute_url | json }},
     "priceCurrency": {{ cart.currency.iso_code | json }},
     "price": {{ current_variant.price | divided_by: 100.0 | json }},
     "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
@@ -302,7 +410,7 @@
     "itemCondition": "https://schema.org/NewCondition",
     "seller": { "@type": "Organization", "name": {{ shop.name | json }} }
   }
-  {%- if product.metafields.reviews.rating_count and product.metafields.reviews.rating_count.value > 0 -%}
+  {%- if product.metafields.reviews.rating != blank and product.metafields.reviews.rating_count.value > 0 -%}
   {%- assign rating_value = product.metafields.reviews.rating.value -%}
   ,"aggregateRating": {
     "@type": "AggregateRating",
@@ -321,9 +429,10 @@
   "@type": "FAQPage",
   "mainEntity": [
     {%- assign faqs = product.metafields.custom.faqs.value -%}
+    {%- assign faq_separator = '' -%}
     {%- for faq in faqs -%}
-      {%- if faq.question != blank -%}
-      {
+      {%- if faq.question != blank and faq.answer != blank -%}
+      {{ faq_separator }}{
         "@type": "Question",
         "name": {{ faq.question | json }},
         "acceptedAnswer": {
@@ -331,7 +440,7 @@
           "text": {{ faq.answer | strip_html | json }}
         }
       }
-      {%- unless forloop.last %},{% endunless -%}
+      {%- assign faq_separator = ',' -%}
       {%- endif -%}
     {%- endfor -%}
   ]
@@ -345,12 +454,12 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ shop.url | json }} }
     {%- if collection -%}
-    ,{ "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" }
-    ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+    ,{ "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} }
+    ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ product_absolute_url | json }} }
     {%- else -%}
-    ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+    ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": {{ product_absolute_url | json }} }
     {%- endif -%}
   ]
 }

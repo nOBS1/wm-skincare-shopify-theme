@@ -23,6 +23,24 @@
             </nav>
           </div>
         {%- endfor -%}
+        <div class="footer-col">
+          <h4>Customer care</h4>
+          <nav aria-label="Customer care">
+            <a href="{{ routes.search_url }}">Search</a>
+            <a href="{{ routes.cart_url }}">Your bag</a>
+            {%- if shop.customer_accounts_enabled -%}<a href="{{ routes.account_url }}">Your account</a>{%- endif -%}
+          </nav>
+        </div>
+        {%- if shop.policies.size > 0 -%}
+          <div class="footer-col">
+            <h4>Information</h4>
+            <nav aria-label="Store policies">
+              {%- for policy in shop.policies -%}
+                {%- if policy != blank -%}<a href="{{ policy.url }}">{{ policy.title | escape }}</a>{%- endif -%}
+              {%- endfor -%}
+            </nav>
+          </div>
+        {%- endif -%}
       </div>
     </div>
 

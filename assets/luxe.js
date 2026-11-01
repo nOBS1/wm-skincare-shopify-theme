@@ -22,6 +22,17 @@
 
   function lockScroll(on) { document.body.classList.toggle('lx-lock', on); }
 
+  function escapeHTML(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
+    });
+  }
+
+  function route(path) {
+    var root = window.Shopify && window.Shopify.routes && window.Shopify.routes.root || '/';
+    return root.replace(/\/?$/, '/') + path.replace(/^\//, '');
+  }
+
   function money(cents, currency) {
     var cur = currency || document.body.getAttribute('data-currency') || 'USD';
     try {
@@ -42,31 +53,14 @@
     try { localStorage.setItem(WISH_KEY, JSON.stringify(w)); } catch (e) {}
   }
 
-  /* ---------------- preloader (once per session, LCP-friendly) ---------------- */
-  document.addEventListener('DOMContentLoaded', function () {
+  /* ---------------- reveal the page as soon as its DOM is ready ---------------- */
+  function dismissPreloader() {
     var pre = $('#lxPreloader');
-    var seen = false;
-    try { seen = sessionStorage.getItem('lx-loaded') === '1'; } catch (e) {}
-    if (!pre || seen) {
-      document.body.classList.add('lx-loaded');
-      if (pre) pre.classList.add('done');
-      return;
-    }
-    var bar = $('.lx-pre-bar i', pre), cnt = $('.lx-pre-count', pre), n = 0;
-    var tick = setInterval(function () {
-      n = Math.min(100, n + Math.ceil(Math.random() * 8));
-      if (bar) bar.style.transform = 'scaleX(' + n / 100 + ')';
-      if (cnt) cnt.textContent = n + '%';
-      if (n >= 100) {
-        clearInterval(tick);
-        setTimeout(function () {
-          pre.classList.add('done');
-          document.body.classList.add('lx-loaded');
-          try { sessionStorage.setItem('lx-loaded', '1'); } catch (e) {}
-        }, 260);
-      }
-    }, 70);
-  });
+    document.body.classList.add('lx-loaded');
+    if (pre) { pre.classList.add('done'); pre.hidden = true; }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', dismissPreloader);
+  else dismissPreloader();
 
   /* ---------------- custom cursor ---------------- */
   if (window.matchMedia('(pointer:fine)').matches && document.body.classList.contains('lx-cursor-enabled')) {
@@ -94,16 +88,54 @@
 
   /* ---------------- close helpers ---------------- */
   var cartDrawer = $('#lxCart'), qvWrap = $('#lxQv'), searchOverlay = $('#lxSearch'), dim = $('#lxDim');
+  var activeOverlay = null, returnFocus = null;
 
-  function closeAll() {
-    if (cartDrawer) cartDrawer.classList.remove('open');
-    if (qvWrap) qvWrap.classList.remove('open');
-    if (searchOverlay) searchOverlay.classList.remove('open');
+  function closeAll(restoreFocus) {
+    if (restoreFocus !== false && returnFocus && returnFocus.isConnected) returnFocus.focus();
+    [cartDrawer, qvWrap, searchOverlay].forEach(function (overlay) {
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.inert = true;
+    });
+    activeOverlay = null;
     if (dim) dim.classList.remove('on');
     lockScroll(false);
   }
+
+  function openOverlay(overlay, focusTarget) {
+    if (!overlay) return;
+    var trigger = activeOverlay ? returnFocus : document.activeElement;
+    closeAll(false);
+    returnFocus = trigger;
+    activeOverlay = overlay;
+    overlay.inert = false;
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('open');
+    if (overlay === cartDrawer && dim) dim.classList.add('on');
+    lockScroll(true);
+    requestAnimationFrame(function () {
+      if (activeOverlay !== overlay) return;
+      var target = focusTarget || $('button, input, select, a[href]', overlay) || overlay;
+      target.focus();
+    });
+  }
+
   addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeAll(); closeMega(); }
+    if (e.key === 'Escape') {
+      if (activeOverlay) { e.preventDefault(); closeAll(); }
+      closeMega();
+    }
+    if (e.key !== 'Tab' || !activeOverlay) return;
+    var focusable = $$('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]', activeOverlay)
+      .filter(function (el) { return !el.hidden && el.getClientRects().length; });
+    if (!focusable.length) { e.preventDefault(); activeOverlay.focus(); return; }
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !activeOverlay.contains(document.activeElement))) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !activeOverlay.contains(document.activeElement))) {
+      e.preventDefault(); first.focus();
+    }
   });
   if (dim) dim.addEventListener('click', closeAll);
 
@@ -140,34 +172,72 @@
 
   /* ---------------- cart drawer (real Cart API) ---------------- */
   var cartCount = $('.header-cart .cart-count');
-  var shipThreshold = cartDrawer ? parseFloat(cartDrawer.getAttribute('data-threshold') || '150') : 150;
+  var shipThreshold = cartDrawer ? parseFloat(cartDrawer.getAttribute('data-threshold') || '0') : 0;
+  var cartBusy = false;
 
-  function fetchCart() {
-    return fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
-      .then(function (r) { return r.json(); });
-  }
-
-  function cartAdd(id, qty) {
-    return fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ items: [{ id: id, quantity: qty }] })
-    }).then(function (r) {
-      if (!r.ok) throw new Error('add failed');
-      return fetchCart();
+  function requestJSON(path, options) {
+    return fetch(route(path), options).then(function (response) {
+      return response.json().catch(function () {
+        throw new Error('The store is temporarily unavailable. Please try again.');
+      }).then(function (data) {
+        if (!response.ok) {
+          var message = data.description || data.message;
+          if (!message && data.errors) message = typeof data.errors === 'string' ? data.errors : Object.values(data.errors).join('. ');
+          throw new Error(message || 'Your bag could not be updated. Please try again.');
+        }
+        return data;
+      });
     });
   }
 
+  function setCartBusy(busy) {
+    cartBusy = busy;
+    if (cartDrawer) cartDrawer.setAttribute('aria-busy', String(busy));
+    $$('#lxCartItems button, [data-lx-add], #lxQvAdd').forEach(function (button) {
+      if (busy) {
+        button.setAttribute('data-lx-was-disabled', String(button.disabled));
+        button.disabled = true;
+      } else if (button.hasAttribute('data-lx-was-disabled')) {
+        button.disabled = button.getAttribute('data-lx-was-disabled') === 'true';
+        button.removeAttribute('data-lx-was-disabled');
+      }
+    });
+  }
+
+  function clearCartError() {
+    var error = $('#lxCartError');
+    if (error) { error.textContent = ''; error.hidden = true; }
+  }
+
+  function showCartError(error) {
+    var message = error && error.message || 'Your bag could not be updated. Please try again.';
+    var box = $('#lxCartError');
+    if (box) { box.textContent = message; box.hidden = false; }
+    toast(message);
+  }
+
+  function fetchCart() {
+    return requestJSON('cart.js', { headers: { 'Accept': 'application/json' } });
+  }
+
+  function cartAdd(id, qty) {
+    return requestJSON('cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: [{ id: id, quantity: qty }] })
+    }).then(fetchCart);
+  }
+
   function cartChange(key, qty) {
-    return fetch('/cart/change.js', {
+    return requestJSON('cart/change.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ id: key, quantity: qty })
-    }).then(function (r) { return r.json(); });
+    });
   }
 
   function renderCart(cart) {
-    if (!cartDrawer) return;
+    if (!cartDrawer || !cart || !Array.isArray(cart.items)) return;
 
     // badge
     var n = cart.item_count || 0;
@@ -186,17 +256,17 @@
     if (box) {
       if (!cart.items || !cart.items.length) {
         box.innerHTML = '<div class="lx-cart-empty"><span>Your bag is empty</span>' +
-          '<a class="btn btn-outline" href="/collections/all">Start Shopping</a></div>';
+          '<a class="btn btn-outline" href="' + escapeHTML(route('collections/all')) + '">Start Shopping</a></div>';
       } else {
         box.innerHTML = cart.items.map(function (it) {
           var img = it.image
-            ? '<img src="' + it.image + '" alt="' + it.product_title.replace(/"/g, '&quot;') + '" loading="lazy">'
+            ? '<img src="' + escapeHTML(it.image) + '" alt="' + escapeHTML(it.product_title) + '" loading="lazy">'
             : '';
-          return '<div class="lx-cart-item" data-key="' + it.key + '">' +
-            '<a class="lx-ci-media" href="' + it.url + '">' + img + '</a>' +
+          return '<div class="lx-cart-item" data-key="' + escapeHTML(it.key) + '">' +
+            '<a class="lx-ci-media" href="' + escapeHTML(it.url) + '">' + img + '</a>' +
             '<div class="lx-ci-info">' +
-              '<h5>' + it.product_title + '</h5>' +
-              '<p class="lx-ci-meta">' + (it.variant_title && it.variant_title !== 'Default Title' ? it.variant_title : 'Full Size') + '</p>' +
+              '<h5>' + escapeHTML(it.product_title) + '</h5>' +
+              '<p class="lx-ci-meta">' + escapeHTML(it.variant_title && it.variant_title !== 'Default Title' ? it.variant_title : 'Full Size') + '</p>' +
               '<button class="lx-ci-remove" data-remove type="button">Remove</button>' +
               '<div class="lx-ci-row">' +
                 '<div class="lx-qty">' +
@@ -217,8 +287,8 @@
     if (totalEl) totalEl.textContent = money(cart.total_price, cart.currency);
     var bar = $('#lxShipBar'), msg = $('#lxShipMsg');
     var total = (cart.total_price || 0) / 100;
-    if (bar) bar.style.width = Math.min(100, total / shipThreshold * 100) + '%';
-    if (msg) {
+    if (bar && shipThreshold > 0) bar.style.width = Math.min(100, total / shipThreshold * 100) + '%';
+    if (msg && shipThreshold > 0) {
       msg.textContent = total >= shipThreshold
         ? 'Free shipping unlocked — enjoy'
         : money(Math.max(0, shipThreshold - total) * 100, cart.currency) + ' away from free shipping';
@@ -226,12 +296,9 @@
   }
 
   function openCart() {
-    closeAll();
     if (!cartDrawer) return;
-    cartDrawer.classList.add('open');
-    if (dim) dim.classList.add('on');
-    lockScroll(true);
-    fetchCart().then(renderCart).catch(function () {});
+    openOverlay(cartDrawer);
+    fetchCart().then(renderCart).catch(showCartError);
   }
 
   // header triggers
@@ -248,18 +315,17 @@
       var dec = e.target.closest('[data-dec]');
       var rem = e.target.closest('[data-remove]');
       var row = e.target.closest('.lx-cart-item');
-      if (!row) return;
+      if (!row || (!inc && !dec && !rem) || cartBusy) return;
       var key = row.getAttribute('data-key');
       var currentQty = parseInt(row.querySelector('.lx-qty span').textContent, 10) || 1;
 
-      if (inc) {
-        cartChange(key, Math.min(99, currentQty + 1)).then(renderCart);
-      } else if (dec) {
-        cartChange(key, currentQty - 1).then(renderCart);
-      } else if (rem) {
-        cartChange(key, 0).then(renderCart);
-        toast('REMOVED FROM BAG');
-      }
+      var nextQty = inc ? Math.min(99, currentQty + 1) : dec ? currentQty - 1 : 0;
+      clearCartError();
+      setCartBusy(true);
+      cartChange(key, nextQty).then(function (cart) {
+        renderCart(cart);
+        if (rem) toast('REMOVED FROM BAG');
+      }).catch(showCartError).finally(function () { setCartBusy(false); });
     });
   }
 
@@ -268,17 +334,19 @@
     var add = e.target.closest('[data-lx-add]');
     if (!add) return;
     e.preventDefault();
-    if (add.disabled) return;
+    if (add.disabled || cartBusy) return;
     var id = parseInt(add.getAttribute('data-lx-add'), 10);
     var qty = 1;
+    var originalLabel = add.textContent;
+    clearCartError();
+    setCartBusy(true);
     add.textContent = 'Adding…';
     cartAdd(id, qty).then(function (cart) {
       renderCart(cart);
-      add.textContent = '+ Quick Add';
       toast('ADDED TO YOUR BAG');
-    }).catch(function () {
-      add.textContent = '+ Quick Add';
-      toast('SORRY — COULD NOT ADD, TRY AGAIN');
+    }).catch(showCartError).finally(function () {
+      add.textContent = originalLabel;
+      setCartBusy(false);
     });
   });
 
@@ -349,18 +417,18 @@
     if (thumbs) {
       thumbs.innerHTML = (p.images && p.images.length > 1)
         ? p.images.map(function (src, i) {
-            return '<button class="lx-qv-thumb' + (i === 0 ? ' on' : '') + '" data-idx="' + i + '" type="button">' +
-              '<img src="' + src + '" alt=""></button>';
+            return '<button class="lx-qv-thumb' + (i === 0 ? ' on' : '') + '" data-idx="' + i + '" type="button" aria-label="View product image ' + (i + 1) + '" aria-pressed="' + (i === 0) + '">' +
+              '<img src="' + escapeHTML(src) + '" alt=""></button>';
           }).join('')
         : '';
     }
     var cat = $('#lxQvCat');
-    if (cat) cat.textContent = (p.type || p.vendor || 'Collection') + ' — Weiman Poetics';
+    if (cat) cat.textContent = p.type || p.vendor || 'Collection';
     var name = $('#lxQvName');
     if (name) name.textContent = p.title;
     var price = $('#lxQvPrice');
     if (price) {
-      price.innerHTML = p.price + (p.compare ? '<s>' + p.compare + '</s>' : '');
+      price.innerHTML = escapeHTML(p.price) + (p.compare ? '<s>' + escapeHTML(p.compare) + '</s>' : '');
     }
     var link = $('#lxQvLink');
     if (link) { link.href = p.url; link.style.display = ''; }
@@ -373,7 +441,7 @@
           p.variants.map(function (v) {
             var cls = 'lx-qv-variant' + (v.id === p.default_variant ? ' active' : '') + (v.available ? '' : ' unavailable');
             return '<button class="' + cls + '" data-variant="' + v.id + '" type="button" ' +
-              (v.available ? '' : 'disabled') + '>' + v.title + '</button>';
+              (v.available ? '' : 'disabled') + '>' + escapeHTML(v.title) + '</button>';
           }).join('') + '</div>';
         vBox.style.display = '';
       } else {
@@ -382,10 +450,12 @@
       }
     }
     var addBtn = $('#lxQvAdd');
-    if (addBtn) addBtn.textContent = p.available ? 'Add to Bag' : 'Sold Out';
+    if (addBtn) {
+      addBtn.textContent = p.available ? 'Add to Bag' : 'Sold Out';
+      addBtn.disabled = !p.available;
+    }
 
-    qvWrap.classList.add('open');
-    lockScroll(true);
+    openOverlay(qvWrap);
   }
 
   document.addEventListener('click', function (e) {
@@ -406,7 +476,10 @@
       var idx = parseInt(t.getAttribute('data-idx'), 10);
       var img = $('#lxQvImg');
       if (img && qvState.product.images[idx]) img.src = qvState.product.images[idx];
-      $$('.lx-qv-thumb', thumbsBox).forEach(function (x) { x.classList.toggle('on', x === t); });
+      $$('.lx-qv-thumb', thumbsBox).forEach(function (x) {
+        x.classList.toggle('on', x === t);
+        x.setAttribute('aria-pressed', String(x === t));
+      });
     });
   }
 
@@ -417,6 +490,9 @@
       if (!b || b.disabled) return;
       qvState.variantId = parseInt(b.getAttribute('data-variant'), 10);
       $$('.lx-qv-variant', variantsBox).forEach(function (x) { x.classList.toggle('active', x === b); });
+      var selected = qvState.product.variants.find(function (v) { return v.id === qvState.variantId; });
+      var price = $('#lxQvPrice');
+      if (selected && price) price.textContent = selected.price;
     });
   }
 
@@ -428,19 +504,18 @@
   if (qvAdd) {
     qvAdd.addEventListener('click', function () {
       var p = qvState.product;
-      if (!p || !p.available || !qvState.variantId) return;
+      if (!p || !p.available || !qvState.variantId || cartBusy || qvAdd.disabled) return;
+      clearCartError();
+      setCartBusy(true);
       qvAdd.textContent = 'Adding…';
       cartAdd(qvState.variantId, qvState.qty).then(function (cart) {
         renderCart(cart);
-        qvAdd.textContent = 'Add to Bag';
-        closeAll();
-        cartDrawer.classList.add('open');
-        if (dim) dim.classList.add('on');
-        lockScroll(true);
+        if (cartDrawer) openOverlay(cartDrawer);
+        else closeAll();
         toast('ADDED TO YOUR BAG');
-      }).catch(function () {
+      }).catch(showCartError).finally(function () {
         qvAdd.textContent = 'Add to Bag';
-        toast('SORRY — COULD NOT ADD, TRY AGAIN');
+        setCartBusy(false);
       });
     });
   }
@@ -451,12 +526,9 @@
   var searchResults = $('#lxSearchResults');
 
   function openSearch() {
-    closeAll();
     if (!searchOverlay) return;
-    searchOverlay.classList.add('open');
-    lockScroll(true);
-    setTimeout(function () { if (searchInput) searchInput.focus(); }, 80);
-    renderSearch('');
+    openOverlay(searchOverlay, searchInput);
+    renderSearch(searchInput ? searchInput.value.trim() : '');
   }
   if (searchBtn) searchBtn.addEventListener('click', function (e) { e.preventDefault(); openSearch(); });
   var searchClose = $('.lx-search-close');
@@ -478,31 +550,32 @@
       return;
     }
     searchResults.innerHTML = '<p class="lx-search-empty">Searching…</p>';
-    fetch('/search/suggest.json?q=' + encodeURIComponent(q) +
+    requestJSON('search/suggest.json?q=' + encodeURIComponent(q) +
       '&resources[type]=product&resources[limit]=8&resources[options][fields]=title,product_type,vendor')
-      .then(function (r) { return r.json(); })
       .then(function (data) {
+        if (searchInput && searchInput.value.trim() !== q) return;
         var products = (data.resources && data.resources.results && data.resources.results.products) || [];
         if (!products.length) {
-          searchResults.innerHTML = '<p class="lx-search-empty">No results for “' + q.replace(/</g, '&lt;') + '”</p>';
+          searchResults.innerHTML = '<p class="lx-search-empty">No results for “' + escapeHTML(q) + '”</p>';
           return;
         }
         searchResults.innerHTML = '<div class="lx-sr-grid">' + products.map(function (p) {
           var img = p.featured_image && p.featured_image.url
-            ? '<img src="' + p.featured_image.url + '" alt="' + String(p.title).replace(/"/g, '&quot;') + '" loading="lazy">'
+            ? '<img src="' + escapeHTML(p.featured_image.url) + '" alt="' + escapeHTML(p.title) + '" loading="lazy">'
             : '';
           /* suggest.json returns price in cents (subunits); price_decimal is a "29.00" string */
           var cents = p.price_decimal
             ? Math.round(parseFloat(p.price_decimal) * 100)
             : p.price;
-          return '<a class="lx-sr-item" href="' + p.url + '">' +
+          return '<a class="lx-sr-item" href="' + escapeHTML(p.url) + '">' +
             '<div class="lx-sr-media">' + img + '</div>' +
-            '<h5>' + p.title + '</h5>' +
+            '<h5>' + escapeHTML(p.title) + '</h5>' +
             '<p>' + money(cents) + '</p>' +
           '</a>';
         }).join('') + '</div>';
       })
       .catch(function () {
+        if (searchInput && searchInput.value.trim() !== q) return;
         searchResults.innerHTML = '<p class="lx-search-empty">Search is unavailable right now</p>';
       });
   }

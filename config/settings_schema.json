@@ -49,10 +49,11 @@
   {
     "name": "Experience",
     "settings": [
-      { "type": "checkbox", "id": "enable_preloader", "label": "Show brand preloader (once per session)", "default": true },
+      { "type": "checkbox", "id": "enable_preloader", "label": "Show brand preloader", "default": false },
       { "type": "checkbox", "id": "enable_cursor", "label": "Enable custom gold cursor", "default": true },
       { "type": "checkbox", "id": "enable_grain", "label": "Enable film grain overlay", "default": true },
-      { "type": "number", "id": "free_shipping_threshold", "label": "Free shipping threshold (amount)", "default": 150 }
+      { "type": "checkbox", "id": "enable_free_shipping_message", "label": "Show free shipping progress (requires a matching shipping rate)", "default": false },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Free shipping threshold (store currency)", "default": 150 }
     ]
   }
 ]
